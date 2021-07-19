@@ -1,6 +1,7 @@
 tmux
   tmux-plugin-manager
 zsh
+alacritty
 wget
 curl
 git
