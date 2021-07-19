@@ -5,6 +5,7 @@ wget
 curl
 git
   git-extras
+github-cli
 tig
 bat
 htop
