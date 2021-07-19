@@ -1,0 +1,36 @@
+tmux
+  tmux-plugin-manager
+zsh
+wget
+curl
+git
+  git-extras
+tig
+bat
+htop
+vtop
+iotop
+ncdu
+fasd
+ssh
+ripgrep
+rlwrap
+virtualenvwrapper
+fzf
+ranger
+neovim
+stow
+jq
+jet
+httpie
+clj
+leiningen
+nvm
+pavucontrol
+direnv
+tldr
+password-store
+gpg
+docker
+chromium
+firefox
