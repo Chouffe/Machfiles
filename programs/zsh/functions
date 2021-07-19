@@ -1,0 +1,321 @@
+#!/usr/bin/env bash
+
+function agf () { ag -G ".*$1\$" $2 }
+
+# Create a new directory and enter it
+function mkd() { mkdir -p "$@" && cd "$_"; }
+
+function tre() {
+tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+function fzf-git-branches() { git branch | fzf-tmux -d 15; }
+
+# with ag - respects .agignore and .gitignore
+function agi() { ag --nobreak --nonumbers --noheading . | fzf --multi | cut -d : -f 1 | xargs vim; }
+
+# Syntax-highlight JSON strings or files
+function json() {
+	if [ -p /dev/stdin ]; then
+		# piping, e.g. `echo '{"foo":42}' | json`
+		python -mjson.tool | pygmentize -l javascript
+	else
+		# e.g. `json '{"foo":42}'`
+		python -mjson.tool <<< "$*" | pygmentize -l javascript
+	fi
+}
+
+# --------------------
+# Password Store utils
+# --------------------
+
+# List all filenames under .pasword-store directory in a
+# Turn filenames into a readable input for pass command
+_pwdstore-files() {
+  find $HOME/.password-store -type f \
+    | sed 's/.*\(\.password-store\/.*\)/\1/' \
+    | grep -v '/\.' \
+    | cut -d / -f2- \
+    | rev \
+    | cut -d . -f2- \
+    | rev \
+    | sort
+}
+
+# pass copy
+pc() {
+  local files pwdstore_file
+  files=$(_pwdstore-files)
+  pwdstore_file=$(echo $files | fzf)
+  pass -c $(echo "$pwdstore_file")
+}
+
+# pass show
+pd() {
+  local files pwdstore_file
+  files=$(_pwdstore-files)
+  pwdstore_file=$(echo $files | fzf)
+  pass show $(echo "$pwdstore_file")
+}
+
+# pass edit
+pe() {
+  local files pwdstore_file
+  files=$(_pwdstore-files)
+  pwdstore_file=$(echo $files | fzf)
+  pass edit $(echo "$pwdstore_file")
+}
+
+## VPN
+
+vpn_tcp() {
+  local servers server
+  servers=$(ls /etc/openvpn/ovpn_tcp/)
+  server=$(echo $servers| fzf)
+  sudo openvpn $(echo "/etc/openvpn/ovpn_tcp/$server")
+}
+
+vpn_udp() {
+  local servers server
+  servers=$(ls /etc/openvpn/ovpn_udp/)
+  server=$(echo $servers| fzf)
+  sudo openvpn $(echo "/etc/openvpn/ovpn_udp/$server")
+}
+
+alias vpn=vpn_tcp
+
+# ------
+# Github
+# ------
+
+# Display github URL based on branch
+ghurl() {
+  echo "$(git config --get remote.origin.url | sed -e 's/git@github.com:/https:\/\/github.com\//' | sed -e 's/\.git//')"
+}
+
+# Display Github PR URL
+ghprurl() {
+  echo "$(ghurl)/compare/$(git symbolic-ref --short HEAD)"
+}
+
+# Open a Github PR and open browser to the link
+ghpr() {
+  git push --set-upstream origin $(git symbolic-ref --short HEAD) && xdg-open $(ghprurl)
+}
+
+# gh() {
+#   xdg-open $(ghurl)
+# }
+
+# ---
+# Git
+# ---
+
+# fbr - checkout git branch
+# fbr() {
+#   local branches branch
+#   branches=$(git branch -vv) &&
+#     branch=$(echo "$branches" | fzf +m) &&
+#     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+# }
+
+# fbr - checkout git branch (including remote branches)
+# fbr() {
+#   local branches branch
+#   branches=$(git branch --all | grep -v HEAD) &&
+#     branch=$(echo "$branches" |
+#   fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+#     git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+# }
+
+# Fuzzy search over git branches ordered by recency
+fbr () {
+    git checkout $(git for-each-ref --sort=-committerdate refs/heads/ | awk '{print $3}' | cut -c $(echo " refs/head/" | wc -c)- | fzf-tmux)
+}
+
+fd() {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
+
+# fco - checkout git branch/tag
+fco() {
+  local tags branches target
+  tags=$(
+  git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+  branches=$(
+  git branch --all | grep -v HEAD             |
+  sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+  sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+  (echo "$tags"; echo "$branches") |
+  fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return
+  git checkout $(echo "$target" | awk '{print $2}')
+}
+
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+fstash() {
+  local out q k sha
+  while out=$(
+    git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+    fzf --ansi --no-sort --query="$q" --print-query \
+      --expect=ctrl-d,ctrl-b);
+  do
+    mapfile -t out <<< "$out"
+    q="${out[0]}"
+    k="${out[1]}"
+    sha="${out[-1]}"
+    sha="${sha%% *}"
+    [[ -z "$sha" ]] && continue
+    if [[ "$k" == 'ctrl-d' ]]; then
+      git diff $sha
+    elif [[ "$k" == 'ctrl-b' ]]; then
+      break;
+    else
+      git stash show -p $sha
+    fi
+  done
+}
+
+# Fasd
+# v() {
+#   local file
+#   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && nvim "${file}" || return 1
+# }
+
+# Screens and Monitors
+
+# set dual monitors
+dual () {
+    # xrandr --auto --output HDMI-1 --mode 1366x768 --right-of eDP-1 --primary
+    xrandr --auto --output HDMI-1 --mode 1920x1080 --right-of eDP-1 --primary
+    # xrandr --auto --output HDMI-1 --mode 3840x2160 --right-of eDP-1 --primary
+}
+
+# set single monitor
+single () {
+    # xrandr --auto --output HDMI-1 --mode 1920x1080
+    xrandr --auto --output HDMI-1 --mode 3840x2160 --output eDP-1 --off
+}
+
+# set laptop monitor only
+laptop () {
+    xrandr --output eDP-1 --mode 1920x1080 --output HDMI-1 --off
+}
+
+# Tmux
+
+function tmsession () {
+  tmux -2 new-session -s $1
+}
+
+function silver-presto () {
+  cat $1 | ssh silver10 presto | less -SFX
+}
+
+# Minimalist Pomodoro technique
+
+_pomo_loop() {
+
+  prompt=$1
+  loop_time=$(expr $2 + 0)
+  s=0
+
+  while [ $s -le $loop_time ]
+  do
+    sec=$(($loop_time - $s))
+    s=$(expr $s + 1)
+    sleep 1
+    printf '%s%02dh:%02dm:%02ds\r' $prompt $(($sec/3600)) $(($sec%3600/60)) $(($sec%60))
+  done
+}
+
+pomo () {
+
+  work_time=$(expr $1 + 0)
+  chill_time=$(expr $2 + 0)
+
+  notify-send "Pomodoro: Start"\
+    && _pomo_loop "Work for:  " $work_time\
+    && zenity --warning --text="Pomodoro: End" --width=200 > /dev/null 2>&1 \
+    && notify-send "Pomodoro: Break"\
+    && _pomo_loop "Relax for: " $chill_time\
+    && zenity --warning --text="Pomodoro: Start" --width=200 > /dev/null 2>&1 \
+    && pomo $work_time $chill_time
+}
+
+pwgen(){
+  n=${1:-10}
+  </dev/urandom tr -dc '12345!@#$%qwertQWERTasdfgASDFGzxcvbZXCVB' | head -c"${n}"; echo ""
+}
+
+# AWS SSM
+
+# function aws-ssm-instance-list {
+#   output=$(aws ssm describe-instance-information --profile $AWS_PROFILE --query "InstanceInformationList[*].{Name:ComputerName,Id:InstanceId,IPAddress:IPAddress}" --output text)
+#   echo "$output"
+# }
+
+# function aws-ssm-menu {
+#   printf "List of instances for $AWS_PROFILE:\n\n"
+#   instance_list_output=$(aws-ssm-instance-list $AWS_PROFILE)
+#   IFS=$'\n'
+#   instance_list=($instance_list_output)
+#   unset IFS
+#   for i in "${!instance_list[@]}"; do
+#     printf "%s) %s\n" "$i" "${instance_list[$i]}"
+#   done
+#   printf "\nSelect an instance from the list above: "
+#   IFS= read -r opt
+#   if [[ $opt =~ ^[0-9]+$ ]] && (( (opt >= 0) && (opt < "${#instance_list[@]}") )); then
+#     return $opt
+#   else
+#     printf 'invalid option\n'
+#     return -1
+#   fi
+# }
+
+# function aws-scp {
+#   if [ "$#" -lt 1 ]; then
+#     echo "Usage: aws-scp <scp parameters>"
+#   else
+#     scp -o ProxyCommand="bash -c \"aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p' --profile $AWS_PROFILE\"" ${@:1}
+#   fi
+# }
+
+# function aws-ssh {
+#   if [ "$#" -lt 1 ]; then
+#     echo "Usage: aws-ssh <ssh parameters>"
+#   else
+#     ssh ${@:1} -o ProxyCommand="bash -c \"aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p' --profile $AWS_PROFILE\""
+#   fi
+# }
+
+# function aws-ssm-session {
+#   if [ "$#" -lt 1 ]; then
+#     echo "Usage: aws-ssm-session <instance_id>"
+#   else
+#     aws ssm start-session --target $1 --profile $AWS_PROFILE
+#   fi
+# }
+
+# function aws-session-interactive {
+#   if [ "$#" -lt 1 ]; then
+#     echo "Usage: aws-ssh-interactive <profile name>"
+#   else
+#     aws-ssm-menu $1
+#     choice=$?
+#     if [ $choice -ne 255 ] ; then
+#       instance_id=$(echo "${instance_list[$choice]}"| awk {'print $2'})
+#       aws-ssm-session $1 $instance_id
+#     fi
+#   fi
+# }
+
+function yaml-valid {
+  cat $1 | python -c 'import yaml, sys; yaml.safe_load(sys.stdin)'
+}

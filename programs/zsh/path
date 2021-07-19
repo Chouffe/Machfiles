@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+
+PREPAND_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/opt/local/bin"
+
+ # GHC and haskell
+PREPAND_PATH=$PREPAND_PATH:~/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.8.4/bin:/opt/happy/1.19.5/bin:/opt/alex/3.1.4/bin:$PATH
+PREPAND_PATH=~/.local/bin:$PREPAND_PATH
+# PREPAND_PATH=$PREPAND_PATH:~/.stack/programs/x86_64-osx/ghc-7.10.3/bin
+
+# Personal bin PATH
+PREPAND_PATH=$PREPAND_PATH:~/bin
+
+# Go Path
+PREPAND_PATH=$PREPAND_PATH:/usr/local/go/bin
+
+# Rust Path
+PREPAND_PATH=$PREPAND_PATH:~/.cargo/bin
+
+# Anaconda PATH
+# PREPAND_PATH=$PREPAND_PATH:~/anaconda3/bin
+
+# Ruby dev
+# PREPAND_PATH=$PREPAND_PATH:~/.gem/ruby/2.0.0/bin
+# PREPAND_PATH=$PREPAND_PATH:$HOME/.rvm/bin
+
+# Work
+PREPAND_PATH=$PREPAND_PATH:/opt/airbnb/bin
+PREPAND_PATH=$PREPAND_PATH:~/airlab/sysops/ec2_tools
+
+POSTPAND_PATH=""
+
+export PATH=$PREPAND_PATH:$PATH:$POSTPAND_PATH
