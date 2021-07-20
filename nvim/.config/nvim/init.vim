@@ -46,15 +46,16 @@ nmap ga <Plug>(EasyAlign)
 
 " New plugins {{{
 Plug 'neovim/nvim-lspconfig'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Olical/conjure', {'tag': 'v4.21.0'}
 Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " Telescope {{{
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-github.nvim'
+" Plug 'nvim-telescope/telescope-github.nvim'
 " }}}
 " }}}
 
@@ -478,6 +479,7 @@ nmap # <Plug>(anzu-sharp-with-echo)
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'lambdalisue/vim-gita'
 
 nnoremap <Leader>gc :Gcommit<CR>
@@ -895,7 +897,7 @@ set smartindent       " Indentation
 set spelllang=en_us              " Set region to American English
 " set mouse=a                      " Enable mouse usage in terminal vim
 set mouse=                       " Disable mouse usage in terminal vim
-set relativenumber               " Enable relative number
+" set relativenumber               " Enable relative number
 set number                       " Enable hybrid mode
 set encoding=utf-8               " UTF-8 encoding
 set scrolloff=3                  " Number of screen lines to show around the cursor
@@ -1468,7 +1470,7 @@ nnoremap <silent><C-q> :FZFRg <C-R><C-W><CR>
 " nnoremap <silent> <C-y> :<C-u>Unite history/yank<CR>
 " nnoremap <silent><M-g> :FZFAg<CR>'
 nnoremap <silent><M-g> :FZFRg<CR>'
-nnoremap <silent><M-p> :FZFFiles<CR>
+" nnoremap <silent><M-p> :FZFFiles<CR>
 nnoremap <silent><C-b> :FZFBuffers<CR>
 nnoremap <silent><M-b> :FZFBuffers<CR>
 " nnoremap <silent><M-t> :Unite -buffer-name=tags tag -start-insert<CR>
@@ -1557,6 +1559,71 @@ endfunction
 " }}}
 
 " New config {{{
+" LSP {{{
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<M-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "clojure_lsp",  "tsserver" }
+-- local servers = { "clojure_lsp" "pyright", "rust_analyzer", "tsserver" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+
+require'lspinstall'.setup()
+local servers = require'lspinstall'.installed_servers()
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+EOF
+
+" }}}
 " Telescope {{{
 
 " Search section
@@ -1570,6 +1637,8 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fa <cmd>Telescope grep_string<cr>
 " Find buffers
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" Find in current buffer
+nnoremap <leader>fl <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 " Find LSP references
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').lsp_references()<cr>
 " Find notes
@@ -1581,24 +1650,31 @@ nnoremap <leader>fm <cmd>Telescope marks<cr>
 " }}}
 
 lua << EOF
-require'lspconfig'.clojure_lsp.setup{}
-require('telescope').load_extension('gh')
+-- require'lspconfig'.clojure_lsp.setup{}
+-- require'lspconfig'.bashls.setup{}
+
+-- require'lspinstall'.setup() -- important
+-- local servers = require'lspinstall'.installed_servers()
+-- for _, server in pairs(servers) do
+--   require'lspconfig'[server].setup{}
+-- end
+
 EOF
 " }}}
 
 " Coc {{{
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   elseif (coc#rpc#ready())
+"     call CocActionAsync('doHover')
+"   else
+"     execute '!' . &keywordprg . " " . expand('<cword>')
+"   endif
+" endfunction
 " }}}
 
 " source $HOME/.config/nvim/plug-config/coc.vim
