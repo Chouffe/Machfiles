@@ -37,6 +37,7 @@ Plug 'mhinz/vim-startify'
 " align with ease
 Plug 'junegunn/vim-easy-align'
 
+" TODO: move to configuration
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -56,7 +57,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-github.nvim'
 " }}}
 " }}}
 
