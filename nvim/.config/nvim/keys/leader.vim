@@ -35,8 +35,8 @@ vnoremap <Leader>P "+P
 nnoremap <silent> <Leader>k :vsplit<CR>
 nnoremap <silent> <Leader>j :split<CR>
 " Edit config files
-nnoremap <leader>ev :edit $MYVIMRC<CR>
-nnoremap <leader>ez :edit ~/.zshrc<CR>
+" nnoremap <leader>ev :edit $MYVIMRC<CR>
+nnoremap <leader>ev <cmd>lua require('telescope.builtin').file_browser({cwd = "~/.config/nvim"})<cr>
 nnoremap <leader>et :edit ~/.tmux.conf<CR>
 " Scroll Off
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
@@ -100,6 +100,7 @@ nnoremap <leader>fl <cmd>lua require('telescope.builtin').current_buffer_fuzzy_f
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').lsp_references()<cr>
 " Find notes
 nnoremap <leader>fn <cmd>lua require('telescope.builtin').file_browser({cwd = "~/notes"})<cr>
+nnoremap <leader>fv <cmd>lua require('telescope.builtin').file_browser({cwd = "~/.config/nvim"})<cr>
 " Find help tags
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " Find marks
