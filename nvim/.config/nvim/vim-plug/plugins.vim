@@ -1,5 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
+" Allowing you to easily write plugins or configuration in a Clojure-like Lisp with great runtime performance.
+Plug 'Olical/aniseed', { 'tag': 'v3.20.0' }
 " Comment out stuff
 Plug 'tpope/vim-commentary'
 " Readline style insertion

@@ -2,7 +2,7 @@
 source ~/.config/nvim/vim-plug/plugins.vim
 source ~/.config/nvim/general/settings.vim
 source ~/.config/nvim/general/functions.vim
-luafile ~/.config/nvim/lua/general/functions.lua
+" luafile ~/.config/nvim/lua/general/functions.lua
 source ~/.config/nvim/general/autocommands.vim
 source ~/.config/nvim/keys/leader.vim
 source ~/.config/nvim/keys/mappings.vim
@@ -22,5 +22,8 @@ function _G.dump(...)
     print(unpack(objects))
 end
 EOF
+
+" Compiles the fnl functions on load
+lua require('aniseed.env').init()
 
 " vim:foldmethod=marker:foldlevel=0
