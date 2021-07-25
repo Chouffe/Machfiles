@@ -6,7 +6,7 @@ source ~/.config/nvim/general/autocommands.vim
 source ~/.config/nvim/keys/leader.vim
 source ~/.config/nvim/keys/mappings.vim
 
-" Plugin configuration
+" Plugins configuration
 source ~/.config/nvim/plug-config/fzf.vim
 source ~/.config/nvim/plug-config/neomake.vim
 source ~/.config/nvim/plug-config/lightline.vim

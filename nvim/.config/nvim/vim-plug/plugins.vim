@@ -36,6 +36,14 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'kyazdani42/nvim-web-devicons'
 " Simple and easy way to use the interface for tree-sitter in Neovim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" Provides yanking highlighting feedback
+Plug 'machakann/vim-highlightedyank'
+" Improved incremental searching
+Plug 'haya14busa/incsearch.vim'
+" Provides improved * motions
+Plug 'haya14busa/vim-asterisk'
+" Place, toggle and display marks.
+Plug 'kshenoy/vim-signature'
 
 " Telescope: Fuzzy finder over lists {{{
 Plug 'nvim-lua/popup.nvim'
@@ -89,6 +97,19 @@ Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release', 'for': 'clojure'
 " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'python/black', { 'for': 'python' }
+" }}}
+
+" Html/Xml {{{
+Plug 'tpope/vim-ragtag', { 'for': ['html', 'javascript'] }
+Plug 'othree/html5.vim', { 'for': 'html' }
+" }}}
+
+" CSS {{{
+
+Plug 'JulesWang/css.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+" Plug 'gorodinskiy/vim-coloresque', { 'for': ['css', 'sass', 'scss'] }
 " }}}
 
 " Git {{{
