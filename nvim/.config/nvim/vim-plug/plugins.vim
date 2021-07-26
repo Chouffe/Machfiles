@@ -75,8 +75,8 @@ Plug 'Olical/conjure', {'tag': 'v4.21.0'}
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure', 'tag': 'v2.1' }
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 " Plug 'honza/vim-clojure-conceal', { 'for' : 'clojure' }
-Plug 'guns/vim-sexp', { 'for': ['clojure', 'scheme'] }
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for' : ['clojure', 'scheme'] }
+Plug 'guns/vim-sexp', { 'for': ['clojure', 'scheme', 'fnl', 'fennel'] }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for' : ['clojure', 'scheme', 'fennel', 'fnl'] }
 " Extend builtin syntax highlighting to referred and aliased vars in Clojure buffers
 Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 " Clojure runtime files
@@ -92,7 +92,7 @@ Plug 'tpope/vim-salve', { 'for': 'clojure' }
 Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
 " Parinfer - requirement: rust and cargo installed
 " https://www.rust-lang.org/tools/install and add bin path to $PATH
-Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release', 'for': 'clojure' }
+Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release', 'for': ['clojure', 'fennel', 'fnl'] }
 " }}}
 
 " Python {{{
