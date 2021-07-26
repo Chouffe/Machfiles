@@ -14,9 +14,7 @@ source ~/.config/nvim/plug-config/neomake.vim
 source ~/.config/nvim/plug-config/lightline.vim
 source ~/.config/nvim/plug-config/clojure.vim
 luafile ~/.config/nvim/lua/plug-config/compe.lua
+luafile ~/.config/nvim/lua/plug-config/aniseed.lua
 luafile ~/.config/nvim/lua/general/lsp.lua
-
-" Compiles the fnl functions on load
-lua require('aniseed.env').init()
 
 " vim:foldmethod=marker:foldlevel=0
