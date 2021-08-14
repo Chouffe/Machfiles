@@ -32,15 +32,24 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
+  -- Autoformatting on save
+  if client.resolved_capabilities.document_formatting then
+     vim.cmd [[augroup lsp_format]]
+     vim.cmd [[autocmd! BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
+     vim.cmd [[augroup END]]
+  end
+
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
+local util = require 'lspconfig/util'
 local servers = { "clojure_lsp" }
 -- local servers = { "clojure_lsp" "pyright", "rust_analyzer", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
+    root_dir = util.root_pattern(".git"),
     flags = {
       debounce_text_changes = 150,
     }
@@ -57,3 +66,14 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+-- Test this for better LSP root detection
+-- local util = require 'lspconfig/util'
+-- require'lspconfig'.clojure_lsp.setup{
+--   -- Override the defaut config to set root in the top-level of a monorepo
+--   root_dir = util.root_pattern(".git"),
+--   flags = {
+--     debounce_text_changes = 150,
+--   },
+-- }
+
