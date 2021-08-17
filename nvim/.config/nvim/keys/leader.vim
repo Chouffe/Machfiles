@@ -71,6 +71,11 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gl :Glog -1000<CR>
 nnoremap <Leader>ggp :Gpush<CR>
 nnoremap <Leader>ggl :Gpull<CR>
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 " }}}
 
 " Buffers {{{
