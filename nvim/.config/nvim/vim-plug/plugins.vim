@@ -46,6 +46,8 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-asterisk'
 " Place, toggle and display marks.
 Plug 'kshenoy/vim-signature'
+" Open URI with your favorite browser - fix gx in nvim
+Plug 'tyru/open-browser.vim'
 
 " Telescope: Fuzzy finder over lists {{{
 Plug 'nvim-lua/popup.nvim'

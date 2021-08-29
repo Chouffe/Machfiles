@@ -24,6 +24,7 @@ source ~/.config/nvim/plug-config/fzf.vim
 source ~/.config/nvim/plug-config/neomake.vim
 source ~/.config/nvim/plug-config/lightline.vim
 source ~/.config/nvim/plug-config/clojure.vim
+source ~/.config/nvim/plug-config/open-browser.vim
 luafile ~/.config/nvim/lua/plug-config/compe.lua
 luafile ~/.config/nvim/lua/plug-config/aniseed.lua
 luafile ~/.config/nvim/lua/general/lsp.lua
