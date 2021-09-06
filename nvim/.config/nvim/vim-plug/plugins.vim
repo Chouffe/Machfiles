@@ -100,7 +100,10 @@ Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release', 'for': ['clojure
 " Python {{{
 " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
-Plug 'python/black', { 'for': 'python' }
+" Plug 'python/black', { 'for': 'python' }
+Plug 'psf/black', { 'for': 'python', 'branch': 'stable' }
+" Executes Black on save if it exists
+autocmd BufWritePre *.py if exists(":Black") | execute ":Black" | endif
 " }}}
 
 " Html/Xml {{{
