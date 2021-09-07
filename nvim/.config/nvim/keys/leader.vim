@@ -140,4 +140,17 @@ nnoremap <silent><C-q> :FZFRg <C-R><C-W><CR>
 " nnoremap <silent><C-m> :FZFMarks<CR>
 " }}}
 
+" Formatting with external tools {{{
+" JSON
+nnoremap <silent> <Leader>Fj :!python -m json.tool --sort-keys<CR>
+vnoremap <silent> <Leader>Fj :!python -m json.tool --sort-keys<CR>
+" EDN
+nnoremap <silent> <Leader>Fc :!jet --pretty<CR>
+vnoremap <silent> <Leader>Fc :!jet --pretty<CR>
+" }}}
+
+" Insert date and time {{{
+nnoremap <Leader>Id "=strftime("%Y-%m-%d")<CR>p
+" }}}
+
 " vim:foldmethod=marker:foldlevel=0
