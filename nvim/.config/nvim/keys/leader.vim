@@ -142,11 +142,11 @@ nnoremap <silent><C-q> :FZFRg <C-R><C-W><CR>
 
 " Formatting with external tools {{{
 " JSON
-nnoremap <silent> <Leader>Fj :!python -m json.tool --sort-keys<CR>
-vnoremap <silent> <Leader>Fj :!python -m json.tool --sort-keys<CR>
+nnoremap <silent> <Leader>Fj :%!jq --sort-keys<CR>
+vnoremap <silent> <Leader>Fj :!jq --sort-keys<CR>
 " EDN
-nnoremap <silent> <Leader>Fc :!jet --pretty<CR>
-vnoremap <silent> <Leader>Fc :!jet --pretty<CR>
+nnoremap <silent> <Leader>Fe :%!jet --pretty<CR>
+vnoremap <silent> <Leader>Fe :!jet --pretty<CR>
 " }}}
 
 " Insert date and time {{{
