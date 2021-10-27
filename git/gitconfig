@@ -1,0 +1,51 @@
+[user]
+	name = Chouffe
+	signingkey = FEF6AA450D2F807B
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
+	precomposeunicode = true
+	pager = delta --dark --theme="zenburn"
+[interactive]
+        diffFilter = delta --color-only
+[alias]
+        oldest-ancestor = !zsh -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
+	co = checkout
+	ci = commit
+	rbi = !sh -c \"git rebase -i `git merge-base $1 HEAD`\" -
+	rbmi = ! "git rebase -i `git merge-base master HEAD`"
+	st = status
+	bd = branch -D
+	br = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	prune-merged = ! "git branch --merged master | grep -v -E '^(\\* |  master$)' | xargs -n 1 git branch -d"
+	stash-unapply = ! "git stash show -p | git apply -R"
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[color "status"]
+	changed = yellow
+	added = green
+	untracked = red
+[credential]
+	helper = cache --timeout=3600000
+[push]
+	default = current
+[rerere]
+	enabled = 1
+[help]
+	autocorrect = 1
+[commit]
+	gpgsign = true
+[merge]
+	tool = vimdiff
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
