@@ -2,6 +2,16 @@
 
 How to setup a work environment.
 
+## Configure the yubikey
+
+* [Yubikey Guide](https://github.com/drduh/YubiKey-Guide#debian-and-ubuntu)
+* Import the public key
+* Do not forget to use card-edit and trust to ultimate
+
+## Configure pass
+
+* Find the git repo URL and pull the repo from pass
+
 ## Privacy
 
 * [Improve your Privacy](https://iotdarwinaward.com/post/improve-your-privacy-in-age-of-mass-surveillance/)
