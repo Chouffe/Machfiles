@@ -1,7 +1,10 @@
 tmux
   tmux-plugin-manager
 zsh
+  oh-my-zsh
 alacritty
+build-essential
+cmake
 wget
 curl
 git
@@ -36,3 +39,5 @@ gpg
 docker
 chromium
 firefox
+miniconda
+yubikey-manager
