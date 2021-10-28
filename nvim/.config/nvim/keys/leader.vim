@@ -67,7 +67,7 @@ nnoremap <Leader>gy :let @+ = expand("%:p")<CR>:call ColorEcho("Filename> ", exp
 " Git {{{
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gl :Glog -1000<CR>
 nnoremap <Leader>ggp :Gpush<CR>
 nnoremap <Leader>ggl :Gpull<CR>

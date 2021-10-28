@@ -6,7 +6,7 @@ How to setup a work environment.
 
 * [Yubikey Guide](https://github.com/drduh/YubiKey-Guide#debian-and-ubuntu)
 * Import the public key
-* Do not forget to use card-edit and trust to ultimate
+* Run `gpg --card-edit` and trust with ultimate (5)
 
 ## Configure pass
 
@@ -37,4 +37,9 @@ How to setup a work environment.
 ## Editor: nvim
 
 * Install vim-plug
+* Install the latest nvim
 * Install all plugins with `:PlugInstall`
+
+## Desktop: Regolith
+
+* Install rofi-pass: https://github.com/carnager/rofi-pass
