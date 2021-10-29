@@ -134,6 +134,7 @@ Plug 'itchyny/lightline.vim'
 " Vim tmux integration
 Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'edkolev/tmuxline.vim'
 " }}}
 
 " Objects and Motions {{{
