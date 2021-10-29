@@ -19,3 +19,4 @@ repl-history
 .ipython
 scratch.py
 .tern-port
+.clj-kondo
