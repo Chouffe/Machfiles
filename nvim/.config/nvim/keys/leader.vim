@@ -69,7 +69,7 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gl :Glog -1000<CR>
-nnoremap <Leader>ggp :Gpush<CR>
+nnoremap <Leader>ggp :Git push<CR>
 nnoremap <Leader>ggl :Gpull<CR>
 
 " Fugitive Conflict Resolution
