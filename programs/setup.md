@@ -43,3 +43,8 @@ How to setup a work environment.
 ## Desktop: Regolith
 
 * Install rofi-pass: https://github.com/carnager/rofi-pass
+
+## Change fonts
+
+* Use the Nerdfont repo to download patched fonts: https://github.com/ryanoasis/nerd-fonts
+* Follow this guide to set it up in Alacritty: https://www.behova.net/fonts-in-alacritty/
