@@ -102,6 +102,14 @@ Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release', 'for': ['clojure
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 " Plug 'python/black', { 'for': 'python' }
 Plug 'psf/black', { 'for': 'python', 'branch': 'stable' }
+
+" Setting up a virtualenv with packages like black (linters)
+"
+" $ conda create -n nvim-dev python=3.7
+" $ pip install pynvim black
+"
+let g:python3_host_prog='/home/chouffe/miniconda3/envs/nvim-dev/bin/python'
+let g:python_host_prog='/home/chouffe/miniconda3/envs/nvim-dev-python2/bin/python'
 " Executes Black on save if it exists
 autocmd BufWritePre *.py if exists(":Black") | execute ":Black" | endif
 " }}}
