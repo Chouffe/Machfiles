@@ -12,6 +12,7 @@ alias t=tig
 alias less="less -R"
 alias ccat='pygmentize -g'
 alias pcat='pygmentize -g'
+alias bat=batcat
 # alias git=gitsafe
 # alias g=gitsafe
 alias pg="ping 8.8.8.8"
