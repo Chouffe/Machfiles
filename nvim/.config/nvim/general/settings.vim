@@ -79,7 +79,7 @@ nnoremap 0 ^
 nnoremap ` ^
 nnoremap <BS> ^
 nnoremap \ $
-nnoremap <CR> G
+" nnoremap <CR> G
 " move to the search
 " Treat long lines as break lines (useful when moving around in them)
 nnoremap j gj
