@@ -153,6 +153,8 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
+# Configure pinentry to use the correct TTY
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # Fix Ctrl-U
 bindkey \^U backward-kill-line
