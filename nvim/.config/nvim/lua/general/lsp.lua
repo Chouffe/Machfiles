@@ -1,4 +1,5 @@
 local nvim_lsp = require('lspconfig')
+local configs = require ('lspconfig.configs')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -56,16 +57,16 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-require'lspinstall'.setup()
-local servers = require'lspinstall'.installed_servers()
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
+-- require 'lspinstall'.setup()
+-- local servers = require' lspinstall'.installed_servers()
+-- for _, lsp in ipairs(servers) do
+--   nvim_lsp[lsp].setup {
+--     on_attach = on_attach,
+--     flags = {
+--       debounce_text_changes = 150,
+--     }
+--   }
+-- end
 
 -- Test this for better LSP root detection
 -- local util = require 'lspconfig/util'

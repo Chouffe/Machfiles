@@ -31,7 +31,8 @@ Plug 'junegunn/vim-easy-align'
 " A collection of common configurations for Neovim's built-in language server client
 Plug 'neovim/nvim-lspconfig'
 " Adds the missing :LspInstall <language> command to conveniently install language servers
-Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'kabouzeid/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 " Auto completion for nvim
 Plug 'hrsh7th/nvim-compe'
 " Icons as well as colors for each icon.
