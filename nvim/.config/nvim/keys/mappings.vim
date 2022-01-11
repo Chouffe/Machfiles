@@ -11,7 +11,7 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 " }}}
 
 " Parinfer {{{
-nnoremap <Localleader>pp :call ParinferToggle()<CR>
+nnoremap <Localleader>pp <cmd>lua require('dotfiles.general.functions').toggle_parinfer()<cr>
 " }}}
 
 " Terminal {{{

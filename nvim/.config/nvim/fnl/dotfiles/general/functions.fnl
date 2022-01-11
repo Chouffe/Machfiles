@@ -18,5 +18,16 @@
 
       (set vim.o.colorcolumn ""))))
 
+(defn toggle_parinfer
+  []
+  "Toggles Parinfer editing mode"
+  (if (= nvim.g.parinfer_enabled 0)
+    (do
+      (print "Enabling Parinfer")
+      (nvim.command "ParinferOn"))
+    (do
+      (print "Disabling Parinfer")
+      (nvim.command "ParinferOff"))))
+
 (comment
-  (highlight-at-colorcolumn))
+  (toggle-parinfer))
