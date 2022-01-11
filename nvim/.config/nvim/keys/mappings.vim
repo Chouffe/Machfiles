@@ -10,6 +10,10 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 " }}}
 
+" Parinfer {{{
+nnoremap <Localleader>pp :call ParinferToggle()<CR>
+" }}}
+
 " Terminal {{{
 tnoremap <Esc> <C-\><C-n>
 tnoremap <silent><C-g> <C-\><C-n>:close<CR>

@@ -3,6 +3,16 @@ function! TrimWhiteSpace()
     %s/\s\+$//e
 endfunction
 
+function! ParinferToggle()
+    if g:parinfer_enabled == 1
+        echo "Disabing Parinfer"
+        ParinferOff
+    else
+        echo "Enabling Parinfer"
+        ParinferOn
+    endif
+endfunction
+
 
 " Color the colorcolumn
 function! ColorColumn()
