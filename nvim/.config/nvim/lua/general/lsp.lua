@@ -1,5 +1,6 @@
 local nvim_lsp = require('lspconfig')
-local configs = require ('lspconfig.configs')
+local configs = require('lspconfig.configs')
+local util = require('lspconfig/util')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -10,7 +11,7 @@ local on_attach = function(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
+  -- Mappings
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -35,16 +36,29 @@ local on_attach = function(client, bufnr)
 
   -- Autoformatting on save
   if client.resolved_capabilities.document_formatting then
-     vim.cmd [[augroup lsp_format]]
-     vim.cmd [[autocmd! BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
-     vim.cmd [[augroup END]]
+     vim.cmd [[
+       augroup lsp_format
+       autocmd! BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
+       augroup END
+     ]]
+  end
+
+  -- Highlighting when not moving the cursor
+  if client.resolved_capabilities.document_highlight then
+    vim.cmd [[
+      augroup lsp_highlight
+        autocmd!
+        autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]]
   end
 
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local util = require 'lspconfig/util'
 local servers = { "clojure_lsp" }
 -- local servers = { "clojure_lsp" "pyright", "rust_analyzer", "tsserver" }
 for _, lsp in ipairs(servers) do
@@ -56,25 +70,3 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
-
--- require 'lspinstall'.setup()
--- local servers = require' lspinstall'.installed_servers()
--- for _, lsp in ipairs(servers) do
---   nvim_lsp[lsp].setup {
---     on_attach = on_attach,
---     flags = {
---       debounce_text_changes = 150,
---     }
---   }
--- end
-
--- Test this for better LSP root detection
--- local util = require 'lspconfig/util'
--- require'lspconfig'.clojure_lsp.setup{
---   -- Override the defaut config to set root in the top-level of a monorepo
---   root_dir = util.root_pattern(".git"),
---   flags = {
---     debounce_text_changes = 150,
---   },
--- }
-
