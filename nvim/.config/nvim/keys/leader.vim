@@ -84,8 +84,8 @@ nnoremap <Leader>h :bprevious<CR>
 " Close all buffers but the current one
 nnoremap <Leader>x :only<CR>
 " Close the current buffer and back to the last edited
-nnoremap <leader>d :call BufferDelete()<CR>
-nnoremap <LocalLeader>d :call BufferDelete()<CR>
+nnoremap <Leader>d <cmd>lua require('dotfiles.general.functions').delete_buffer()<cr>
+nnoremap <LocalLeader>d <cmd>lua require('dotfiles.general.functions').delete_buffer()<cr>
 " }}}
 "}}
 
