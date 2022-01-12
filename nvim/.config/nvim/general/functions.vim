@@ -53,9 +53,6 @@ endfunction
 
 " Clojure Settings
 function! ClojureSettings()
-  " TODO: find better mappings!
-  nnoremap cpy :ParinferOn<CR>
-  nnoremap cpn :ParinferOff<CR>
   nmap <silent><buffer> << <Plug>(sexp_capture_prev_element)
   nmap <silent><buffer> >> <Plug>(sexp_capture_next_element)
   autocmd BufEnter *.cljs setlocal iskeyword+=?,-,*,!,+,/,=,<,>,.,:
