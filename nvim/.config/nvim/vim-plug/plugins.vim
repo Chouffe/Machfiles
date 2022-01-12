@@ -74,7 +74,7 @@ Plug 'preservim/nerdtree'
 Plug 'neomake/neomake'
 
 " Clojure {{{
-Plug 'Olical/conjure', {'tag': 'v4.21.0'}
+Plug 'Olical/conjure', {'tag': 'v4.28.0'}
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure', 'tag': 'v2.1' }
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 " Plug 'honza/vim-clojure-conceal', { 'for' : 'clojure' }
