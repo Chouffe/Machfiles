@@ -30,4 +30,30 @@
       (nvim.command "ParinferOff"))))
 
 (comment
-  (toggle-parinfer))
+  (do
+    (nvim.command "echohl ErrorMsg")
+    (nvim.command "echomsg \"No write since last change\"")
+    (nvim.command "echohl NONE")))
+
+(defn delete_buffer []
+  "Deletes the current buffer."
+  (let [total-nr-buffers (-> (nvim.fn.range 1 (nvim.fn.bufnr "$"))
+                             (nvim.fn.filter "buflisted(v:val)")
+                             (a.count))]
+    (if
+      nvim.bo.modified
+      (do
+        (nvim.command "echohl ErrorMsg")
+        (nvim.command "echomsg \"No write since last change\"")
+        (nvim.command "echohl NONE"))
+
+      (= 1 total-nr-buffers)
+      (do
+        (nvim.command "bdelete")
+        (print "Buffer deleted. Created new buffer."))
+
+      :else
+      (do
+        (nvim.command "bprevious")
+        (nvim.command "bdelete #")
+        (print "Buffer deleted.")))))
