@@ -18,6 +18,9 @@
 
       (set vim.o.colorcolumn ""))))
 
+(defn trim_whitespace []
+  (nvim.command "%substitute/\\s\\+$//e"))
+
 (defn toggle_parinfer
   []
   "Toggles Parinfer editing mode"
