@@ -49,6 +49,8 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'kshenoy/vim-signature'
 " Open URI with your favorite browser - fix gx in nvim
 Plug 'tyru/open-browser.vim'
+" Display a popup with possible key bindings of the command you started typing
+Plug 'folke/which-key.nvim', { 'branch': 'main' }
 
 " Telescope: Fuzzy finder over lists {{{
 Plug 'nvim-lua/popup.nvim'
