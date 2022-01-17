@@ -5,6 +5,16 @@
              configs lspconfig.configs}
    require-macros [dotfiles.macros]})
 
+(defn- augroup-highlight []
+  (augroup :lsp_highlight
+    (autocmd :CursorHold "<buffer>" "lua vim.lsp.buf.document_highlight()")
+    (autocmd :CursorHoldI "<buffer>" "lua" "vim.lsp.buf.document_highlight()")
+    (autocmd :CursorMoved "<buffer>" "lua" "vim.lsp.buf.clear_references()")))
+
+(defn- augroup-format []
+  (augroup :lsp_format
+    (autocmd :BufWritePre "<buffer>" "lua vim.lsp.buf.formatting_sync(nil, 1000)")))
+
 (defn on-attach [client bufnr]
   (let [opts {:noremap true :silent true}
         nmap! (fn [mapping target] (nvim.buf_set_keymap bufnr :n mapping target opts))
@@ -19,12 +29,16 @@
     (nmap! :<space>ca "<Cmd>lua vim.lsp.buf.code_action()<CR>")
     (nmap! :gr "<Cmd>lua vim.lsp.buf.references()<CR>")
 
+    ;; Enable formatting and highlighting capabilities
     (when client.resolved_capabilities.document_formatting
-      (augroup :lsp_format
-        (autocmd :BufWritePre "<buffer>" "lua vim.lsp.buf.formatting_sync(nil, 1000)")))
-
+      (augroup-format))
     (when client.resolved_capabilities.document_highlight
-      (augroup :lsp_highlight
-        (autocmd :CursorHold "<buffer>" "lua vim.lsp.buf.document_highlight()")
-        (autocmd :CursorHoldI "<buffer>" "lua" "vim.lsp.buf.document_highlight()")
-        (autocmd :CursorMoved "<buffer>" "lua" "vim.lsp.buf.clear_references()")))))
+      (augroup-highlight))))
+
+(defn update-colorscheme []
+ (set nvim.o.updatetime 1000) ;; Useful for the HoldCursor and HoldCursorI
+ (nvim.ex.highlight :link :LspReferenceText :Search)
+ (nvim.ex.highlight :link :LspReferenceRead :LspReferenceText)
+ (nvim.ex.highlight :link :LspReferenceWrite :LspReferenceText))
+
+(update-colorscheme)

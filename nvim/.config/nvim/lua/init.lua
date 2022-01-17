@@ -11,6 +11,5 @@ do
   _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
 end
 require("dotfiles.general.functions")
-require("dotfiles.general.lspconfig")
 require("dotfiles.config.plugins.telescope")
 return require("dotfiles.config.lsp.clojure")
