@@ -13,9 +13,3 @@
   (empty? 1)
   (empty? [])
   (empty? 42))
-
-;; TODO: remove
-(defn fib [n]
-  (if (< n 2)
-    n
-    (+ (fib (- n 1)) (fib (- n 2)))))
