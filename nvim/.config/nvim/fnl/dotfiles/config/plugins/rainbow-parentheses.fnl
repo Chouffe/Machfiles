@@ -1,4 +1,4 @@
-(module dotfiles.config.plugins.rainbowparentheses
+(module dotfiles.config.plugins.rainbow-parentheses
   {autoload {nvim aniseed.nvim}
    require-macros [dotfiles.macros]})
 
