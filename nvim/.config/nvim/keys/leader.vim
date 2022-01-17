@@ -65,12 +65,12 @@ nnoremap <Leader>gg :call ColorEcho("Filename> ", expand('%:p'))<CR>
 nnoremap <Leader>gy :let @+ = expand("%:p")<CR>:call ColorEcho("Filename> ", expand('%:p'), " → copied to clipboard")<CR>
 
 " Git {{{
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gc :Git commit<CR>
+nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader>gs :Git<CR>
-nnoremap <Leader>gl :Glog -1000<CR>
+nnoremap <Leader>gl :Git log -1000<CR>
 nnoremap <Leader>ggp :Git push<CR>
-nnoremap <Leader>ggl :Gpull<CR>
+nnoremap <Leader>ggl :Git pull<CR>
 
 " Fugitive Conflict Resolution
 nnoremap <leader>gd :Gvdiffsplit!<CR>
