@@ -39,4 +39,5 @@ local _local_0_ = _2_(...)
 local _2amodule_2a = _0_
 local _2amodule_name_2a = "init"
 do local _ = ({nil, _0_, nil, {{}, nil, nil, nil}})[2] end
-return require("dotfiles.general.functions")
+require("dotfiles.general.functions")
+return require("dotfiles.general.lspconfig")
