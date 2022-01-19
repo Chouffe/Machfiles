@@ -27,3 +27,5 @@
 
 ;import plugin.fnl
 (require :config.plugin)
+(require :config.general.autocommands)
+(require :config.general.functions)

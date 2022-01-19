@@ -43,9 +43,9 @@
   :tpope/vim-sleuth {}
   ; Helpers for Linux
   :tpope/vim-eunuch {}
-  ; Defaults everyone can agree on 
+  ; Defaults everyone can agree on
   :tpope/vim-sensible {}
-  ; Expand region 
+  ; Expand region
   :terryma/vim-expand-region {}
   ; Pairs of handy bracket mapping
   :tpope/vim-unimpaired {}
@@ -72,7 +72,7 @@
   ; Place, toggle and display marks.
   :kshenoy/vim-signature {}
   ; Open URI with your favorite browser - fix gx in nvim
-  :tyru/open-browser.vim {}
+  :tyru/open-browser.vim {:mod :open-browser}
   ; Display a popup with possible key bindings of the command you started ty
   :folke/which-key.nvim {:branch :main}
   ; vim over: :substitute preview
@@ -116,9 +116,9 @@
   ; Clojure
   :Olical/conjure {:branch :master :mod :conjure}
   :guns/vim-sexp {:mod :sexp}
-  :tpope/vim-sexp-mappings-for-regular-people {} 
+  :tpope/vim-sexp-mappings-for-regular-people {}
   ; {:ft constants.lisp-filetypes}
-  :eraserhd/parinfer-rust {:run "cargo build --release"} 
+  :eraserhd/parinfer-rust {:run "cargo build --release"}
   ; {:run "cargo build --release" :ft constants.lisp-filetypes}
 
   ; Fennel
@@ -128,7 +128,7 @@
   :Vimjas/vim-python-pep8-indent {:ft :python}
   :psf/black {:ft :python}
 
-  ; FZF 
+  ; FZF
   :junegunn/fzf {:run "./install --all"}
   :junegunn/fzf.vim {}
   :tweekmonster/fzf-filemru {}
@@ -163,7 +163,7 @@
                                 :hrsh7th/cmp-nvim-lsp
                                 :PaterJason/cmp-conjure]
                      :mod :cmp}
-  ; Tmux 
+  ; Tmux
   :tmux-plugins/vim-tmux {}
   :christoomey/vim-tmux-navigator {}
   :edkolev/tmuxline.vim {}

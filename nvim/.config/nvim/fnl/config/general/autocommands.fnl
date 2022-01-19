@@ -6,6 +6,6 @@
 (defn setup []
   (augroup :config_group
     (autocmd :BufWinLeave "*" "call clearmatches()")
-    (autocmd :BufWritePre "*" "lua require('dotfiles.general.functions').trim_whitespace()")))
+    (autocmd :BufWritePre "*" "lua require('config.general.functions').trim_whitespace()")))
 
 (setup)

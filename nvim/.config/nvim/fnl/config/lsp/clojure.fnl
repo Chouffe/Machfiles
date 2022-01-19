@@ -15,5 +15,4 @@
      :handlers (lsp-common.make-handlers)
      :capabilites (lsp-common.make-capabilites)
      ; :root_dir (util.root_pattern ".git")
-     :flags {:debounce_text_changes 150}
-     }))
+     :flags {:debounce_text_changes 150}}))
