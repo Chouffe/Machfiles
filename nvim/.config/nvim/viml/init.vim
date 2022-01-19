@@ -11,6 +11,7 @@
 
 " General settings {{{
 source ~/.config/nvim/viml/general/settings.vim
+source ~/.config/nvim/viml/general/filetypes.vim
 source ~/.config/nvim/viml/keys/leader.vim
 source ~/.config/nvim/viml/keys/mappings.vim
 " }}}
