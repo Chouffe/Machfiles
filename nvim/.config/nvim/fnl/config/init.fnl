@@ -2,7 +2,9 @@
   {autoload {core aniseed.core
              nvim aniseed.nvim
              util config.util
-             str aniseed.string}})
+             str aniseed.string
+             autocommands config.general.autocommands
+             plugin config.plugin}})
 
 ;generic mapping leaders configuration
 ; (nvim.set_keymap :n :<space> :<nop> {:noremap true})
@@ -25,7 +27,8 @@
 ;  (each [option value (pairs options)]
 ;    (core.assoc nvim.o option value)))
 
-;import plugin.fnl
-(require :config.plugin)
-(require :config.general.autocommands)
-(require :config.general.functions)
+(defn init! []
+ (plugin.start)
+ (autocommands.setup))
+
+(init!)
