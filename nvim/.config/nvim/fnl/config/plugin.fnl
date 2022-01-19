@@ -1,4 +1,5 @@
 (module config.plugin
+
   {autoload {nvim aniseed.nvim
              constants config.constants
              a aniseed.core
@@ -22,6 +23,12 @@
             (-?> (. opts :mod) (safe-require-plugin-config))
             (use (a.assoc opts 1 name)))))))
   nil)
+
+(defn- setup [name]
+  (string.format "require('plugins.%s').setup()" name))
+
+(defn- config [name]
+  (string.format "require('plugins.%s').config()" name))
 
 ;plugins managed by packer
 (use
@@ -107,8 +114,8 @@
 
   ; Clojure
   :Olical/conjure {:branch :master :mod :conjure}
-  :guns/vim-sexp {}
-  :tpope/vim-sexp-mappings-for-regular-people {:ft :clojure}
+  :guns/vim-sexp {:ft constants.lisp-filetypes}
+  :tpope/vim-sexp-mappings-for-regular-people {:ft constants.lisp-filetypes}
   :eraserhd/parinfer-rust {:run "cargo build --release" :ft constants.lisp-filetypes}
 
   ; Python
