@@ -1,7 +1,7 @@
 (module config.plugin
   {autoload {nvim aniseed.nvim
+             constants config.constants
              a aniseed.core
-             util config.util
              packer packer}})
 
 (defn- safe-require-plugin-config [name]
@@ -109,7 +109,7 @@
   :Olical/conjure {:branch :master :mod :conjure}
   :guns/vim-sexp {}
   :tpope/vim-sexp-mappings-for-regular-people {:ft :clojure}
-  :eraserhd/parinfer-rust {:run "cargo build --release" :ft :clojure}
+  :eraserhd/parinfer-rust {:run "cargo build --release" :ft constants.lisp-filetypes}
 
   ; Python
   :Vimjas/vim-python-pep8-indent {:ft :python}
