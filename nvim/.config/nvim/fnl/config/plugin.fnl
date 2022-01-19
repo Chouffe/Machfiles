@@ -77,6 +77,8 @@
   :folke/which-key.nvim {:branch :main}
   ; vim over: :substitute preview
   :osyo-manga/vim-over {}
+  ; Rainbow
+  :luochen1990/rainbow {:mod :rainbow}
 
   ;; Objects and Motions
   ; Editing keys
