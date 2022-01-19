@@ -118,16 +118,14 @@
     :Olical/conjure {:branch :master :mod :conjure}
     :guns/vim-sexp {:mod :sexp}
     :tpope/vim-sexp-mappings-for-regular-people {}
-    ; {:ft constants.lisp-filetypes}
     :eraserhd/parinfer-rust {:run "cargo build --release"}
-    ; {:run "cargo build --release" :ft constants.lisp-filetypes}
 
     ; Fennel
     :bakpakin/fennel.vim {}
 
     ; Python
-    :Vimjas/vim-python-pep8-indent {:ft :python}
-    :psf/black {:mod :black}
+    :Vimjas/vim-python-pep8-indent {:ft "python"}
+    :psf/black {:ft "python" :mod :black}
 
     ; FZF
     :junegunn/fzf {:run "./install --all"}
