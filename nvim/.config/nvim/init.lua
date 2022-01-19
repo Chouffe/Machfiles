@@ -26,3 +26,6 @@ vim.g["aniseed#env"] = {
   module = "config.init",
   compile = true
 }
+
+-- Source viml config files
+vim.cmd [[ source ~/.config/nvim/viml/init.vim ]]

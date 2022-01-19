@@ -16,14 +16,4 @@ do end (_2amodule_locals_2a)["core"] = core
 _2amodule_locals_2a["nvim"] = nvim
 _2amodule_locals_2a["str"] = str
 _2amodule_locals_2a["util"] = util
-nvim.set_keymap("n", "<space>", "<nop>", {noremap = true})
-nvim.g.mapleader = " "
-nvim.g.maplocalleader = ","
-nvim.ex.set("nowrap")
-do
-  local options = {completeopt = "menuone,noselect", ignorecase = true, smartcase = true, clipboard = "unnamedplus"}
-  for option, value in pairs(options) do
-    core.assoc(nvim.o, option, value)
-  end
-end
 return require("config.plugin")
