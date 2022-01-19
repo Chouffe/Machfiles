@@ -127,7 +127,7 @@
 
     ; Python
     :Vimjas/vim-python-pep8-indent {:ft :python}
-    :psf/black {:ft :python}
+    :psf/black {:mod :black}
 
     ; FZF
     :junegunn/fzf {:run "./install --all"}
