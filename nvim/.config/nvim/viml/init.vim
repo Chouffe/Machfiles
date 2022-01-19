@@ -9,6 +9,11 @@
 " $$/ $$/   $$/ $$/    $$$$/ $$/  $/     $$/ $$/  $$/  $$/
 
 
+" TODO: move to another ns {{{
+" let g:sexp_insert_after_wrap = 0 " Disable insertion after wrapping
+" let g:sexp_enable_insert_mode_mappings = 0 " Make sure vim-sexp plays nicely with parinfer
+" }}}
+
 " General settings {{{
 source ~/.config/nvim/viml/general/settings.vim
 source ~/.config/nvim/viml/general/functions.vim

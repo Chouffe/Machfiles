@@ -114,9 +114,12 @@
 
   ; Clojure
   :Olical/conjure {:branch :master :mod :conjure}
-  :guns/vim-sexp {:ft constants.lisp-filetypes}
-  :tpope/vim-sexp-mappings-for-regular-people {:ft constants.lisp-filetypes}
-  :eraserhd/parinfer-rust {:run "cargo build --release" :ft constants.lisp-filetypes}
+  ;; TODO: fix ft option
+  :guns/vim-sexp {}
+  :tpope/vim-sexp-mappings-for-regular-people {} 
+  ; {:ft constants.lisp-filetypes}
+  :eraserhd/parinfer-rust {:run "cargo build --release"} 
+  ; {:run "cargo build --release" :ft constants.lisp-filetypes}
 
   ; Python
   :Vimjas/vim-python-pep8-indent {:ft :python}
