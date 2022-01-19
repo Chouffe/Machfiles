@@ -1,5 +1,4 @@
 (module config.plugin
-
   {autoload {nvim aniseed.nvim
              constants config.constants
              a aniseed.core
@@ -114,12 +113,14 @@
 
   ; Clojure
   :Olical/conjure {:branch :master :mod :conjure}
-  ;; TODO: fix ft option
-  :guns/vim-sexp {}
+  :guns/vim-sexp {:mod :sexp}
   :tpope/vim-sexp-mappings-for-regular-people {} 
   ; {:ft constants.lisp-filetypes}
   :eraserhd/parinfer-rust {:run "cargo build --release"} 
   ; {:run "cargo build --release" :ft constants.lisp-filetypes}
+
+  ; Fennel
+  :bakpakin/fennel.vim {}
 
   ; Python
   :Vimjas/vim-python-pep8-indent {:ft :python}
