@@ -29,7 +29,7 @@
 (defn- config [name]
   (string.format "require('plugins.%s').config()" name))
 
-(defn- start []
+(defn start []
   ; plugins managed by packer
   (use
     ; Plugin Manager

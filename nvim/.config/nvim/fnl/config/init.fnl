@@ -27,7 +27,7 @@
 ;  (each [option value (pairs options)]
 ;    (core.assoc nvim.o option value)))
 
-(defn init! []
+(defn- init! []
  (plugin.start)
  (autocommands.setup))
 
