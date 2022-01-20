@@ -100,7 +100,7 @@ nnoremap <silent><C-p>Telescope find_files<CR>
 " Live grep
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 " Grep with word under cursor
-nnoremap <leader>fa <cmd>Telescope grep_string<cr>
+" nnoremap <leader>fa <cmd>Telescope grep_string<cr>
 " Find buffers
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " Find in current buffer
@@ -108,8 +108,8 @@ nnoremap <leader>fl <cmd>lua require('telescope.builtin').current_buffer_fuzzy_f
 " Find LSP references
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').lsp_references()<cr>
 " Find notes
-nnoremap <leader>fn <cmd>lua require('telescope.builtin').file_browser({cwd = "~/notes"})<cr>
-nnoremap <leader>fv <cmd>lua require('telescope.builtin').file_browser({cwd = "~/.config/nvim"})<cr>
+nnoremap <leader>fn <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd = "~/notes"})<cr>
+nnoremap <leader>fv <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd = "~/.config/nvim"})<cr>
 " Find help tags
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " Find marks

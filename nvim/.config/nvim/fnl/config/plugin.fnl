@@ -146,7 +146,9 @@
 
     ; Telescope: file searching
     :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
-    :nvim-telescope/telescope.nvim {:requires [:nvim-lua/popup.nvim
+    :nvim-telescope/telescope.nvim {:requires [:nvim-telescope/telescope-file-browser.nvim
+                                               :nvim-telescope/telescope-fzf-native.nvim
+                                               :nvim-lua/popup.nvim
                                                :nvim-lua/plenary.nvim]
                                     :mod :telescope}
     ; Treesitter: parsing system
