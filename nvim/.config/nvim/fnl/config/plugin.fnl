@@ -32,10 +32,12 @@
 (defn start []
   ; plugins managed by packer
   (use
+    ; ====================================
     ; Plugin Manager
     :wbthomason/packer.nvim {}
     ; nvim config and plugins in Fennel
     :Olical/aniseed {:branch :develop}
+    ; ====================================
     ; Comment out stuff
     :tpope/vim-commentary {}
     ; Readline style insertion
@@ -168,6 +170,7 @@
     :edkolev/tmuxline.vim {}
 
     ; Colorschemes
+    :kyazdani42/nvim-web-devicons {}
     :morhetz/gruvbox {}
     :joshdick/onedark.vim {}
     :projekt0n/github-nvim-theme {:mod :theme}))
