@@ -7,5 +7,3 @@
   (augroup :config_group
     (autocmd :BufWinLeave "*" "call clearmatches()")
     (autocmd :BufWritePre "*" "lua require('config.general.functions').trim_whitespace()")))
-
-; (setup)
