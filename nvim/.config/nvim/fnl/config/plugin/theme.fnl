@@ -9,7 +9,6 @@
   and GNU screen. See also http://snk.tuxfamily.org/log/vim-256color-bce.html"
   (when (string.find nvim.o.term "256color")
     (set nvim.o.background :dark)))
-  ; (nvim.command "colorscheme hybrid_material"))
 
 ; (defn setup []
 ;   (theme.setup {:theme_style "dark"
