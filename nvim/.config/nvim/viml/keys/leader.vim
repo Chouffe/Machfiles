@@ -59,10 +59,6 @@ nnoremap <Leader>cc <cmd>lua require('dotfiles.general.functions').toggle_highli
 nnoremap <leader>w2 :setlocal tabstop=2<CR>:setlocal shiftwidth=2<CR>
 nnoremap <leader>w4 :setlocal tabstop=4<CR>:setlocal shiftwidth=4<CR>
 nnoremap <leader>w8 :setlocal tabstop=8<CR>:setlocal shiftwidth=8<CR>
-" Shows file name
-nnoremap <Leader>gg :call ColorEcho("Filename> ", expand('%:p'))<CR>
-" Copy the filename to the unamed register
-nnoremap <Leader>gy :let @+ = expand("%:p")<CR>:call ColorEcho("Filename> ", expand('%:p'), " → copied to clipboard")<CR>
 
 " Git {{{
 nnoremap <Leader>gc :Git commit<CR>
