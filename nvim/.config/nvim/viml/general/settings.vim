@@ -1,24 +1,6 @@
-" Colors / UI / Colorschemes {{{
+" Colors {{{
 filetype plugin indent on       " Enable filetype plugins
 syntax enable                   " Syntax highlighting
-set termguicolors               " true color support (will work only in tmux)
-set t_Co=256                    " Number of colors used in terminal
-if &term =~ '256color'
-"   " disable Background Color Erase (BCE) so that color schemes
-"   " render properly when inside 256-color tmux and GNU screen.
-"   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-set t_ut=
-endif
-set background=dark
-colorscheme gruvbox              " Awesome colorscheme
-" colorscheme hybrid_material      " Awesome colorscheme
-" Make the background color transparent
-hi Normal guibg=NONE ctermbg=NONE
-set cursorline                   " Highlight the line you are on
-set cursorline cursorcolumn      " Highlights the column you are in
-highlight clear SignColumn
-" " let base16colorspace=256
-" let $NVIM_TUI_ENABLE_TRUE_COLOR='1'
 " }}}
 
 " UX / Layout {{{
