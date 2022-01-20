@@ -15,19 +15,20 @@
         warn  (.. prefix "SignWarn")
         info  (.. prefix "SignInfo")
         hint  (.. prefix "SignHint")]
-  (vim.fn.sign_define error {:text "x" :texthl error})
-  (vim.fn.sign_define warn  {:text "!" :texthl warn})
-  (vim.fn.sign_define info  {:text "i" :texthl info})
-  (vim.fn.sign_define hint  {:text "?" :texthl hint})))
+   (vim.fn.sign_define error {:text "x" :texthl error})
+   (vim.fn.sign_define warn  {:text "!" :texthl warn})
+   (vim.fn.sign_define info  {:text "i" :texthl info})
+   (vim.fn.sign_define hint  {:text "?" :texthl hint})))
 
-(defn augroup-highlight 
+(defn augroup-highlight
   []
   (augroup :lsp_highlight
-    (autocmd :CursorHold "<buffer>" "lua vim.lsp.buf.document_highlight()")
+    (autocmd :CursorHold  "<buffer>" "lua vim.lsp.buf.document_highlight()")
     (autocmd :CursorHoldI "<buffer>" "lua" "vim.lsp.buf.document_highlight()")
     (autocmd :CursorMoved "<buffer>" "lua" "vim.lsp.buf.clear_references()")))
 
-(defn augroup-format []
+(defn augroup-format
+  []
   (augroup :lsp_format
     (autocmd :BufWritePre "<buffer>" "lua vim.lsp.buf.formatting_sync(nil, 1000)")))
 
@@ -58,22 +59,22 @@
 
     (nmap :gd         "<Cmd>lua vim.lsp.buf.definition()<CR>")
     (nmap :K          "<Cmd>lua vim.lsp.buf.hover()<CR>")
-    (nmap :<leader>ld "<Cmd>lua vim.lsp.buf.declaration()<CR>")
-    (nmap :<leader>lt "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-    (nmap :<leader>lh "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-    (nmap :<leader>ln "<cmd>lua vim.lsp.buf.rename()<CR>")
-    (nmap :<leader>le "<cmd>lua vim.diagnostic.open_float()<CR>")
-    (nmap :<leader>lq "<cmd>lua vim.diagnostic.setloclist()<CR>")
-    (nmap :<leader>lf "<cmd>lua vim.lsp.buf.formatting()<CR>")
-    (nmap :<leader>lj "<cmd>lua vim.diagnostic.goto_next()<CR>")
-    (nmap :<leader>lk "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+    (nmap :<localleader>ld "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+    (nmap :<localleader>lt "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+    (nmap :<localleader>lh "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+    (nmap :<localleader>ln "<cmd>lua vim.lsp.buf.rename()<CR>")
+    (nmap :<localleader>le "<cmd>lua vim.diagnostic.open_float()<CR>")
+    (nmap :<localleader>lq "<cmd>lua vim.diagnostic.setloclist()<CR>")
+    (nmap :<localleader>lf "<cmd>lua vim.lsp.buf.formatting()<CR>")
+    (nmap :<localleader>lj "<cmd>lua vim.diagnostic.goto_next()<CR>")
+    (nmap :<localleader>lk "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 
     ; Telescope
-    (nmap :<leader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
-    (vmap :<leader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>")
-    (nmap :<leader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
-    (nmap :<leader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
-    (nmap :<leader>li ":lua require('telescope.builtin').lsp_implementations()<cr>"))
+    (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
+    (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>")
+    (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
+    (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
+    (nmap :<localleader>li ":lua require('telescope.builtin').lsp_implementations()<cr>"))
 
   ;; Enable formatting and highlighting capabilities
   (when client.resolved_capabilities.document_formatting
@@ -107,5 +108,3 @@
  (nvim.ex.highlight! :link :LspReferenceText :Search)
  (nvim.ex.highlight! :link :LspReferenceRead :LspReferenceText)
  (nvim.ex.highlight! :link :LspReferenceWrite :LspReferenceText))
-
-; (update-colorscheme)

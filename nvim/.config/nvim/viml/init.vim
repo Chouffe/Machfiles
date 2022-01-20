@@ -17,7 +17,7 @@ source ~/.config/nvim/viml/keys/mappings.vim
 " }}}
 
 " Plugins configuration {{{
-" source ~/.config/nvim/viml/config/plugin/fzf.vim
+source ~/.config/nvim/viml/config/plugin/fzf.vim
 source ~/.config/nvim/viml/config/plugin/neomake.vim
 source ~/.config/nvim/viml/config/plugin/lightline.vim
 source ~/.config/nvim/viml/config/plugin/clojure.vim
