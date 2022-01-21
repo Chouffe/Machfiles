@@ -1,0 +1,19 @@
+(module config.plugin.telescope
+  {autoload {a aniseed.core
+             nvim aniseed.nvim
+             telescope telescope
+             actions telescope.actions}})
+
+(defn config []
+  (telescope.load_extension "fzf")
+  (telescope.load_extension "file_browser")
+  ; (telescope.load_extension "packer")
+  (telescope.setup {:defaults {:mappings {:i {"<esc>" actions.close}}
+                               :file_ignore_patterns ["node_modules"]}
+                    :pickers {:find_files {:find_command ["rg" "--files" "--iglob" "!.git" "--hidden"]}}}))
+
+  ;; Those mappings are still in mappings.vim
+  ; (nvim.set_keymap :n :<leader>ff ":lua require('telescope.builtin').find_files()<CR>" {:noremap true})
+  ; (nvim.set_keymap :n :<leader>fg ":lua require('telescope.builtin').live_grep()<CR>" {:noremap true})
+  ; (nvim.set_keymap :n :<leader>fb ":lua require('telescope.builtin').buffers()<CR>" {:noremap true})
+  ; (nvim.set_keymap :n :<leader>fh ":lua require('telescope.builtin').help_tags()<CR>" {:noremap true}))
