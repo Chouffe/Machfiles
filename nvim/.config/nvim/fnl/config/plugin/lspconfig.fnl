@@ -2,4 +2,4 @@
   {autoload {lsp-clojure config.lsp.clojure}})
 
 (defn config []
-  (lsp-clojure.setup))
+  (lsp-clojure.config))
