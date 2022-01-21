@@ -1,7 +1,5 @@
 (module config.plugin.lspconfig
   {autoload {lsp-clojure config.lsp.clojure}})
 
-(defn setup []
+(defn config []
   (lsp-clojure.setup))
-
-(setup)

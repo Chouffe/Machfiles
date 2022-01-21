@@ -3,8 +3,6 @@
              nvim aniseed.nvim}
    require-macros [config.macros]})
 
-(defn setup []
+(defn config []
   (augroup :black_config
     (nvim.ex.autocmd :BufWritePre  "*py" "if exists(':Black') | execute ':Black' | endif")))
-
-(setup)

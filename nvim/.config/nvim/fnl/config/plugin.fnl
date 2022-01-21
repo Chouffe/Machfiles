@@ -5,9 +5,13 @@
              packer packer}})
 
 (defn- safe-require-plugin-config [name]
-  (let [(ok? val-or-err) (pcall require (.. :config.plugin. name))]
-    (when (not ok?)
-      (print (.. "config error: " val-or-err)))))
+  (let [(ok-require? val-or-err-require)
+        (pcall require (.. :config.plugin. name))]
+    (if (not ok-require?)
+      (print (.. "config error: " val-or-err-require))
+      (let [(ok? val-or-err) (pcall val-or-err-require.config)]
+        (when (not ok?)
+          (print (.. "config error: " val-or-err)))))))
 
 (defn- use [...]
   "Iterates through the arguments as pairs and calls packer's use function for
@@ -19,15 +23,9 @@
         (for [i 1 (a.count pkgs) 2]
           (let [name (. pkgs i)
                 opts (. pkgs (+ i 1))]
-            (-?> (. opts :mod) (safe-require-plugin-config))
+            (-?> (. opts :config) (safe-require-plugin-config))
             (use (a.assoc opts 1 name)))))))
   nil)
-
-(defn- setup [name]
-  (string.format "require('plugins.%s').setup()" name))
-
-(defn- config [name]
-  (string.format "require('plugins.%s').config()" name))
 
 (defn start []
   ; plugins managed by packer
@@ -75,7 +73,7 @@
     ; Place, toggle and display marks.
     :kshenoy/vim-signature {}
     ; Open URI with your favorite browser - fix gx in nvim
-    :tyru/open-browser.vim {:mod :open-browser}
+    :tyru/open-browser.vim {:config :open-browser}
     ; Display a popup with possible key bindings of the command you started ty
     :folke/which-key.nvim {:branch :main}
     ; vim over: :substitute preview
@@ -117,8 +115,8 @@
     :neomake/neomake {}
 
     ; Clojure
-    :Olical/conjure {:branch :master :mod :conjure}
-    :guns/vim-sexp {:mod :sexp}
+    :Olical/conjure {:branch :master :config :conjure}
+    :guns/vim-sexp {:config :sexp}
     :tpope/vim-sexp-mappings-for-regular-people {}
     :eraserhd/parinfer-rust {:run "cargo build --release"}
 
@@ -127,7 +125,7 @@
 
     ; Python
     :Vimjas/vim-python-pep8-indent {:ft "python"}
-    :psf/black {:ft "python" :mod :black}
+    :psf/black {:ft "python" :config :black}
 
     ; FZF
     :junegunn/fzf {:run "./install --all"}
@@ -150,21 +148,21 @@
                                                :nvim-telescope/telescope-fzf-native.nvim
                                                :nvim-lua/popup.nvim
                                                :nvim-lua/plenary.nvim]
-                                    :mod :telescope}
+                                    :config :telescope}
     ; Treesitter: parsing system
     :nvim-treesitter/nvim-treesitter {:requires [:p00f/nvim-ts-rainbow]
                                       :run ":TSUpdate"
-                                      :mod :treesitter}
+                                      :config :treesitter}
     ;; Language Server Protocol
     ; A collection of common configurations for Neovim's built in LSP
-    :neovim/nvim-lspconfig {:mod :lspconfig}
+    :neovim/nvim-lspconfig {:config :lspconfig}
     ; Adds the missing :LspInstall <language> command to conveniently install
     :williamboman/nvim-lsp-installer {}
     ; Autocomplete
     :hrsh7th/nvim-cmp {:requires [:hrsh7th/cmp-buffer
                                   :hrsh7th/cmp-nvim-lsp
                                   :PaterJason/cmp-conjure]
-                       :mod :cmp}
+                       :config :cmp}
 
 
     ; Tmux
@@ -174,6 +172,6 @@
 
     ; Colorschemes
     :kyazdani42/nvim-web-devicons {}
-    :morhetz/gruvbox {}
+    :morhetz/gruvbox {:config :theme}
     :joshdick/onedark.vim {}
-    :projekt0n/github-nvim-theme {:mod :theme}))
+    :projekt0n/github-nvim-theme {}))

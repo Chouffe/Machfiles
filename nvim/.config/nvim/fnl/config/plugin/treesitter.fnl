@@ -1,7 +1,7 @@
 (module config.plugin.treesitter
   {autoload {treesitter nvim-treesitter.configs}})
 
-(defn setup []
+(defn config []
   (treesitter.setup {:highlight {:enable true}
                      :rainbow {:enable true
                                ;; List of languages you want to disable the plugin for
@@ -12,5 +12,3 @@
                                :max_file_lines nil}
                      :indent {:enable true}
                      :ensure_installed ["clojure"]}))
-
-(setup)

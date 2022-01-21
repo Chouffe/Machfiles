@@ -12,7 +12,7 @@
    {:name :conjure}
    {:name :buffer}])
 
-(defn setup []
+(defn config []
   "Setup cmp with desired settings"
   (cmp.setup {:formatting
               {:format (fn [entry item]
@@ -27,5 +27,3 @@
                         :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Insert
                                                     :select true})}
               :sources cmp-srcs}))
-
-(setup)

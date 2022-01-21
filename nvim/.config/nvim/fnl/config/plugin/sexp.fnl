@@ -1,7 +1,6 @@
 (module config.plugin.sexp
-  {autoload {nvim aniseed.nvim}})
+  {autoload {a aniseed.core
+             nvim aniseed.nvim}})
 
-(defn setup []
+(defn config []
   (set nvim.g.sexp_filetypes "clojure,scheme,lisp,timl,fennel,janet"))
-
-(setup)

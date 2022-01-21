@@ -14,7 +14,7 @@
 ;   (theme.setup {:theme_style "dark"
 ;                 :comment_style "italic"}))
 
-(defn setup []
+(defn config []
   (nvim.ex.set :termguicolors)     ;; True color support (will work only in tmux)
   (set nvim.o.t_Co 256)            ;; Number of colors used in terminal
   (disable-background-color-erase)
@@ -28,6 +28,3 @@
   (nvim.ex.set :cursorline)               ;; highlight the line you are on
   (nvim.ex.set :cursorline :cursorcolumn) ;; highlight the column you are on
   (nvim.ex.highlight :clear :SignColumn))
-
-
-(setup)
