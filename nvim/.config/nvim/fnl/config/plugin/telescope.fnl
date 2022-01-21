@@ -1,11 +1,13 @@
 (module config.plugin.telescope
-  {autoload {nvim aniseed.nvim
+  {autoload {a aniseed.core
+             nvim aniseed.nvim
              telescope telescope
              actions telescope.actions}})
 
 (defn config []
   (telescope.load_extension "fzf")
   (telescope.load_extension "file_browser")
+  ; (telescope.load_extension "packer")
   (telescope.setup {:defaults {:mappings {:i {"<esc>" actions.close}}
                                :file_ignore_patterns ["node_modules"]}
                     :pickers {:find_files {:find_command ["rg" "--files" "--iglob" "!.git" "--hidden"]}}}))

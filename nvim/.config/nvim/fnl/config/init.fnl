@@ -4,7 +4,7 @@
              util config.util
              str aniseed.string
              autocommands config.general.autocommands
-             plugin config.plugin}})
+             plugins config.plugins}})
 
 ;generic mapping leaders configuration
 ; (nvim.set_keymap :n :<space> :<nop> {:noremap true})
@@ -28,7 +28,7 @@
 ;    (core.assoc nvim.o option value)))
 
 (defn- init! []
- (plugin.start)
+ (plugins.init)
  (autocommands.setup))
 
 (init!)
