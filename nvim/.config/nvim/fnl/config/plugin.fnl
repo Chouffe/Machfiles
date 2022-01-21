@@ -81,7 +81,7 @@
     ; vim over: :substitute preview
     :osyo-manga/vim-over {}
     ; Rainbow
-    :luochen1990/rainbow {:mod :rainbow}
+    ; :luochen1990/rainbow {:mod :rainbow}
 
     ;; Objects and Motions
     ; Editing keys
@@ -152,7 +152,8 @@
                                                :nvim-lua/plenary.nvim]
                                     :mod :telescope}
     ; Treesitter: parsing system
-    :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
+    :nvim-treesitter/nvim-treesitter {:requires [:p00f/nvim-ts-rainbow]
+                                      :run ":TSUpdate"
                                       :mod :treesitter}
     ;; Language Server Protocol
     ; A collection of common configurations for Neovim's built in LSP
