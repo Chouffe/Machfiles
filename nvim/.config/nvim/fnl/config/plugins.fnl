@@ -61,7 +61,7 @@
    ; Place, toggle and display marks.
    :kshenoy/vim-signature {}
    ; Open URI with your favorite browser - fix gx in nvim
-   :tyru/open-browser.vim {} ;; {:config :open-browser}
+   :tyru/open-browser.vim {:config (config-fn :open-browser)}
    ; Display a popup with possible key bindings of the command you started ty
    :folke/which-key.nvim {:branch :main}
    ; vim over: :substitute preview
@@ -114,7 +114,6 @@
    ; Python
    :Vimjas/vim-python-pep8-indent {:ft "python"}
    :psf/black {:ft "python" :config (config-fn :black)}
-               ; :config :black}
 
    ; FZF
    :junegunn/fzf {:run "./install --all"}
@@ -132,27 +131,21 @@
    :itchyny/lightline.vim {}
 
    ; Telescope: file searching
-   ; :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
-   ; :nvim-telescope/telescope-packer.nvim {}
    :nvim-telescope/telescope.nvim {:requires {:nvim-telescope/telescope-file-browser.nvim {}
                                               :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
                                               ; :nvim-telescope/telescope-packer {}
                                               :nvim-lua/popup.nvim {}
                                               :nvim-lua/plenary.nvim {}}
-                                   :config #(let [telescope (require :config.plugin.telescope)]
-                                              (telescope.config))}
+                                   :config (config-fn :telescope)}
+
    ; ; Treesitter: parsing system
    :nvim-treesitter/nvim-treesitter {:requires {:p00f/nvim-ts-rainbow {}}
                                      :run ":TSUpdate"
                                      :config (config-fn :treesitter)}
-                                     ; :config #(let [x (require :config.plugin.treesitter)]
-                                     ;            (a.println "HELLO")
-                                     ;            (x.config))}
 
-                                     ; :config :treesitter}
    ;; Language Server Protocol
    ; A collection of common configurations for Neovim's built in LSP
-   :neovim/nvim-lspconfig {} ;; {:config (config-fn :lspconfig)}
+   :neovim/nvim-lspconfig {:config (config-fn :lspconfig)}
    ; Adds the missing :LspInstall <language> command to conveniently install
    :williamboman/nvim-lsp-installer {}
    ; Autocomplete
@@ -192,10 +185,6 @@
 (defn- use-all [plugins]
   (each [_ plugin (ipairs (adapt-plugins plugins))]
     (packer.use plugin)))
-
-(comment
-  (adapt-plugins plugins)
-  (ipairs plugins))
 
 (defn init []
   (packer.init {:max_jobs 50})
