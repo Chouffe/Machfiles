@@ -13,10 +13,6 @@
         (when (not ok?)
           (print (.. "config error: " val-or-err)))))))
 
-(defn- config-fn [name]
-  (let [ns (require (.. :config.plugin. name))]
-    (ns.config)))
-
 (def plugins
   { ; ====================================
    ; Plugin Manager
@@ -61,7 +57,8 @@
    ; Place, toggle and display marks.
    :kshenoy/vim-signature {}
    ; Open URI with your favorite browser - fix gx in nvim
-   :tyru/open-browser.vim {:config (config-fn :open-browser)}
+   :tyru/open-browser.vim {:config #(let [open-browser (require :config.plugin.open-browser)]
+                                      (open-browser.config))}
    ; Display a popup with possible key bindings of the command you started ty
    :folke/which-key.nvim {:branch :main}
    ; vim over: :substitute preview
@@ -103,7 +100,8 @@
    :neomake/neomake {}
 
    ; Clojure
-   :Olical/conjure {:branch :master :config (config-fn :conjure)}
+   :Olical/conjure {:branch :master :config #(let [conjure (require :config.plugin.conjure)]
+                                               (conjure.config))}
    :guns/vim-sexp {:ft "clojure"}
    :tpope/vim-sexp-mappings-for-regular-people {}
    :eraserhd/parinfer-rust {:run "cargo build --release"}
@@ -113,7 +111,8 @@
 
    ; Python
    :Vimjas/vim-python-pep8-indent {:ft "python"}
-   :psf/black {:ft "python" :config (config-fn :black)}
+   :psf/black {:ft "python" :config #(let [black (require :config.plugin.black)]
+                                       (black.config))}
 
    ; FZF
    :junegunn/fzf {:run "./install --all"}
@@ -133,26 +132,30 @@
    ; Telescope: file searching
    :nvim-telescope/telescope.nvim {:requires {:nvim-telescope/telescope-file-browser.nvim {}
                                               :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
-                                              ; :nvim-telescope/telescope-packer {}
                                               :nvim-lua/popup.nvim {}
                                               :nvim-lua/plenary.nvim {}}
-                                   :config (config-fn :telescope)}
+                                   :config #(let [telescope (require :config.plugin.telescope)]
+                                              (telescope.config))}
 
-   ; ; Treesitter: parsing system
-   :nvim-treesitter/nvim-treesitter {:requires {:p00f/nvim-ts-rainbow {}}
-                                     :run ":TSUpdate"
-                                     :config (config-fn :treesitter)}
 
-   ;; Language Server Protocol
-   ; A collection of common configurations for Neovim's built in LSP
-   :neovim/nvim-lspconfig {:config (config-fn :lspconfig)}
-   ; Adds the missing :LspInstall <language> command to conveniently install
-   :williamboman/nvim-lsp-installer {}
-   ; Autocomplete
-   :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
-                                  :hrsh7th/cmp-nvim-lsp {}
-                                  :PaterJason/cmp-conjure {}}
-                      :config (config-fn :cmp)}
+    ; Treesitter: parsing system
+    :nvim-treesitter/nvim-treesitter {:requires {:p00f/nvim-ts-rainbow {}}
+                                      :run ":TSUpdate"
+                                      :config #(let [treesitter (require :config.plugin.treesitter)]
+                                                 (treesitter.config))}
+
+    ;; Language Server Protocol
+    ; A collection of common configurations for Neovim's built in LSP
+    :neovim/nvim-lspconfig {:config #(let [lspconfig (require :config.plugin.lspconfig)]
+                                       (lspconfig.config))}
+    ; Adds the missing :LspInstall <language> command to conveniently install
+    :williamboman/nvim-lsp-installer {}
+    ; Autocomplete
+    :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
+                                   :hrsh7th/cmp-nvim-lsp {}
+                                   :PaterJason/cmp-conjure {}}
+                       :config #(let [cmp (require :config.plugin.cmp)]
+                                  (cmp.config))}
 
    ; Tmux
    :tmux-plugins/vim-tmux {}
@@ -161,7 +164,8 @@
 
    ; Colorschemes
    :kyazdani42/nvim-web-devicons {}
-   :morhetz/gruvbox {:config (config-fn :theme)}
+   :morhetz/gruvbox {:config #(let [theme (require :config.plugin.theme)]
+                                (theme.config))}
    :joshdick/onedark.vim {}
    :projekt0n/github-nvim-theme {}})
 
