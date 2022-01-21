@@ -65,7 +65,11 @@
   (fn on-attach [client bufnr]
     (let [opts {:noremap true}
           nmap (fn [mapping target] (nvim.buf_set_keymap bufnr :n mapping target opts))
-          vmap (fn [mapping target] (nvim.buf_set_keymap bufnr :v mapping target opts))]
+          vmap (fn [mapping target] (nvim.buf_set_keymap bufnr :v mapping target opts))
+          option (fn [name value] (nvim.buf_set_option bufnr name value))]
+
+      ;; Set omnicompletion with LSP
+      (option :omnifunc :v:lua.vim.lsp.omnifunc)
 
       (nmap :gd              "<Cmd>lua vim.lsp.buf.definition()<CR>")
       (nmap :K               "<Cmd>lua vim.lsp.buf.hover()<CR>")
