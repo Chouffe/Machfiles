@@ -89,10 +89,8 @@
       ;; Enable formatting and highlighting capabilities
     (when (and document-formatting-on-save?
                client.resolved_capabilities.document_formatting)
-      (a.println "Enable document formatting on save")
       (format-on-save))
 
     (when (and highlight-reference-when-idle?
                client.resolved_capabilities.document_highlight)
-      (a.println "Enable reference highlight when idel")
       (highlight-reference-when-idle))))
