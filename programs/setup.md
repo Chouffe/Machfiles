@@ -33,6 +33,7 @@ How to setup a work environment.
 * Cursor speed:
   * xset q | grep rate
   * xset r rate 250 40
+* Enable the Compose Key by installing gnome-tweak-tool and enabling it
 
 ## Editor: nvim
 
