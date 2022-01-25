@@ -87,7 +87,9 @@
    ; :jasonlong/vim-textobj-css {}
 
    ; Navigation
-   :preservim/nerdtree {}
+   :kyazdani42/nvim-tree.lua {:requires {:kyazdani42/nvim-web-devicons {}}
+                              :config (config :nvim-tree)}
+   ; :preservim/nerdtree {}
 
    ; Neomake
    :neomake/neomake {}

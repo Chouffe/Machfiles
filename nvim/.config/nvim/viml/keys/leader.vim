@@ -41,8 +41,10 @@ nnoremap <leader>et :edit ~/.tmux.conf<CR>
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 " nnoremap <silent><Leader>t :<C-u>VimFilerExplorer -split -simple -parent -winwidth=35 -auto-expand -toggle -no-quit<CR>
 " nnoremap <silent><Leader>t :<C-u>NERDTreeToggle<CR>
-nnoremap <silent><Leader>t :<C-u>NERDTreeToggle<CR>
-nnoremap <silent><Leader>r :<C-u>NERDTreeToggle %<CR>
+" nnoremap <silent><Leader>t :<C-u>NERDTreeToggle<CR>
+nnoremap <silent><Leader>t :<C-u>NvimTreeToggle<CR>
+" nnoremap <silent><Leader>r :<C-u>NERDTreeToggle %<CR>
+nnoremap <silent><Leader>r :<C-u>NvimTreeFindFileToggle<CR>
 " nnoremap <silent><Leader>f :<C-u>NERDTreeToggle %<CR>
 " Spell checking
 nnoremap <silent> <leader>s :set spell!<CR>
