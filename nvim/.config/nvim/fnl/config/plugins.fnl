@@ -146,21 +146,28 @@
     :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
                                   :hrsh7th/cmp-nvim-lsp {}
                                   :PaterJason/cmp-conjure {}
+                                  :andersevenrud/cmp-tmux {}
                                   :hrsh7th/cmp-path {}
                                   :hrsh7th/cmp-cmdline {}
-                                  :hrsh7th/nvim-cmp {}}
+                                  :hrsh7th/nvim-cmp {}
+                                  ;; Provides icons for cmp
+                                  :onsails/lspkind-nvim {}}
                        :config (config :cmp)}
+    ; A tree like view for symbols using LSP
+    :simrat39/symbols-outline.nvim {:config (config :symbols-outline)}
+    :kosayoda/nvim-lightbulb {:config (config :lightbulb)}
 
-   ; Tmux
-   :tmux-plugins/vim-tmux {}
-   :christoomey/vim-tmux-navigator {}
-   :edkolev/tmuxline.vim {}
+    ; Tmux
+    :tmux-plugins/vim-tmux {}
+    :christoomey/vim-tmux-navigator {}
+    :edkolev/tmuxline.vim {}
 
-   ; Colorschemes
-   :kyazdani42/nvim-web-devicons {}
-   :morhetz/gruvbox {:config (config :theme)}
-   :joshdick/onedark.vim {}
-   :projekt0n/github-nvim-theme {}})
+    ; Colorschemes
+    ;; Checkout: https://github.com/kyazdani42/nvim-tree.lua
+    :yamatsum/nvim-nonicons {:requires {:kyazdani42/nvim-web-devicons  {}}}
+    :morhetz/gruvbox {:config (config :theme)}
+    :joshdick/onedark.vim {}
+    :projekt0n/github-nvim-theme {}})
 
 (defn- log [x]
   (a.println x))

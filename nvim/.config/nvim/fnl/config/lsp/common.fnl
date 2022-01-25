@@ -1,11 +1,10 @@
 (module config.lsp.common
   {autoload {a aniseed.core
-             nvim aniseed.nvim
-             lsp lspconfig
+             configs lspconfig.configs
              cmplsp cmp_nvim_lsp
              lsp lspconfig
-             util lspconfig/util
-             configs lspconfig.configs}
+             nvim aniseed.nvim
+             util lspconfig/util}
    require-macros [config.macros]})
 
 (defn define-signs
