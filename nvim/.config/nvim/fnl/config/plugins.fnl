@@ -127,6 +127,7 @@
    ; Telescope: file searching
    :nvim-telescope/telescope.nvim {:requires {:nvim-telescope/telescope-file-browser.nvim {}
                                               :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
+                                              ; :xiyaowong/telescope-emoji.nvim {}
                                               :nvim-lua/popup.nvim {}
                                               :nvim-lua/plenary.nvim {}}
                                    :config (config :telescope)}
@@ -143,8 +144,11 @@
     :williamboman/nvim-lsp-installer {}
     ; Autocomplete
     :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
-                                   :hrsh7th/cmp-nvim-lsp {}
-                                   :PaterJason/cmp-conjure {}}
+                                  :hrsh7th/cmp-nvim-lsp {}
+                                  :PaterJason/cmp-conjure {}
+                                  :hrsh7th/cmp-path {}
+                                  :hrsh7th/cmp-cmdline {}
+                                  :hrsh7th/nvim-cmp {}}
                        :config (config :cmp)}
 
    ; Tmux

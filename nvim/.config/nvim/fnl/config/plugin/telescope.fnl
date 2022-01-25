@@ -7,6 +7,7 @@
 (defn config []
   (telescope.load_extension "fzf")
   (telescope.load_extension "file_browser")
+  ; (telescope.load_extension "emoji")
   ; (telescope.load_extension "packer")
   (telescope.setup {:defaults {:mappings {:i {"<esc>" actions.close}}
                                :file_ignore_patterns ["node_modules"]}

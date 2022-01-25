@@ -10,7 +10,8 @@
 (def- cmp-srcs
   [{:name :nvim_lsp}
    {:name :conjure}
-   {:name :buffer}])
+   {:name :buffer}
+   {:name :path}])
 
 (defn config []
   "Setup cmp with desired settings"
@@ -26,4 +27,7 @@
                         :<C-e> (cmp.mapping.close)
                         :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Insert
                                                     :select true})}
-              :sources cmp-srcs}))
+              :sources cmp-srcs})
+
+  (cmp.setup.cmdline :: {:sources [{:name :cmdline}
+                                   {:name :path}]}))
