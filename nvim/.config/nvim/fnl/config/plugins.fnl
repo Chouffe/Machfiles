@@ -4,14 +4,8 @@
              a aniseed.core
              packer packer}})
 
-(defn- safe-require-plugin-config [name]
-  (let [(ok-require? val-or-err-require)
-        (pcall require (.. :config.plugin. name))]
-    (if (not ok-require?)
-      (print (.. "config error: " val-or-err-require))
-      (let [(ok? val-or-err) (pcall val-or-err-require.config)]
-        (when (not ok?)
-          (print (.. "config error: " val-or-err)))))))
+(defn- config [name]
+  (string.format "require('config.plugin.%s').config()" name))
 
 (def plugins
   { ; ====================================
@@ -57,8 +51,7 @@
    ; Place, toggle and display marks.
    :kshenoy/vim-signature {}
    ; Open URI with your favorite browser - fix gx in nvim
-   :tyru/open-browser.vim {:config #(let [open-browser (require :config.plugin.open-browser)]
-                                      (open-browser.config))}
+   :tyru/open-browser.vim {:config (config :open-browser)}
    ; Display a popup with possible key bindings of the command you started ty
    :folke/which-key.nvim {:branch :main}
    ; vim over: :substitute preview
@@ -79,19 +72,19 @@
    ; r for a block in ruby
    ; f,c for function and class in python
    ; c for css class
-   :kana/vim-textobj-user {}
-   :kana/vim-textobj-entire {}
-   :kana/vim-textobj-indent {}
-   :kana/vim-textobj-line {}
-   :mattn/vim-textobj-url {}
-   :rhysd/vim-textobj-anyblock {}
-   :rhysd/vim-textobj-conflict {}
-   :kana/vim-textobj-function {}
-   :sgur/vim-textobj-parameter {}
-   :thinca/vim-textobj-function-javascript {}
-   :nelstrom/vim-textobj-rubyblock {}
-   :bps/vim-textobj-python {}
-   :jasonlong/vim-textobj-css {}
+   ; :kana/vim-textobj-user {}
+   ; :kana/vim-textobj-entire {}
+   ; :kana/vim-textobj-indent {}
+   ; :kana/vim-textobj-line {}
+   ; :mattn/vim-textobj-url {}
+   ; :rhysd/vim-textobj-anyblock {}
+   ; :rhysd/vim-textobj-conflict {}
+   ; :kana/vim-textobj-function {}
+   ; :sgur/vim-textobj-parameter {}
+   :thinca/vim-textobj-function-javascript {:ft :javascript}
+   ; :nelstrom/vim-textobj-rubyblock {}
+   :bps/vim-textobj-python {:ft :python}
+   ; :jasonlong/vim-textobj-css {}
 
    ; Navigation
    :preservim/nerdtree {}
@@ -100,24 +93,26 @@
    :neomake/neomake {}
 
    ; Clojure
-   :Olical/conjure {:branch :master :config #(let [conjure (require :config.plugin.conjure)]
-                                               (conjure.config))}
-   :guns/vim-sexp {:ft "clojure"}
-   :tpope/vim-sexp-mappings-for-regular-people {}
-   :eraserhd/parinfer-rust {:run "cargo build --release"}
+   :Olical/conjure {:branch :master
+                    :config (config :conjure)}
+   :guns/vim-sexp {:ft constants.lisp-filetypes
+                   :config (config :sexp)}
+   :tpope/vim-sexp-mappings-for-regular-people {:ft constants.lisp-filetypes}
+   :eraserhd/parinfer-rust {:ft constants.lisp-filetypes
+                            :run "cargo build --release"}
 
    ; Fennel
    :bakpakin/fennel.vim {}
 
    ; Python
-   :Vimjas/vim-python-pep8-indent {:ft "python"}
-   :psf/black {:ft "python" :config #(let [black (require :config.plugin.black)]
-                                       (black.config))}
+   :Vimjas/vim-python-pep8-indent {:ft :python}
+   :psf/black {:ft :python
+               :config (config :black)}
 
    ; FZF
-   :junegunn/fzf {:run "./install --all"}
-   :junegunn/fzf.vim {}
-   :tweekmonster/fzf-filemru {}
+   :junegunn/fzf {:run "./install --all"
+                  :requires {:junegunn/fzf.vim {}
+                             :tweekmonster/fzf-filemru {}}}
 
    ; Git
    :tpope/vim-fugitive {}
@@ -134,28 +129,23 @@
                                               :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
                                               :nvim-lua/popup.nvim {}
                                               :nvim-lua/plenary.nvim {}}
-                                   :config #(let [telescope (require :config.plugin.telescope)]
-                                              (telescope.config))}
-
+                                   :config (config :telescope)}
 
     ; Treesitter: parsing system
     :nvim-treesitter/nvim-treesitter {:requires {:p00f/nvim-ts-rainbow {}}
                                       :run ":TSUpdate"
-                                      :config #(let [treesitter (require :config.plugin.treesitter)]
-                                                 (treesitter.config))}
+                                      :config (config :treesitter)}
 
     ;; Language Server Protocol
     ; A collection of common configurations for Neovim's built in LSP
-    :neovim/nvim-lspconfig {:config #(let [lspconfig (require :config.plugin.lspconfig)]
-                                       (lspconfig.config))}
+    :neovim/nvim-lspconfig {:config (config :lspconfig)}
     ; Adds the missing :LspInstall <language> command to conveniently install
     :williamboman/nvim-lsp-installer {}
     ; Autocomplete
     :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
                                    :hrsh7th/cmp-nvim-lsp {}
                                    :PaterJason/cmp-conjure {}}
-                       :config #(let [cmp (require :config.plugin.cmp)]
-                                  (cmp.config))}
+                       :config (config :cmp)}
 
    ; Tmux
    :tmux-plugins/vim-tmux {}
@@ -164,8 +154,7 @@
 
    ; Colorschemes
    :kyazdani42/nvim-web-devicons {}
-   :morhetz/gruvbox {:config #(let [theme (require :config.plugin.theme)]
-                                (theme.config))}
+   :morhetz/gruvbox {:config (config :theme)}
    :joshdick/onedark.vim {}
    :projekt0n/github-nvim-theme {}})
 
