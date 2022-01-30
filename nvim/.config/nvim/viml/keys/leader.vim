@@ -89,39 +89,58 @@ nnoremap <LocalLeader>d <cmd>lua require('dotfiles.general.functions').delete_bu
 
 " Telescope {{{
 
+" All mappings currently moved to FZF
 " Search section
 " --------------
-" Find files
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <silent><C-p>Telescope find_files<CR>
+" Find files -> done with FZF lua
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <silent><C-p>Telescope find_files<CR>
 " Live grep
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" fzf lua is providing live grep for now -> see bindings there
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 " Grep with word under cursor
 " nnoremap <leader>fa <cmd>Telescope grep_string<cr>
-" Find buffers
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" Find in current buffer
-nnoremap <leader>fl <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+" Find buffers -> done with FZF lua
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" Find in current buffer - FZFLua does this
+" nnoremap <leader>fl <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 " Find LSP references
-nnoremap <leader>fr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-" Find notes
-nnoremap <leader>fn <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd = "~/notes"})<cr>
+" nnoremap <leader>fr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+" Find notes -> Done with FZF Lua
+" nnoremap <leader>fn <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd = "~/notes"})<cr>
 " Find vim config
-nnoremap <leader>fv <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd = "~/.config/nvim"})<cr>
-" Find help tags
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-" Find marks
-nnoremap <leader>fm <cmd>Telescope marks<cr>
+" nnoremap <leader>fv <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd = "~/.config/nvim"})<cr>
+" Find help tags -> done with fzf lua
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" Find marks -> done with fzf lua
+" nnoremap <leader>fm <cmd>Telescope marks<cr>
 " }}}
 
 
 " FZF {{{
-nnoremap <silent><C-f> :FZFBLines<CR>
-nnoremap <silent><M-f> :FZFLines<CR>
-nnoremap <silent> <Leader>a :FZFRg <C-R><C-W><CR>
-nnoremap <silent> <Leader>: :FZFHistory:<CR>
-nnoremap <silent> <Leader>/ :FZFHistory/<CR>
-nnoremap <silent><C-q> :FZFRg <C-R><C-W><CR>
+nnoremap <silent><leader>ff :FzfLua files<cr>
+nnoremap <silent><leader>fb :FzfLua buffers<cr>
+nnoremap <silent><Leader>fl :FzfLua lines<CR>
+nnoremap <silent><Leader>fw :FzfLua grep_cword<CR>
+nnoremap <silent><Leader>fW :FzfLua grep_cWORD<CR>
+nnoremap <silent><Leader>fg :FzfLua live_grep<CR>
+nnoremap <silent><Leader>fr :FzfLua resume<CR>
+nnoremap <silent><Leader>f: :FzfLua command_history<CR>
+nnoremap <silent><Leader>f/ :FzfLua search_history<CR>
+nnoremap <silent><Leader>fm :FzfLua marks<CR>
+nnoremap <silent><Leader>fh :FzfLua help_tags<CR>
+nnoremap <silent><Leader>fn :lua require('fzf-lua').files({ cwd = '~/notes' })<CR>
+nnoremap <silent><Leader>fvg :lua require('fzf-lua').live_grep({ cwd = '~/.config/nvim' })<CR>
+nnoremap <silent><Leader>fvf :lua require('fzf-lua').files({ cwd = '~/.config/nvim' })<CR>
+
+" nnoremap <silent><C-f> :FZFBLines<CR>
+" nnoremap <silent><C-f> :FzfLua lines<CR>
+" nnoremap <silent><Leader>a :FzfLua grep_cword<CR>
+" nnoremap <silent><M-f> :FZFLines<CR>
+" nnoremap <silent> <Leader>a :FZFRg <C-R><C-W><CR>
+" nnoremap <silent> <Leader>: :FZFHistory:<CR>
+" nnoremap <silent> <Leader>/ :FZFHistory/<CR>
+" nnoremap <silent><C-q> :FZFRg <C-R><C-W><CR>
 " nnoremap <silent><C-s> :<C-u>Unite neosnippet -start-insert<CR>
 " nnoremap <silent> <C-y> :<C-u>Unite history/yank<CR>
 " nnoremap <silent><M-g> :FZFAg<CR>'

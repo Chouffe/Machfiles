@@ -113,7 +113,8 @@
 
    ; FZF
    :junegunn/fzf {:run "./install --all"
-                  :requires {:junegunn/fzf.vim {}
+                  :requires {:ibhagwan/fzf-lua {:requires {:kyazdani42/nvim-web-devicons {}}}
+                             :junegunn/fzf.vim {}
                              :tweekmonster/fzf-filemru {}}}
 
    ; Git
