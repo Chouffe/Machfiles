@@ -82,12 +82,17 @@
       (nmap :<localleader>lj "<cmd>lua vim.diagnostic.goto_next()<CR>")
       (nmap :<localleader>lk "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 
+      ; Fzf
+      (nmap :<localleader>la ":FzfLua lsp_code_actions<CR>")
+      (nmap :<localleader>lw ":FzfLua lsp_workspace_diagnostics<CR>")
+      (nmap :<localleader>lr ":FzfLua lsp_references<CR>")
+
       ; Telescope
-      (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
-      (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>")
-      (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
-      (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
-      (nmap :<localleader>li ":lua require('telescope.builtin').lsp_implementations()<cr>"))
+      ; (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
+      (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>"))
+      ; (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
+      ; (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
+      ; (nmap :<localleader>li ":lua require('telescope.builtin').lsp_implementations()<cr>"))
 
       ;; Enable formatting and highlighting capabilities
     (when (and document-formatting-on-save?
