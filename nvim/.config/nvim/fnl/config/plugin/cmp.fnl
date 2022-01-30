@@ -4,18 +4,20 @@
              cmp cmp}})
 
 (def- cmp-src-menu-items
-  {:buffer   "[buffer]"
-   :conjure  "[conjure]"
-   :nvim_lsp "[lsp]"
-   :tmux     "[tmux]"})
+  {:buffer   "buffer"
+   :conjure  "conjure"
+   :nvim_lsp "lsp"
+   :tmux     "tmux"
+   :rg       "ripgrep"})
 
 (def- cmp-srcs
   [{:name :nvim_lsp}
    {:name :conjure}
    {:name :buffer}
    {:name :path}
+   {:name :rg}
    {:name :tmux
-    :options {:all_panes false :label "[tmux]"}}])
+    :options {:all_panes false :label "tmux"}}])
 
 (def- format-fn
   (lspkind.cmp_format {:with_text false ; do not show text alongside icons
@@ -26,7 +28,9 @@
                        ; will be called before any modifications from lspkind
                        ; to provide more controls on modifications
                        :before (fn [entry item]
-                                 (set item.menu (or (. cmp-src-menu-items entry.source.name) ""))
+                                 (set item.menu
+                                      (or (string.format "[%s]" (. cmp-src-menu-items entry.source.name))
+                                          ""))
                                  item)}))
 
 (def- mapping

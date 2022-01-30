@@ -149,6 +149,7 @@
                                   :hrsh7th/cmp-nvim-lsp {}
                                   :PaterJason/cmp-conjure {}
                                   :andersevenrud/cmp-tmux {}
+                                  :lukas-reineke/cmp-rg {}
                                   :hrsh7th/cmp-path {}
                                   :hrsh7th/cmp-cmdline {}
                                   :hrsh7th/nvim-cmp {}
