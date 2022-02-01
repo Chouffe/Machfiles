@@ -81,9 +81,9 @@
    ; :rhysd/vim-textobj-conflict {}
    ; :kana/vim-textobj-function {}
    ; :sgur/vim-textobj-parameter {}
-   :thinca/vim-textobj-function-javascript {:ft :javascript}
+   ; :thinca/vim-textobj-function-javascript {:ft :javascript}
    ; :nelstrom/vim-textobj-rubyblock {}
-   :bps/vim-textobj-python {:ft :python}
+   ; :bps/vim-textobj-python {:ft :python}
    ; :jasonlong/vim-textobj-css {}
 
    ; Navigation
