@@ -15,6 +15,14 @@
       (reverse (a.rest coll))
       [(a.first coll)])))
 
+(comment
+  (reverse [1 2 3 4])
+
+  ;; Insert in a table
+  (let [t [1 2 3]]
+    (table.insert t 4)
+    t))
+
 (defn take-while [pred coll]
   "Returns a coll of successive items from coll while
   (pred item) returns logical true. pred must be free of side-effects."
