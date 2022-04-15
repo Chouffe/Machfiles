@@ -16,7 +16,8 @@
 
 (defn config []
   (nvim.ex.set :termguicolors)     ;; True color support (will work only in tmux)
-  (set nvim.o.t_Co 256)            ;; Number of colors used in terminal
+  (set nvim.o.t_Co "256")            ;; Number of colors used in terminal
+  ; (set nvim.o.t_Co 256)            ;; Number of colors used in terminal
   (disable-background-color-erase)
   (set nvim.o.background :dark)    ;; Set the background as dark
   ;; set the gruvbox coloscheme
