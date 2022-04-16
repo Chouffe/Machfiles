@@ -11,7 +11,8 @@ vmap <C-V> <Plug>(expand_region_shrink)
 " }}}
 
 " Parinfer {{{
-nnoremap <Localleader>pp <cmd>lua require('dotfiles.general.functions').toggle_parinfer()<cr>
+" nnoremap <Localleader>pp <cmd>lua require('dotfiles.general.functions').toggle_parinfer()<cr>
+nnoremap <Localleader>pp <cmd>ParinferToggle<CR>
 " }}}
 
 " Terminal {{{

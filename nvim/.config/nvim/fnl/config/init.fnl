@@ -4,6 +4,7 @@
              util config.util
              str aniseed.string
              autocommands config.general.autocommands
+             user-commands config.general.user_commands
              plugins config.plugins}})
 
 ;generic mapping leaders configuration
@@ -29,6 +30,7 @@
 
 (defn- init! []
  (plugins.init)
- (autocommands.setup))
+ (autocommands.setup)
+ (user-commands.setup))
 
 (init!)

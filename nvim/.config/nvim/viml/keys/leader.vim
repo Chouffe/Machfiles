@@ -55,7 +55,8 @@ nnoremap <silent> <leader>n :set number!<CR>
 " nnoremap <Leader>cc <cmd>lua require('functions').highlight_at_colorcolumn()<cr>
 " nnoremap <Leader>cc <cmd>lua require('general.functions').highlight_at_colorcolumn()<cr>
 " nnoremap <Leader>cc <cmd>lua require('general.functions').toggle_highlight_at_colorcolumn()<cr>
-nnoremap <Leader>cc <cmd>lua require('dotfiles.general.functions').toggle_highlight_at_colorcolumn()<cr>
+" nnoremap <Leader>cc <cmd>lua require('dotfiles.general.functions').toggle_highlight_at_colorcolumn()<cr>
+nnoremap <Leader>cc <cmd>ToggleHiglightAtColorColumn<CR>
 " Key bindings for adjusting tee tab/shift width.
 nnoremap <leader>w2 :setlocal tabstop=2<CR>:setlocal shiftwidth=2<CR>
 nnoremap <leader>w4 :setlocal tabstop=4<CR>:setlocal shiftwidth=4<CR>

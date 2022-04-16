@@ -4,7 +4,7 @@
              u config.general.utils
              a aniseed.core}})
 
-(defn toggle_highlight_at_colorcolumn []
+(defn toggle-highlight-at-colorcolumn []
   "Toggles the color specified by colorcolumn."
   (let [colorcolumn nvim.o.colorcolumn
         textwidth nvim.o.textwidth]
@@ -37,13 +37,13 @@
   "Removes all empty lines at the end of the current buffer."
   (remove-empty-lines-end-buffer 0))
 
-(defn trim_whitespace []
+(defn trim-whitespace []
   "Trims whitespace from the current buffer.
   Also removes empty lines at the end of the buffer."
   (nvim.command "%substitute/\\s\\+$//e")
   (remove-empty-lines-end-current-buffer))
 
-(defn toggle_parinfer
+(defn toggle-parinfer
   []
   "Toggles Parinfer editing mode"
   (if (= nvim.g.parinfer_enabled 0)
