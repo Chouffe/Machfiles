@@ -101,4 +101,6 @@
 
     (when (and highlight-reference-when-idle?
                client.resolved_capabilities.document_highlight)
-      (highlight-reference-when-idle bufnr))))
+      (highlight-reference-when-idle bufnr))
+
+    (print (string.format "LSP ready. [%s]" (. client :name)))))

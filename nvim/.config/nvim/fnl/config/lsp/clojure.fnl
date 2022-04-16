@@ -6,7 +6,7 @@
              util lspconfig/util}})
 
 (defn config []
-  (if (= (nvim.fn.has "nvim-0.6") 1)
+  (if (= (nvim.fn.has "nvim-0.8") 1)
     (lsp-common.define-signs "Diagnostic")
     (lsp-common.define-signs "LspDiagnostics"))
   (lsp.clojure_lsp.setup
@@ -16,5 +16,5 @@
         :highlight-reference-when-idle? true})
      :handlers (lsp-common.make-handlers)
      :capabilites (lsp-common.make-capabilites)
-     :root_dir (util.root_pattern ".git")
+     ; :root_dir (util.root_pattern ".git")
      :flags {:debounce_text_changes 150}}))
