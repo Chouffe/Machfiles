@@ -1,46 +1,8 @@
 (module config.general.functions
   {autoload {nvim conjure.aniseed.nvim
+             lib lib.core
              u config.general.utils
              a aniseed.core}})
-
-;; --------------------------
-;; Some missing lib functions
-;; --------------------------
-
-(defn reverse [coll]
-  "Returns a collection of the items in coll in reverse order."
-  (if (a.empty? coll)
-    coll
-    (a.concat
-      (reverse (a.rest coll))
-      [(a.first coll)])))
-
-(comment
-  (reverse [1 2 3 4])
-
-  ;; Insert in a table
-  (let [t [1 2 3]]
-    (table.insert t 4)
-    t))
-
-(defn take-while [pred coll]
-  "Returns a coll of successive items from coll while
-  (pred item) returns logical true. pred must be free of side-effects."
-  (. (a.reduce (fn [{: ys : done?} x]
-                 (if
-                   done? {:ys ys :done? true}
-                   (pred x) {:ys (a.concat ys [x]) :done? false}
-                   :else {:ys ys :done? true}))
-            {:done? false :ys []}
-            coll)
-     :ys))
-
-(comment
-  (take-while a.string? ["hello" "world" 42 43]))
-
-;; ----------------------------
-;; End of missing lib functions
-;; ----------------------------
 
 (defn toggle_highlight_at_colorcolumn []
   "Toggles the color specified by colorcolumn."
@@ -65,8 +27,8 @@
   "Removes all empty lines at the end of buffer `bufnr`."
   (let [blank-lines-end-buffer (->> (nvim.buf_get_lines bufnr 0 -1 false)
                                     (a.map-indexed (fn [[idx line]] [idx line]))
-                                    (reverse)
-                                    (take-while (fn [[idx line]] (a.empty? line)))
+                                    (lib.reverse)
+                                    (lib.take-while (fn [[idx line]] (a.empty? line)))
                                     (a.map a.first))]
     (each [index line-index (ipairs blank-lines-end-buffer)]
       (remove-line bufnr (a.dec line-index)))))
@@ -123,4 +85,4 @@
 
 (comment
   ;; Try this from the REPL by adding empty line at the end of this file
-  (remove_empty_lines_end_current_buffer))
+  (remove-empty-lines-end-current-buffer))
