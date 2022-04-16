@@ -26,17 +26,17 @@
  (nvim.ex.highlight! :link :LspReferenceWrite :LspReferenceText))
 
 (defn- highlight-reference-when-idle
-  []
+  [bufnr]
   ;; TODO: make it an autocmd with :ColorScheme event
   (update-colorscheme)
-  (augroup :lsp_highlight
+  (augroup (string.format "lsp_highlight_%d" bufnr)
     (autocmd :CursorHold  "<buffer>" "lua vim.lsp.buf.document_highlight()")
     (autocmd :CursorHoldI "<buffer>" "lua" "vim.lsp.buf.document_highlight()")
     (autocmd :CursorMoved "<buffer>" "lua" "vim.lsp.buf.clear_references()")))
 
 (defn- format-on-save
-  []
-  (augroup :lsp_format
+  [bufnr]
+  (augroup (string.format "lsp_format_%d" bufnr)
     (autocmd :BufWritePre "<buffer>" "lua vim.lsp.buf.formatting_sync(nil, 1000)")))
 
 (defn make-handlers []
@@ -83,22 +83,22 @@
       (nmap :<localleader>lk "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 
       ; Fzf
-      (nmap :<localleader>la ":FzfLua lsp_code_actions<CR>")
-      (nmap :<localleader>lw ":FzfLua lsp_workspace_diagnostics<CR>")
-      (nmap :<localleader>lr ":FzfLua lsp_references<CR>")
+      ; (nmap :<localleader>la ":FzfLua lsp_code_actions<CR>")
+      ; (nmap :<localleader>lw ":FzfLua lsp_workspace_diagnostics<CR>")
+      ; (nmap :<localleader>lr ":FzfLua lsp_references<CR>")
 
       ; Telescope
-      ; (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
-      (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>"))
-      ; (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
-      ; (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
-      ; (nmap :<localleader>li ":lua require('telescope.builtin').lsp_implementations()<cr>"))
+      (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
+      (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>")
+      (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
+      (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
+      (nmap :<localleader>li ":lua require('telescope.builtin').lsp_implementations()<cr>"))
 
       ;; Enable formatting and highlighting capabilities
     (when (and document-formatting-on-save?
                client.resolved_capabilities.document_formatting)
-      (format-on-save))
+      (format-on-save bufnr))
 
     (when (and highlight-reference-when-idle?
                client.resolved_capabilities.document_highlight)
-      (highlight-reference-when-idle))))
+      (highlight-reference-when-idle bufnr))))
