@@ -17,6 +17,9 @@ PREPAND_PATH=$PREPAND_PATH:/usr/local/go/bin
 # Rust Path
 PREPAND_PATH=$PREPAND_PATH:~/.cargo/bin
 
+# Lua Language Server Path
+PREPAND_PATH=$PREPAND_PATH:~/lua-language-server/bin
+
 # Anaconda PATH
 # PREPAND_PATH=$PREPAND_PATH:~/anaconda3/bin
 

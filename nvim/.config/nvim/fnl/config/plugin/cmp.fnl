@@ -4,9 +4,9 @@
              cmp cmp}})
 
 (def- cmp-src-menu-items
-  {:buffer   "buffer"
+  {:nvim_lsp "lsp"
+   :buffer   "buffer"
    :conjure  "conjure"
-   :nvim_lsp "lsp"
    :tmux     "tmux"
    :rg       "ripgrep"})
 

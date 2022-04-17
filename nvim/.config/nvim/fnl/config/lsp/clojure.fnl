@@ -16,5 +16,5 @@
         :highlight-reference-when-idle? true})
      :handlers (lsp-common.make-handlers)
      :capabilites (lsp-common.make-capabilites)
-     ; :root_dir (util.root_pattern ".git")
+     :root_dir (util.root_pattern ".git")
      :flags {:debounce_text_changes 150}}))
