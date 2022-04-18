@@ -117,7 +117,7 @@
                              :tweekmonster/fzf-filemru {}}}
 
    ; Git
-   :tpope/vim-fugitive {}
+   :tpope/vim-fugitive {:config (config :fugitive)}
    :tpope/vim-rhubarb {}
    :airblade/vim-gitgutter {}
    :mhinz/vim-signify {}
@@ -142,7 +142,6 @@
 
     ;; Language Server Protocol
     ; A collection of common configurations for Neovim's built in LSP
-    ; :neovim/nvim-lspconfig {:config (config :lspconfig)}
     :neovim/nvim-lspconfig {}
     ; Adds the missing :LspInstall <language> command to conveniently install
     :williamboman/nvim-lsp-installer {:config (config :nvim-lsp-installer)}
