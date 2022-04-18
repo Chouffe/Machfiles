@@ -5,17 +5,6 @@
    require-macros [config.macros]})
 
 (defn config []
-  (let [group-name :lightbulb_config
-        group-id (vim.api.nvim_create_augroup group-name {})]
-    (vim.api.nvim_create_autocmd
-      :CursorHoldI
-      {:group group-id
-       :pattern "*"
-       :callback (fn [_] (lightbulb.update_lightbulb))
-       :desc "Updates lightbulb sign when cursor idle"})
-    (vim.api.nvim_create_autocmd
-      :CursorHold
-      {:group group-id
-       :pattern "*"
-       :callback (fn [_] (lightbulb.update_lightbulb))
-       :desc "Updates lightbulb sign when cursor idle"})))
+  (augroup :my_lightbulb_config
+    (autocmd :CursorHold  "*" "lua require('nvim-lightbulb').update_lightbulb()")
+    (autocmd :CursorHoldI "*" "lua require('nvim-lightbulb').update_lightbulb()")))
