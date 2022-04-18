@@ -1,8 +1,7 @@
 (module config.plugin.lightbulb
   {autoload {a aniseed.core
              nvim aniseed.nvim
-             lightbulb nvim-lightbulb}
-   require-macros [config.macros]})
+             lightbulb nvim-lightbulb}})
 
 (defn config []
   (let [group-name :lightbulb_config

@@ -1,7 +1,6 @@
 (module config.general.autocommands
   {autoload {nvim aniseed.nvim
-             functions config.general.functions}
-   require-macros [config.macros]})
+             functions config.general.functions}})
 
 (defn setup []
   (let [group-id (vim.api.nvim_create_augroup :config_group {})]
@@ -9,7 +8,7 @@
       :BufWinLeave
       {:pattern "*"
        :group group-id
-       :callback (fn [_] (vim.fn.clearmatches))
+       :callback vim.fn.clearmatches
        :desc "Clears matches"})
     (vim.api.nvim_create_autocmd
       :BufWritePre
