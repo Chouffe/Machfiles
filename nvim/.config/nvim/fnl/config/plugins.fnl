@@ -120,8 +120,7 @@
                                  ;; Provides icons for cmp
                                  :onsails/lspkind-nvim {}}
                       :config (config :cmp)}
-    ; A tree like view for symbols using LSP
-   :simrat39/symbols-outline.nvim {:config (config :symbols-outline)}
+
    :kosayoda/nvim-lightbulb {:config (config :lightbulb)}
 
    ;; Git
