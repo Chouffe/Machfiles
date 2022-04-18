@@ -12,6 +12,7 @@
 
 (def- cmp-srcs
   [{:name :nvim_lsp}
+   {:name :nvim_lua}
    {:name :conjure}
    {:name :buffer}
    {:name :path}
