@@ -1,4 +1,4 @@
-(module config.plugin.lspconfig
+(module config.plugin.nvim-lsp-installer
   {autoload {lsp-clojure config.lsp.clojure
              lsp-lua config.lsp.lua
              lsp-python config.lsp.python

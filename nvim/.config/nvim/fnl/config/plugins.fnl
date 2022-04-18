@@ -107,8 +107,8 @@
 
    ; Python
    :Vimjas/vim-python-pep8-indent {:ft :python}
-   :psf/black {:ft :python
-               :config (config :black)}
+   ; :psf/black {:ft :python
+   ;             :config (config :black)}
 
    ; FZF
    :junegunn/fzf {:run "./install --all"
@@ -141,9 +141,10 @@
 
     ;; Language Server Protocol
     ; A collection of common configurations for Neovim's built in LSP
-    :neovim/nvim-lspconfig {:config (config :lspconfig)}
+    ; :neovim/nvim-lspconfig {:config (config :lspconfig)}
+    :neovim/nvim-lspconfig {}
     ; Adds the missing :LspInstall <language> command to conveniently install
-    :williamboman/nvim-lsp-installer {}
+    :williamboman/nvim-lsp-installer {:config (config :nvim-lsp-installer)}
     ; Autocomplete
     :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
                                   :hrsh7th/cmp-nvim-lsp {}
