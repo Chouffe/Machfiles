@@ -21,7 +21,6 @@ source ~/.config/nvim/viml/config/plugin/fzf.vim
 source ~/.config/nvim/viml/config/plugin/neomake.vim
 source ~/.config/nvim/viml/config/plugin/lightline.vim
 source ~/.config/nvim/viml/config/plugin/clojure.vim
-source ~/.config/nvim/viml/config/plugin/which-key.vim
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

@@ -70,6 +70,7 @@
    :guns/vim-sexp {:config (config :sexp)} ;; For some reason the config is not called
    :tpope/vim-sexp-mappings-for-regular-people {:ft constants.lisp-filetypes}
    :eraserhd/parinfer-rust {:ft constants.lisp-filetypes
+                            :config (config :parinfer)
                             :run "cargo build --release"}
 
    ; Fennel
