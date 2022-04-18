@@ -1,10 +1,18 @@
 (module config.plugin.lightbulb
-  {autoload {a aniseed.core
-             nvim aniseed.nvim
-             lightbulb nvim-lightbulb}
-   require-macros [config.macros]})
+  {autoload {lightbulb nvim-lightbulb}})
 
 (defn config []
-  (augroup :my_lightbulb_config
-    (autocmd :CursorHold  "*" "lua require('nvim-lightbulb').update_lightbulb()")
-    (autocmd :CursorHoldI "*" "lua require('nvim-lightbulb').update_lightbulb()")))
+  (let [group-name :my_lightbulb_config
+        group-id (vim.api.nvim_create_augroup group-name {})]
+    (vim.api.nvim_create_autocmd
+      :CursorHoldI
+      {:group group-id
+       :pattern "*"
+       :callback (fn [_] (lightbulb.update_lightbulb))
+       :desc "Updates lightbulb signs when cursor idle"})
+    (vim.api.nvim_create_autocmd
+      :CursorHold
+      {:group group-id
+       :pattern "*"
+       :callback (fn [_] (lightbulb.update_lightbulb))
+       :desc "Updates lightbulb signs when cursor idle"})))
