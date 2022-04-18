@@ -20,18 +20,20 @@
     :options {:all_panes false :label "tmux"}}])
 
 (def- format-fn
-  (lspkind.cmp_format {:with_text false ; do not show text alongside icons
-                       ; prevent the popup from showing more than provided
-                       ; characters (e.g 50 will not show more than 50
-                       ; characters)
-                       :maxwidth 50
-                       ; will be called before any modifications from lspkind
-                       ; to provide more controls on modifications
-                       :before (fn [entry item]
-                                 (set item.menu
-                                      (or (string.format "[%s]" (. cmp-src-menu-items entry.source.name))
-                                          ""))
-                                 item)}))
+  (lspkind.cmp_format
+    {:with_text false ; do not show text alongside icons
+     ; prevent the popup from showing more than provided
+     ; characters (e.g 50 will not show more than 50
+     ; characters)
+     :mode :symbol ; show only symbol annotations
+     :maxwidth 50
+     ; will be called before any modifications from lspkind
+     ; to provide more controls on modifications
+     :before (fn [entry item]
+               (set item.menu
+                    (or (string.format "[%s]" (. cmp-src-menu-items entry.source.name))
+                        ""))
+               item)}))
 
 (def- mapping
   {:<C-p> (cmp.mapping.select_prev_item)

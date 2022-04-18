@@ -30,6 +30,10 @@ augroup filetypes
   " automatic gofmt
   autocmd FileType go nmap <buffer> = <Esc>:Fmt<CR>
 
+  " automatic Neomake
+  " autocmd BufWritePre,BufRead *.clj  :Neomake clj_kondo<CR>
+  " autocmd BufWritePre,BufRead *.cljs :Neomake clj_kondo<CR>
+
   " support for json c
   autocmd FileType json syntax match Comment +\/\/.\+$+
 augroup END

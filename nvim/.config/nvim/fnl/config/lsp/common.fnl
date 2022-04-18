@@ -110,7 +110,7 @@
       ; (nmap :<localleader>lr ":FzfLua lsp_references<CR>")
 
       ; Telescope
-      (nmap :<silent><localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
+      (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
       (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>")
       (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
       (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")

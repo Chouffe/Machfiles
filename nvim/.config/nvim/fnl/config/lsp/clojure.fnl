@@ -14,9 +14,3 @@
    :capabilites (lsp-common.make-capabilites)
    :root_dir (util.root_pattern ".git")
    :flags {:debounce_text_changes 150}})
-
-(defn config []
-  (if (= (nvim.fn.has "nvim-0.8") 1)
-    (lsp-common.define-signs "Diagnostic")
-    (lsp-common.define-signs "LspDiagnostics"))
-  (lsp.clojure_lsp.setup settings))

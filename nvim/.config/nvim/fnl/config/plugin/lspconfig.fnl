@@ -6,6 +6,7 @@
              lspkind lspkind}})
 
 (defn config []
+  (lsp-common.define-signs "LspDiagnostics")
   (nvim-lsp-installer.on_server_ready
     (fn [server]
       (let [server-name (. server :name)
@@ -15,13 +16,9 @@
           (setup server lsp-lua.settings)
 
           (= "clojure_lsp" server-name)
-          (do
-            (lsp-common.define-signs "LspDiagnostics")
-            (setup server lsp-clojure.settings))
+          (setup server lsp-clojure.settings)
 
           (= "pyright" server-name)
           (setup server {})
 
-          (print (.. "[nvim-lsp-installer] Not handled with exta settings: " server-name))))))
-  ; (lsp-clojure.config)
-  (lspkind.init))
+          (print (.. "[nvim-lsp-installer] Not handled with exta settings: " server-name)))))))

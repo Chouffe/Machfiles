@@ -21,6 +21,3 @@
      :handlers (lsp-common.make-handlers)
      :capabilites (lsp-common.make-capabilites)
      :flags {:debounce_text_changes 150}}))
-
-(defn config []
-  (lspconfig.sumneko_lua.setup settings))

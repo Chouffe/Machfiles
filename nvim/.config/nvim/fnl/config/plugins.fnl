@@ -92,7 +92,7 @@
    ; :preservim/nerdtree {}
 
    ; Neomake
-   :neomake/neomake {}
+   :neomake/neomake {:config (config :neomake)}
 
    ; Clojure
    :Olical/conjure {:branch :master
