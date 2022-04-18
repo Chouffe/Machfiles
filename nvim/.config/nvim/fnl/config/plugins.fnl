@@ -136,9 +136,6 @@
    :christoomey/vim-tmux-navigator {}
    :edkolev/tmuxline.vim {}
 
-   ; :akinsho/bufferline.nvim {:tag "*"
-   ;                           :config (config :bufferline)
-   ;                           :requires {:kyazdani42/nvim-web-devicons {}}}
    ; Colorschemes
    ;; Checkout: https://github.com/kyazdani42/nvim-tree.lua
    :yamatsum/nvim-nonicons {:requires {:kyazdani42/nvim-web-devicons {}}}
