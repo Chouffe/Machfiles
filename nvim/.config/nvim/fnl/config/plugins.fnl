@@ -130,6 +130,7 @@
    :nvim-telescope/telescope.nvim {:requires {:nvim-telescope/telescope-file-browser.nvim {}
                                               :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
                                               ; :xiyaowong/telescope-emoji.nvim {}
+                                              :nvim-telescope/telescope-ui-select.nvim {}
                                               :nvim-lua/popup.nvim {}
                                               :nvim-lua/plenary.nvim {}}
                                    :config (config :telescope)}
