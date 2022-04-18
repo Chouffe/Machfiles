@@ -1,7 +1,5 @@
 (module config.general.autocommands
-  {autoload {nvim aniseed.nvim
-             functions config.general.functions}
-   require-macros [config.macros]})
+  {autoload {functions config.general.functions}})
 
 (defn setup []
   (let [group-id (vim.api.nvim_create_augroup :config_group {})]
