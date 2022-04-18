@@ -4,8 +4,7 @@
              cmplsp cmp_nvim_lsp
              lsp lspconfig
              nvim aniseed.nvim
-             util lspconfig/util}
-   require-macros [config.macros]})
+             util lspconfig/util}})
 
 (defn define-signs
   [prefix]
