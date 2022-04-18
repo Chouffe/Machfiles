@@ -4,18 +4,19 @@
    require-macros [config.macros]})
 
 (defn setup []
-  (augroup :config_group
-    ; (autocmd :BufWinLeave "*" "call clearmatches()")
+  (let [group-id (vim.api.nvim_create_augroup :config_group {})]
     (vim.api.nvim_create_autocmd
       :BufWinLeave
       {:pattern "*"
+       :group group-id
        :callback (fn [_] (vim.fn.clearmatches))
        :desc "Clears matches"})
     (vim.api.nvim_create_autocmd
-     :BufWritePre
-     {:pattern "*"
-      :callback functions.trim-whitespace
-      :desc "Trims whitespace and empty end of buffer blank lines"})))
+      :BufWritePre
+      {:pattern "*"
+       :group group-id
+       :callback functions.trim-whitespace
+       :desc "Trims whitespace and empty end of buffer blank lines"})))
 
 (comment
   (print "hello")
@@ -24,6 +25,8 @@
   ;   {:pattern "*"
   ;    :callback (fn [args] (print "HELLO!"))
   ;    :desc "Tell me when I enter a buffer!"})
+
+  (vim.api.nvim_create_augroup)
 
   (vim.api.nvim_create_autocmd
     :BufEnter

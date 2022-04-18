@@ -29,15 +29,37 @@
   [bufnr]
   ;; TODO: make it an autocmd with :ColorScheme event
   (update-colorscheme)
-  (augroup (string.format "lsp_highlight_%d" bufnr)
-    (autocmd :CursorHold  "<buffer>" "lua vim.lsp.buf.document_highlight()")
-    (autocmd :CursorHoldI "<buffer>" "lua" "vim.lsp.buf.document_highlight()")
-    (autocmd :CursorMoved "<buffer>" "lua" "vim.lsp.buf.clear_references()")))
+  (let [group-name (string.format "lsp_highlight_%d" bufnr)
+        group-id (vim.api.nvim_create_augroup group-name {})]
+    (vim.api.nvim_create_autocmd
+      :CursorHold
+      {:group group-id
+       :pattern "<buffer>"
+       :callback (fn [_] (vim.lsp.buf.document_highlight))
+       :desc "Highlights document when idle for some time"})
+    (vim.api.nvim_create_autocmd
+      :CursorHoldI
+      {:group group-id
+       :pattern "<buffer>"
+       :callback (fn [_] (vim.lsp.buf.document_highlight))
+       :desc "Highlights document when idle for some time"})
+    (vim.api.nvim_create_autocmd
+      :CursorMoved
+      {:group group-id
+       :pattern "<buffer>"
+       :callback (fn [_] (vim.lsp.buf.clear_references))
+       :desc "Clears references once the cursor has moved"})))
 
 (defn- format-on-save
   [bufnr]
-  (augroup (string.format "lsp_format_%d" bufnr)
-    (autocmd :BufWritePre "<buffer>" "lua vim.lsp.buf.formatting_sync(nil, 1000)")))
+  (let [group-name (string.format "lsp_format_%d" bufnr)
+        group-id (vim.api.nvim_create_augroup group-name {})]
+    (vim.api.nvim_create_autocmd
+      :BufWritePre
+      {:group group-id
+       :pattern "<buffer>"
+       :callback (fn [_] (vim.lsp.buf.formatting_sync nil 1000))
+       :desc "Formats on save with LSP"})))
 
 (defn make-handlers []
   {"textDocument/publishDiagnostics"
@@ -88,7 +110,7 @@
       ; (nmap :<localleader>lr ":FzfLua lsp_references<CR>")
 
       ; Telescope
-      (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
+      (nmap :<silent><localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
       (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>")
       (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
       (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
