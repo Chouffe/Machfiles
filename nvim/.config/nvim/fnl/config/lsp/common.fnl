@@ -2,9 +2,11 @@
   {autoload {a aniseed.core
              configs lspconfig.configs
              cmplsp cmp_nvim_lsp
+             t telescope.builtin
              lsp lspconfig
              nvim aniseed.nvim
-             util lspconfig/util}})
+             util lspconfig/util
+             which-key which-key}})
 
 (defn define-signs
   [prefix]
@@ -26,7 +28,6 @@
 
 (defn- highlight-reference-when-idle
   [bufnr]
-  ;; TODO: make it an autocmd with :ColorScheme event
   (update-colorscheme)
   (let [group-name (string.format "lsp_highlight_%d" bufnr)
         group-id (vim.api.nvim_create_augroup group-name {})]
@@ -78,42 +79,53 @@
      {:border "single"})})
 
 (defn make-capabilites []
-  (cmplsp.update_capabilities (vim.lsp.protocol.make_client_capabilities)))
+  (cmplsp.update_capabilities
+    (vim.lsp.protocol.make_client_capabilities)))
+
+(defn- nmap [function label opts]
+  (a.merge [function label] opts))
+
+(defn- register-keybindings [bufnr]
+  (which-key.register
+    {:gq ["<Cmd>lua vim.lsp.buf.range_formatting()<CR><Esc>" "Format selection"]}
+    {:buffer bufnr :mode "v"})
+
+  (which-key.register
+    {:K (nmap vim.lsp.buf.hover "Show documentation")
+     :gd (nmap vim.lsp.buf.definition "Jump to definition")
+     "[" {:d (nmap vim.diagnostic.goto_prev "Previous diagnostic")}
+     "]" {:d (nmap vim.diagnostic.goto_next "Next diagnostic")}}
+    {:buffer bufnr})
+
+  (which-key.register
+    {:x {:name "transform"
+         :x ["<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR><Esc>" "Code action"]}}
+    {:prefix "<LocalLeader>" :buffer bufnr :mode "v"})
+
+  (which-key.register
+    {:b {:name "buffer"
+         := (nmap vim.lsp.buf.formatting "Format buffer")
+         :d (nmap vim.diagnostic.set_loclist "List diagnostics")}
+     :f {:name "find"
+         :d (nmap t.diagnostics "Diagnostics")
+         :r (nmap t.lsp_references "References")
+         :s (nmap t.lsp_document_symbols "Document symbols")
+         :S (nmap t.lsp_workspace_symbols "Workspace symbols")}
+     :v {:name "view"
+         ; :d ["<Cmd>lua vim.diagnostic.open_float()<CR>" "View diagnostics"]
+         :h (nmap vim.lsp.buf.signature_help "Signature help")}
+     :x {:name "transform"
+         :r (nmap vim.lsp.buf.rename "Rename symbol")
+         :x (nmap t.lsp_code_actions "Code action")}}
+    {:prefix "<LocalLeader>" :buffer bufnr}))
 
 (defn make-on-attach-handler
   [{: document-formatting-on-save? : highlight-reference-when-idle?}]
   (fn on-attach [client bufnr]
-    (let [opts {:noremap true}
-          nmap (fn [mapping target] (nvim.buf_set_keymap bufnr :n mapping target opts))
-          vmap (fn [mapping target] (nvim.buf_set_keymap bufnr :v mapping target opts))
-          option (fn [name value] (nvim.buf_set_option bufnr name value))]
 
-      ;; Set omnicompletion with LSP
-      (option :omnifunc :v:lua.vim.lsp.omnifunc)
-
-      (nmap :gd              "<Cmd>lua vim.lsp.buf.definition()<CR>")
-      (nmap :K               "<Cmd>lua vim.lsp.buf.hover()<CR>")
-      (nmap :<localleader>ld "<Cmd>lua vim.lsp.buf.declaration()<CR>")
-      (nmap :<localleader>lt "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-      (nmap :<localleader>lh "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-      (nmap :<localleader>ln "<cmd>lua vim.lsp.buf.rename()<CR>")
-      (nmap :<localleader>le "<cmd>lua vim.diagnostic.open_float()<CR>")
-      (nmap :<localleader>lq "<cmd>lua vim.diagnostic.setloclist()<CR>")
-      (nmap :<localleader>lf "<cmd>lua vim.lsp.buf.formatting()<CR>")
-      (nmap :<localleader>lj "<cmd>lua vim.diagnostic.goto_next()<CR>")
-      (nmap :<localleader>lk "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-
-      ; Fzf
-      ; (nmap :<localleader>la ":FzfLua lsp_code_actions<CR>")
-      ; (nmap :<localleader>lw ":FzfLua lsp_workspace_diagnostics<CR>")
-      ; (nmap :<localleader>lr ":FzfLua lsp_references<CR>")
-
-      ; Telescope
-      (nmap :<localleader>la ":lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>")
-      (vmap :<localleader>la ":'<,'>:Telescope lsp_range_code_actions theme=cursor<cr>")
-      (nmap :<localleader>lw ":lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
-      (nmap :<localleader>lr ":lua require('telescope.builtin').lsp_references()<cr>")
-      (nmap :<localleader>li ":lua require('telescope.builtin').lsp_implementations()<cr>"))
+    ;; Set omnicompletion with LSP
+    (nvim.buf_set_option bufnr :omnifunc :v:lua.vim.lsp.omnifunc)
+    (register-keybindings bufnr)
 
       ;; Enable formatting and highlighting capabilities
     (when (and document-formatting-on-save?

@@ -56,35 +56,6 @@
    :folke/which-key.nvim {:branch :main}
    ; vim over: :substitute preview
    :osyo-manga/vim-over {}
-   ; Rainbow
-   ; :luochen1990/rainbow {:mod :rainbow}
-
-   ;; Objects and Motions
-   ; Editing keys
-   ; e for entire file
-   ; i for indent level
-   ; l for current line
-   ; u for url
-   ; b for any block type (parens, braces, quotes, ltgt)
-   ; = and i= for conflicts marked blocks
-   ; f for function (c, java, js, php, vim only)
-   ; i,/a, for function parameter
-   ; r for a block in ruby
-   ; f,c for function and class in python
-   ; c for css class
-   ; :kana/vim-textobj-user {}
-   ; :kana/vim-textobj-entire {}
-   ; :kana/vim-textobj-indent {}
-   ; :kana/vim-textobj-line {}
-   ; :mattn/vim-textobj-url {}
-   ; :rhysd/vim-textobj-anyblock {}
-   ; :rhysd/vim-textobj-conflict {}
-   ; :kana/vim-textobj-function {}
-   ; :sgur/vim-textobj-parameter {}
-   ; :thinca/vim-textobj-function-javascript {:ft :javascript}
-   ; :nelstrom/vim-textobj-rubyblock {}
-   ; :bps/vim-textobj-python {:ft :python}
-   ; :jasonlong/vim-textobj-css {}
 
    ; Navigation
    :kyazdani42/nvim-tree.lua {:requires {:kyazdani42/nvim-web-devicons {}}
@@ -96,8 +67,7 @@
    ; Clojure
    :Olical/conjure {:branch :master
                     :config (config :conjure)}
-   :guns/vim-sexp {:ft constants.lisp-filetypes
-                   :config (config :sexp)}
+   :guns/vim-sexp {:config (config :sexp)} ;; For some reason the config is not called
    :tpope/vim-sexp-mappings-for-regular-people {:ft constants.lisp-filetypes}
    :eraserhd/parinfer-rust {:ft constants.lisp-filetypes
                             :run "cargo build --release"}
@@ -107,21 +77,12 @@
 
    ; Python
    :Vimjas/vim-python-pep8-indent {:ft :python}
-   ; :psf/black {:ft :python
-   ;             :config (config :black)}
 
    ; FZF
    :junegunn/fzf {:run "./install --all"
                   :requires {:ibhagwan/fzf-lua {:requires {:kyazdani42/nvim-web-devicons {}}}
                              :junegunn/fzf.vim {}
                              :tweekmonster/fzf-filemru {}}}
-
-   ; Git
-   :tpope/vim-fugitive {:config (config :fugitive)}
-   :tpope/vim-rhubarb {}
-   :airblade/vim-gitgutter {}
-   :mhinz/vim-signify {}
-   :lambdalisue/vim-gita {}
 
    ; Minimalist status/tabline for vim
    :itchyny/lightline.vim {}
@@ -136,46 +97,53 @@
                                    :config (config :telescope)}
 
     ; Treesitter: parsing system
-    :nvim-treesitter/nvim-treesitter {:requires {:p00f/nvim-ts-rainbow {}}
-                                      :run ":TSUpdate"
-                                      :config (config :treesitter)}
+   :nvim-treesitter/nvim-treesitter {:requires {:p00f/nvim-ts-rainbow {}}
+                                     :run ":TSUpdate"
+                                     :config (config :treesitter)}
 
-    ;; Language Server Protocol
-    ; A collection of common configurations for Neovim's built in LSP
-    :neovim/nvim-lspconfig {}
-    ; Adds the missing :LspInstall <language> command to conveniently install
-    :williamboman/nvim-lsp-installer {:config (config :nvim-lsp-installer)}
-    ; Autocomplete
-    :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
-                                  :hrsh7th/cmp-nvim-lsp {}
-                                  :PaterJason/cmp-conjure {}
-                                  :andersevenrud/cmp-tmux {}
-                                  :lukas-reineke/cmp-rg {}
-                                  :hrsh7th/cmp-path {}
-                                  :hrsh7th/cmp-cmdline {}
-                                  :hrsh7th/nvim-cmp {}
-                                  :hrsh7th/cmp-nvim-lua {}
-                                  ;; Provides icons for cmp
-                                  :onsails/lspkind-nvim {}}
-                       :config (config :cmp)}
+   ;; Language Server Protocol
+   ; A collection of common configurations for Neovim's built in LSP
+   :neovim/nvim-lspconfig {}
+   ; Adds the missing :LspInstall <language> command to conveniently install
+   :williamboman/nvim-lsp-installer {:config (config :nvim-lsp-installer)}
+   ; Autocomplete
+   :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
+                                 :hrsh7th/cmp-nvim-lsp {}
+                                 :PaterJason/cmp-conjure {}
+                                 :andersevenrud/cmp-tmux {}
+                                 :lukas-reineke/cmp-rg {}
+                                 :hrsh7th/cmp-path {}
+                                 :hrsh7th/cmp-cmdline {}
+                                 :hrsh7th/nvim-cmp {}
+                                 :hrsh7th/cmp-nvim-lua {}
+                                 ;; Provides icons for cmp
+                                 :onsails/lspkind-nvim {}}
+                      :config (config :cmp)}
     ; A tree like view for symbols using LSP
-    :simrat39/symbols-outline.nvim {:config (config :symbols-outline)}
-    :kosayoda/nvim-lightbulb {:config (config :lightbulb)}
+   :simrat39/symbols-outline.nvim {:config (config :symbols-outline)}
+   :kosayoda/nvim-lightbulb {:config (config :lightbulb)}
 
-    ; Tmux
-    :tmux-plugins/vim-tmux {}
-    :christoomey/vim-tmux-navigator {}
-    :edkolev/tmuxline.vim {}
+   ;; Git
+   :tpope/vim-fugitive {}
+   :tpope/vim-rhubarb {}
+   :airblade/vim-gitgutter {}
+   :mhinz/vim-signify {}
+   :lambdalisue/vim-gita {}
 
-    ; :akinsho/bufferline.nvim {:tag "*"
-    ;                           :config (config :bufferline)
-    ;                           :requires {:kyazdani42/nvim-web-devicons {}}}
-    ; Colorschemes
-    ;; Checkout: https://github.com/kyazdani42/nvim-tree.lua
-    :yamatsum/nvim-nonicons {:requires {:kyazdani42/nvim-web-devicons {}}}
-    :morhetz/gruvbox {:config (config :theme)}
-    :joshdick/onedark.vim {}
-    :projekt0n/github-nvim-theme {}})
+   ; Tmux
+   :tmux-plugins/vim-tmux {}
+   :christoomey/vim-tmux-navigator {}
+   :edkolev/tmuxline.vim {}
+
+   ; :akinsho/bufferline.nvim {:tag "*"
+   ;                           :config (config :bufferline)
+   ;                           :requires {:kyazdani42/nvim-web-devicons {}}}
+   ; Colorschemes
+   ;; Checkout: https://github.com/kyazdani42/nvim-tree.lua
+   :yamatsum/nvim-nonicons {:requires {:kyazdani42/nvim-web-devicons {}}}
+   :morhetz/gruvbox {:config (config :theme)}
+   :joshdick/onedark.vim {}
+   :projekt0n/github-nvim-theme {}})
 
 (defn- log [x]
   (a.println x))

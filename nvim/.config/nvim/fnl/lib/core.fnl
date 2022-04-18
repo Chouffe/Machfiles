@@ -32,3 +32,5 @@
 ;   (let [t [1 2 3]]
 ;     (table.insert t 4)
 ;    t))
+
+(def deep-merge (partial vim.tbl_deep_extend "keep"))
