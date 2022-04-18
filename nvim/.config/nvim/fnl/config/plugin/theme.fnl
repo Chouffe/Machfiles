@@ -1,7 +1,10 @@
 (module config.plugin.theme
   {autoload {a aniseed.core
              theme github-theme
-             nvim aniseed.nvim}})
+             nvim aniseed.nvim
+             material-functions material.functions
+             material material
+             lualine lualine}})
 
 (defn- disable-background-color-erase
   []
@@ -21,7 +24,15 @@
   (disable-background-color-erase)
   (set nvim.o.background :dark)    ;; Set the background as dark
   ;; set the gruvbox coloscheme
-  (nvim.command "colorscheme gruvbox")
+  ; (nvim.command "colorscheme gruvbox")
+  ;; Set the material colorscheme
+  (nvim.command "colorscheme material")
+  ; (material-functions.change_style "oceanic")
+  (material-functions.change_style "palenight")
+  (material.setup {:lualine_style :stealth})
+  (lualine.setup {:options {:theme :material}})
+  ; (material-functions.change_style "darker")
+  ; (material-functions.change_style "deep ocean")
   ; set the hybrid material colorscheme
   ; (nvim.command "colorscheme hybrid_material")
   ;; Make the background color transparent

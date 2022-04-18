@@ -86,12 +86,14 @@
                              :tweekmonster/fzf-filemru {}}}
 
    ; Minimalist status/tabline for vim
-   :itchyny/lightline.vim {}
+   ; :itchyny/lightline.vim {}
+   :nvim-lualine/lualine.nvim {:requires {:kyazdani42/nvim-web-devicons {}}}
 
    ; Telescope: file searching
    :nvim-telescope/telescope.nvim {:requires {:nvim-telescope/telescope-file-browser.nvim {}
                                               :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
                                               ; :xiyaowong/telescope-emoji.nvim {}
+                                              :nvim-telescope/telescope-symbols.nvim {}
                                               :nvim-telescope/telescope-ui-select.nvim {}
                                               :nvim-lua/popup.nvim {}
                                               :nvim-lua/plenary.nvim {}}
@@ -137,6 +139,7 @@
 
    ; Colorschemes
    ;; Checkout: https://github.com/kyazdani42/nvim-tree.lua
+   :marko-cerovac/material.nvim {}
    :yamatsum/nvim-nonicons {:requires {:kyazdani42/nvim-web-devicons {}}}
    :morhetz/gruvbox {:config (config :theme)}
    :joshdick/onedark.vim {}
