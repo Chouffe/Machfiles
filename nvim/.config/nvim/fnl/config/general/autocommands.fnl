@@ -17,25 +17,3 @@
        :group group-id
        :callback functions.trim-whitespace
        :desc "Trims whitespace and empty end of buffer blank lines"})))
-
-(comment
-  (print "hello")
-  ; (nvim.create_autocmnd
-  ;   "BufEnter"
-  ;   {:pattern "*"
-  ;    :callback (fn [args] (print "HELLO!"))
-  ;    :desc "Tell me when I enter a buffer!"})
-
-  (vim.api.nvim_create_augroup)
-
-  (vim.api.nvim_create_autocmd
-    :BufEnter
-    {:pattern "*"
-     :callback (fn [args] (print (.. "HELLO! " (tostring args))))
-     :desc "Tell me when I enter a buffer!"})
-
-  ;; Create a user command via nvim api
-  (nvim.create_user_command
-    "SayHello"
-    (fn [args] (print "hello World"))
-    {:nargs "*" :desc "Say hi to someone"}))
