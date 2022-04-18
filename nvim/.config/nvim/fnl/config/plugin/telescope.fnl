@@ -19,26 +19,14 @@
 (defn- map [function label opts]
   (a.merge [function label] opts))
 
-(defn config []
-  (telescope.load_extension "fzf")
-  (telescope.load_extension "file_browser")
-  (telescope.load_extension "ui-select")
-  ; (telescope.load_extension "emoji")
-  ; (telescope.load_extension "packer")
-  (telescope.setup {:defaults {:mappings {:i telescope-mappings}
-                               :file_ignore_patterns ["node_modules"]}
-                    :extensions {:fzf {:case_mode :smart_case
-                                       :fuzzy true
-                                       :override_file_sorter true
-                                       :override_generic_sorter true}
-                                 :ui-select (themes.get_cursor)}
-                    :pickers {:find_files {:find_command ["rg" "--files" "--iglob" "!.git" "--hidden"]}}})
+(defn- load-extensions []
+  (let [extensions ["fzf" "file_browser" "ui-select"]]
+    (each [_ extension-name (ipairs extensions)]
+      (telescope.load_extension extension-name))))
 
+(defn- register-keybindings []
   (which-key.register
     {:name "find"
-     :v {:name "vim"
-         :g (map #(t.live_grep {:cwd "~/.config/nvim"}) "Search in project")
-         :f (map #(t.find_files {:cwd "~/.config/nvim"}) "Files")}
      :n     (map #(t.find_files {:cwd "~/notes"}) "Search Notes")
      :/     (map t.search_history "Search history")
      :w     (map t.grep_string "Search string under cursor")
@@ -52,5 +40,21 @@
      :k     (map t.keymaps "Keymaps")
      :o     (map t.oldfiles "Oldfiles")
      :t     (map t.builtin "Telescope pickers")
-     "<CR>" (map ":Telescope " "Enter find command..." {:silent false})}
+     "<CR>" (map ":Telescope " "Enter find command..." {:silent false})
+     :v {:name "vim"
+         :g (map #(t.live_grep {:cwd "~/.config/nvim"}) "Search in project")
+         :f (map #(t.find_files {:cwd "~/.config/nvim"}) "Files")}}
     {:prefix "<Leader>f"}))
+
+(defn config []
+  (load-extensions)
+  (telescope.setup
+    {:defaults {:mappings {:i telescope-mappings}
+                :file_ignore_patterns ["node_modules"]}
+     :extensions {:fzf {:case_mode :smart_case
+                        :fuzzy true
+                        :override_file_sorter true
+                        :override_generic_sorter true}
+                  :ui-select (themes.get_cursor)}
+     :pickers {:find_files {:find_command ["rg" "--files" "--iglob" "!.git" "--hidden"]}}})
+  (register-keybindings))
