@@ -5,85 +5,87 @@ let maplocalleader=","
 
 " Leader Mappings {{{
 " Remap the ex command
-nnoremap <Leader><Leader> V
-nnoremap <silent><Leader>q :q<CR>
-vnoremap <Leader><Leader> :
+" nnoremap <Leader><Leader> V
+" nnoremap <silent><Leader>q :q<CR>
+" vnoremap <Leader><Leader> :
 " Escapes visual mode
-vnoremap <C-g> <ESC>
+" vnoremap <C-g> <ESC>
 " Disable highlight when <leader><cr> is pressed
-nnoremap <silent> <Leader><CR> :noh<CR>
+" nnoremap <silent> <Leader><CR> :noh<CR>
 " Treat long lines as break lines (useful when moving around in them)
-nnoremap <Leader><CR> :nohlsearch<CR>
+" nnoremap <Leader><CR> :nohlsearch<CR>
 " Save a file
-nnoremap <Leader>w :w<CR>
+" nnoremap <Leader>w :w<CR>
 " Paste
-nnoremap <silent> <leader>p :set paste!<CR>"+p :set paste!<CR>
+" nnoremap <silent> <leader>p :set paste!<CR>"+p :set paste!<CR>
 " quickfix window
-nnoremap <Leader>e :call ToggleQuickfix()<CR>
-nnoremap <Leader>en :cn<CR>
-nnoremap <Leader>el :cl<CR>
-nnoremap <Leader>ep :cp<CR>
+" TODO: port it to another keybining prefix <LEADER><q>
+" nnoremap <Leader>e :call ToggleQuickfix()<CR>
+" nnoremap <Leader>en :cn<CR>
+" nnoremap <Leader>el :cl<CR>
+" nnoremap <Leader>ep :cp<CR>
 " Copy & paste to system clipboard
-vnoremap <Leader>y "+y
-vnoremap <Leader>d "+d
-vnoremap <Leader>y "+yy
-vnoremap <Leader>p "+p
-vnoremap <Leader>P "+P
-vnoremap <Leader>p "+p
-vnoremap <Leader>P "+P
+" vnoremap <Leader>y "+y
+" vnoremap <Leader>d "+d
+" vnoremap <Leader>y "+yy
+" vnoremap <Leader>p "+p
+" vnoremap <Leader>P "+P
+" vnoremap <Leader>p "+p
+" vnoremap <Leader>P "+P
 " Splits
-nnoremap <silent> <Leader>k :vsplit<CR>
-nnoremap <silent> <Leader>j :split<CR>
+" nnoremap <silent> <Leader>k :vsplit<CR>
+" nnoremap <silent> <Leader>j :split<CR>
 " Edit config files
 " nnoremap <leader>ev :edit $MYVIMRC<CR>
-nnoremap <leader>et :edit ~/.tmux.conf<CR>
+" nnoremap <leader>et :edit ~/.tmux.conf<CR>
 " Scroll Off
-nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+" nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 " nnoremap <silent><Leader>t :<C-u>VimFilerExplorer -split -simple -parent -winwidth=35 -auto-expand -toggle -no-quit<CR>
 " nnoremap <silent><Leader>t :<C-u>NERDTreeToggle<CR>
 " nnoremap <silent><Leader>t :<C-u>NERDTreeToggle<CR>
-nnoremap <silent><Leader>t :<C-u>NvimTreeToggle<CR>
+" nnoremap <silent><Leader>t :<C-u>NvimTreeToggle<CR>
 " nnoremap <silent><Leader>r :<C-u>NERDTreeToggle %<CR>
-nnoremap <silent><Leader>r :<C-u>NvimTreeFindFileToggle<CR>
+" nnoremap <silent><Leader>r :<C-u>NvimTreeFindFileToggle<CR>
 " nnoremap <silent><Leader>f :<C-u>NERDTreeToggle %<CR>
 " Spell checking
-nnoremap <silent> <leader>s :set spell!<CR>
+" nnoremap <silent> <leader>s :set spell!<CR>
 " Numbers
-nnoremap <silent> <leader>n :set number!<CR>
+" nnoremap <silent> <leader>n :set number!<CR>
 " Color the colorcolumn
 " nnoremap <Leader>cc <cmd>lua require('general/functions').highlight_at_colorcolumn()<cr>
 " nnoremap <Leader>cc <cmd>lua require('functions').highlight_at_colorcolumn()<cr>
 " nnoremap <Leader>cc <cmd>lua require('general.functions').highlight_at_colorcolumn()<cr>
 " nnoremap <Leader>cc <cmd>lua require('general.functions').toggle_highlight_at_colorcolumn()<cr>
 " nnoremap <Leader>cc <cmd>lua require('dotfiles.general.functions').toggle_highlight_at_colorcolumn()<cr>
-nnoremap <Leader>cc <cmd>ToggleHiglightAtColorColumn<CR>
+" nnoremap <Leader>cc <cmd>ToggleHiglightAtColorColumn<CR>
 " Key bindings for adjusting tee tab/shift width.
-nnoremap <leader>w2 :setlocal tabstop=2<CR>:setlocal shiftwidth=2<CR>
-nnoremap <leader>w4 :setlocal tabstop=4<CR>:setlocal shiftwidth=4<CR>
-nnoremap <leader>w8 :setlocal tabstop=8<CR>:setlocal shiftwidth=8<CR>
+" nnoremap <leader>w2 :setlocal tabstop=2<CR>:setlocal shiftwidth=2<CR>
+" nnoremap <leader>w4 :setlocal tabstop=4<CR>:setlocal shiftwidth=4<CR>
+" nnoremap <leader>w8 :setlocal tabstop=8<CR>:setlocal shiftwidth=8<CR>
 
 " Git {{{
-nnoremap <Leader>gc :Git commit<CR>
-nnoremap <Leader>gb :Git blame<CR>
-nnoremap <Leader>gs :Git<CR>
-nnoremap <Leader>gl :Git log -1000<CR>
-nnoremap <Leader>ggp :Git push<CR>
-nnoremap <Leader>ggl :Git pull<CR>
+" nnoremap <Leader>gc :Git commit<CR>
+" nnoremap <Leader>gb :Git blame<CR>
+" nnoremap <Leader>gs :Git<CR>
+" nnoremap <Leader>gl :Git log -1000<CR>
+" nnoremap <Leader>ggp :Git push<CR>
+" nnoremap <Leader>ggl :Git pull<CR>
 
 " Fugitive Conflict Resolution
-nnoremap <leader>gd :Gvdiffsplit!<CR>
-nnoremap <leader>gdh :diffget //2<CR>
-nnoremap <leader>gdl :diffget //3<CR>
+" nnoremap <leader>gd :Gvdiffsplit!<CR>
+" nnoremap <leader>gdh :diffget //2<CR>
+" nnoremap <leader>gdl :diffget //3<CR>
 " }}}
 
 " Buffers {{{
-nnoremap <Leader>l :bnext<CR>
-nnoremap <Leader>h :bprevious<CR>
+" TODO: remove mappings here
+" nnoremap <Leader>l :bnext<CR>
+" nnoremap <Leader>h :bprevious<CR>
 " Close all buffers but the current one
-nnoremap <Leader>x :only<CR>
+" nnoremap <Leader>x :only<CR>
 " Close the current buffer and back to the last edited
-nnoremap <Leader>d <cmd>lua require('dotfiles.general.functions').delete_buffer()<cr>
-nnoremap <LocalLeader>d <cmd>lua require('dotfiles.general.functions').delete_buffer()<cr>
+" nnoremap <Leader>d <cmd>lua require('dotfiles.general.functions').delete_buffer()<cr>
+" nnoremap <LocalLeader>d <cmd>lua require('dotfiles.general.functions').delete_buffer()<cr>
 " }}}
 "}}
 
@@ -181,7 +183,7 @@ nnoremap <LocalLeader>d <cmd>lua require('dotfiles.general.functions').delete_bu
 " }}}
 
 " Insert date and time {{{
-nnoremap <Leader>Id "=strftime("%Y-%m-%d")<CR>p
+" nnoremap <Leader>Id "=strftime("%Y-%m-%d")<CR>p
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
