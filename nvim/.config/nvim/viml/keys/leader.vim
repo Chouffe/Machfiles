@@ -1,6 +1,6 @@
 " Leader Shortcuts {{{
-let mapleader="\<Space>"
-let maplocalleader=","
+" let mapleader="\<Space>"
+" let maplocalleader=","
 " }}}
 
 " Leader Mappings {{{

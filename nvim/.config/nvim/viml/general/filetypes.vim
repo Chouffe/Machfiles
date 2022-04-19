@@ -18,7 +18,6 @@ augroup filetypes
   autocmd FileType yaml       setlocal ts=2 sts=2 sw=2 expandtab
 
   " autocmd FileType markdown,text,tex DittoOn
-
   autocmd Filetype gitcommit  setlocal spell textwidth=72
 
   autocmd BufNewFile,Bufread *.hl        setfiletype clojure
@@ -29,10 +28,6 @@ augroup filetypes
 
   " automatic gofmt
   autocmd FileType go nmap <buffer> = <Esc>:Fmt<CR>
-
-  " automatic Neomake
-  " autocmd BufWritePre,BufRead *.clj  :Neomake clj_kondo<CR>
-  " autocmd BufWritePre,BufRead *.cljs :Neomake clj_kondo<CR>
 
   " support for json c
   autocmd FileType json syntax match Comment +\/\/.\+$+

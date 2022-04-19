@@ -1,6 +1,6 @@
 " Vim expand region
-vmap v <Plug>(expand_region_expand)
-vmap <C-V> <Plug>(expand_region_shrink)
+" vmap v <Plug>(expand_region_expand)
+" vmap <C-V> <Plug>(expand_region_shrink)
 
 " Compe {{{
 " inoremap <silent><expr> <C-Space> compe#complete()
@@ -12,12 +12,12 @@ vmap <C-V> <Plug>(expand_region_shrink)
 
 " Parinfer {{{
 " nnoremap <Localleader>pp <cmd>lua require('dotfiles.general.functions').toggle_parinfer()<cr>
-nnoremap <Localleader>pp <cmd>ParinferToggle<CR>
+" nnoremap <Localleader>pp <cmd>ParinferToggle<CR>
 " }}}
 
 " Terminal {{{
-tnoremap <Esc> <C-\><C-n>
-tnoremap <silent><C-g> <C-\><C-n>:close<CR>
-tnoremap jk <C-\><C-n>
-tnoremap jj <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
+" tnoremap <silent><C-g> <C-\><C-n>:close<CR>
+" tnoremap jk <C-\><C-n>
+" tnoremap jj <C-\><C-n>
 " }}}
