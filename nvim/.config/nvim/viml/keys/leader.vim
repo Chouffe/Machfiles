@@ -173,11 +173,11 @@ nnoremap <LocalLeader>d <cmd>lua require('dotfiles.general.functions').delete_bu
 
 " Formatting with external tools {{{
 " JSON
-nnoremap <silent> <Leader>Fj :%!jq --sort-keys<CR>
-vnoremap <silent> <Leader>Fj :!jq --sort-keys<CR>
+" nnoremap <silent> <Leader>Fj :%!jq --sort-keys<CR>
+" vnoremap <silent> <Leader>Fj :!jq --sort-keys<CR>
 " EDN
-nnoremap <silent> <Leader>Fe :%!jet --pretty<CR>
-vnoremap <silent> <Leader>Fe :!jet --pretty<CR>
+" nnoremap <silent> <Leader>Fe :%!jet --pretty<CR>
+" vnoremap <silent> <Leader>Fe :!jet --pretty<CR>
 " }}}
 
 " Insert date and time {{{

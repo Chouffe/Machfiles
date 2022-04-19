@@ -5,6 +5,7 @@
              str aniseed.string
              autocommands config.general.autocommands
              user-commands config.general.user_commands
+             keys-leader config.keys.leader
              plugins config.plugins}})
 
 ;generic mapping leaders configuration
@@ -31,6 +32,7 @@
 (defn- init! []
  (plugins.init)
  (autocommands.setup)
- (user-commands.setup))
+ (user-commands.setup)
+ (keys-leader.register-keybindings))
 
 (init!)
