@@ -56,6 +56,8 @@
    :folke/which-key.nvim {:branch :main}
    ; vim over: :substitute preview
    :osyo-manga/vim-over {}
+   ; Motion plugin for neovim
+   :ggandor/lightspeed.nvim {}
 
    ; Navigation
    :kyazdani42/nvim-tree.lua {:requires {:kyazdani42/nvim-web-devicons {}}

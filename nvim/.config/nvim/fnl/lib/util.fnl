@@ -19,3 +19,11 @@
 
 (defn bmap! [bufnr mode from to opts]
   (bmap bufnr mode from to (a.assoc opts :silent true)))
+
+(defn loclist? [win-id]
+  (let [win-info (a.first (vim.fn.getwininfo win-id))]
+    (= 1 (. win-info :loclist))))
+
+(defn quickfix? [win-id]
+  (let [win-info (a.first (vim.fn.getwininfo win-id))]
+    (= 1 (. win-info :quickfix))))
