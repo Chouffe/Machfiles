@@ -27,23 +27,24 @@
 (defn- register-keybindings []
   (which-key.register
     {:name "find"
-     :n     (map #(t.find_files {:cwd "~/notes"}) "Search Notes")
-     :/     (map t.search_history "Search history")
-     :w     (map t.grep_string "Search string under cursor")
-     :m     (map t.marks "Marks")
-     ::     (map t.command_history "Command history")
      :b     (map t.buffers "Buffers")
-     :r     (map t.resume "Resume last Telescope")
      :f     (map t.find_files "Files")
      :g     (map t.live_grep "Search in project")
      :h     (map t.help_tags "Help tags")
      :k     (map t.keymaps "Keymaps")
+     :m     (map t.marks "Marks")
+     :n     (map #(t.find_files {:cwd "~/notes"}) "Search Notes")
      :o     (map t.oldfiles "Oldfiles")
+     :r     (map t.resume "Resume last Telescope")
+     :s     (map t.symbols "Symbols")
      :t     (map t.builtin "Telescope pickers")
-     "<CR>" (map ":Telescope " "Enter find command..." {:silent false})
      :v {:name "vim"
          :g (map #(t.live_grep {:cwd "~/.config/nvim"}) "Search in project")
-         :f (map #(t.find_files {:cwd "~/.config/nvim"}) "Files")}}
+         :f (map #(t.find_files {:cwd "~/.config/nvim"}) "Files")}
+     :w     (map t.grep_string "Search string under cursor")
+     :<CR>  (map ":Telescope " "Enter find command..." {:silent false})
+     ::     (map t.command_history "Command history")
+     :/     (map t.search_history "Search history")}
     {:prefix "<Leader>f"}))
 
 (defn config []
