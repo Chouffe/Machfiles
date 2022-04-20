@@ -59,7 +59,7 @@
          :s [":Git<CR>" "status"]}}
     {:prefix prefix}))
 
-(defn register-location-list-keybindings [prefix]
+(defn- register-location-list-keybindings [prefix]
   (which-key.register
     {:l {:name "location list"
          :l [":lopen<CR>" "open"]
@@ -69,7 +69,7 @@
          :x [":lclose<CR>" "close"]}}
     {:prefix prefix}))
 
-(defn register-quickfix-keybindings [prefix]
+(defn- register-quickfix-keybindings [prefix]
   (which-key.register
     {:c {:name "quickfix list"
          :c [":copen<CR>" "open"]
@@ -93,18 +93,12 @@
     {:prefix prefix})
 
   (which-key.register
-    {:<CR> [":nohlsearch<CR>" "search highlighting off"]
-     :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]
-     :gcc "toggle comment"
-     :n [":set number!<CR>" "toggle number"]
-     :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
-     :s [":set spell!<CR>" "toggle spell"]
-     :y ["\"+y" "copy into clipboard"]}
-    {})
+    {:y ["\"+yy" "copy into clipboard"]}
+    {:prefix prefix :mode :v})
 
   (which-key.register
-    {:y ["\"+yy" "copy into clipboard"]}
-    {:prefix prefix :mode :v}))
+    {:gcc "toggle comment"}
+    {}))
 
 (defn- register-parinfer-keybindings [prefix]
   (which-key.register
