@@ -1,6 +1,8 @@
 (module config.general.autocommands
-  {autoload {functions config.general.functions
+  {autoload {a aniseed.core
+             functions config.general.functions
              nvim aniseed.nvim
+             util lib.util
              which-key which-key}})
 
 (defn- python-setup []
@@ -28,21 +30,23 @@
        :callback functions.trim-whitespace
        :desc "Trims whitespace and empty end of buffer blank lines"})))
 
-(defn- register-location-list-keybindings []
-  (which-key.register
-    {:<CR> [":.ll<CR>" "jump"]}
-    {:buffer (nvim.get_current_buf)}))
+(defn- register-qf-list-keybindings []
+  (let [win-id (vim.fn.win_getid)]
+    (when (util.loclist? win-id)
+      (which-key.register
+        {:<CR> [":.ll<CR>" "jump"]}
+        {:buffer (nvim.get_current_buf)}))))
 
-(defn- location-list-setup []
+(defn- quickfix-list-setup []
   (let [group-id (vim.api.nvim_create_augroup :quickfix_list_group {})]
     (vim.api.nvim_create_autocmd
       :FileType
       {:pattern "qf"
        :group group-id
-       :callback register-location-list-keybindings
-       :desc "Registers location-list keybindings"})))
+       :callback register-qf-list-keybindings
+       :desc "Registers quickfix list keybindings"})))
 
 (defn setup []
   (python-setup)
   (general-clean-setup)
-  (location-list-setup))
+  (quickfix-list-setup))
