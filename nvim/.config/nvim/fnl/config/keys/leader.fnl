@@ -81,14 +81,15 @@
 
 (defn- register-misc-keybindings [prefix]
   (which-key.register
-    {:c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]
+    {:h {:name "highlight"
+         :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]
+         :x [":nohlsearch<CR>" "search highlighting off"]}
      :n [":set number!<CR>" "toggle number"]
      :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
      :s [":set spell!<CR>" "toggle spell"]
      :t {:name "NvimTree"
          :r [":<C-u>NvimTreeFindFileToggle<CR>" "find file toggle"]
          :t [":<C-u>NvimTreeToggle<CR>" "toggle"]}
-     :<CR> [":nohlsearch<CR>" "search highlighting off"]
      :y ["\"+y" "copy into clipboard"]}
     {:prefix prefix})
 
