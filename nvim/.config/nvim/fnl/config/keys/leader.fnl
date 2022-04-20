@@ -4,6 +4,7 @@
              str aniseed.string
              functions config.general.functions
              constants config.constants
+             t telescope.builtin
              which-key which-key}})
 
 (defn- set-leader-keys [leader-key local-leader-key]
@@ -14,27 +15,28 @@
   (which-key.register
     {:b {:name "buffer"
          :d [functions.delete_buffer "delete"]
+         :l [t.buffers "list"]
          :n [":bnext<CR>" "next"]
-         :p [":bprevious<CR>" "previous"]
          :o [":only<CR>" "only"]
+         :p [":bprevious<CR>" "previous"]
          :w [":w<CR>" "write|save"]}}
     {:prefix prefix}))
 
 (defn- register-window-keybindings [prefix]
   (which-key.register
     {:w {:name "window"
-         :w [":w<CR>" "write|save"]
          :o [":only<CR>" "only"]
+         :w [":w<CR>" "write|save"]
          :q [":q<CR>" "quit"]}
-     :k [":vsplit<CR>" "vertical split"]
-     :j [":split<CR>" "horizontal split"]}
+     :j [":split<CR>" "horizontal split"]
+     :k [":vsplit<CR>" "vertical split"]}
     {:prefix prefix}))
 
 (defn- register-formatting-keybindings [prefix]
   (which-key.register
     {:F {:name "format"
-         :j [":%!jq --sort-keys<CR>" "Format json"]
-         :e [":%!jet --pretty<CR>" "Format edn"]}}
+         :e [":%!jet --pretty<CR>" "Format edn"]
+         :j [":%!jq --sort-keys<CR>" "Format json"]}}
     {:prefix prefix})
   (which-key.register
     {:F {:name "format"
@@ -45,38 +47,59 @@
 (defn- register-git-keybindings [prefix]
   (which-key.register
     {:g {:name "git"
-         :c [":Git commit<CR>" "commit"]
-         :gp [":Git push<CR>" "push"]
-         :gl [":Git pull<CR>" "pull"]
          :b [":Git blame<CR>" "blame"]
+         :c [":Git commit<CR>" "commit"]
          :d {:name "conflict resolution"
              :s [":Gvdiffsplit!<CR>" "diff split"]
              :h [":diffget //2<CR>" "get left"]
              :l [":diffget //3<CR>" "get right"]}
+         :g {:name "sync"
+             :p [":Git push<CR>" "push"]
+             :l [":Git pull<CR>" "pull"]}
          :s [":Git<CR>" "status"]}}
+    {:prefix prefix}))
+
+(defn register-location-list-keybindings [prefix]
+  (which-key.register
+    {:l {:name "location list"
+         :l [":lopen<CR>" "open"]
+         :n [":lnext<CR>" "next"]
+         :o [":lopen<CR>" "open"]
+         :p [":lprev<CR>" "previous"]
+         :x [":lclose<CR>" "close"]}}
+    {:prefix prefix}))
+
+(defn register-quickfix-keybindings [prefix]
+  (which-key.register
+    {:c {:name "quickfix list"
+         :c [":copen<CR>" "open"]
+         :n [":cnext<CR>" "next"]
+         :o [":copen<CR>" "open"]
+         :p [":cprev<CR>" "previous"]
+         :x [":cclose<CR>" "close"]}}
     {:prefix prefix}))
 
 (defn- register-misc-keybindings [prefix]
   (which-key.register
-    {:t {:name "NvimTree"
-         :t [":<C-u>NvimTreeToggle<CR>" "toggle"]
-         :r [":<C-u>NvimTreeFindFileToggle<CR>" "find file toggle"]}
-     :<CR> [":nohlsearch<CR>" "search highlighting off"]
-     :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
-     :y ["\"+y" "copy into clipboard"]
-     :s [":set spell!<CR>" "toggle spell"]
+    {:c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]
      :n [":set number!<CR>" "toggle number"]
-     :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]}
+     :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
+     :s [":set spell!<CR>" "toggle spell"]
+     :t {:name "NvimTree"
+         :r [":<C-u>NvimTreeFindFileToggle<CR>" "find file toggle"]
+         :t [":<C-u>NvimTreeToggle<CR>" "toggle"]}
+     :<CR> [":nohlsearch<CR>" "search highlighting off"]
+     :y ["\"+y" "copy into clipboard"]}
     {:prefix prefix})
 
   (which-key.register
-    {:gcc "toggle comment"
-     :<CR> [":nohlsearch<CR>" "search highlighting off"]
-     :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
-     :y ["\"+y" "copy into clipboard"]
-     :s [":set spell!<CR>" "toggle spell"]
+    {:<CR> [":nohlsearch<CR>" "search highlighting off"]
+     :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]
+     :gcc "toggle comment"
      :n [":set number!<CR>" "toggle number"]
-     :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]}
+     :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
+     :s [":set spell!<CR>" "toggle spell"]
+     :y ["\"+y" "copy into clipboard"]}
     {})
 
   (which-key.register
@@ -96,4 +119,6 @@
   (register-formatting-keybindings :<Leader>)
   (register-git-keybindings :<Leader>)
   (register-misc-keybindings :<Leader>)
+  (register-location-list-keybindings :<Leader>)
+  (register-quickfix-keybindings :<Leader>)
   (register-parinfer-keybindings :<Localleader>))
