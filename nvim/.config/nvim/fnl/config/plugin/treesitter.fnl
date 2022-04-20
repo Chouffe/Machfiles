@@ -11,4 +11,4 @@
                                ;; Do not enable for files with more than n lines, int
                                :max_file_lines nil}
                      :indent {:enable true}
-                     :ensure_installed ["clojure"]}))
+                     :ensure_installed ["clojure" "fennel"]}))
