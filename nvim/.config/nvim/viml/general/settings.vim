@@ -97,18 +97,18 @@ set backspace=2
 " turn off search highlight
 set hidden  " It hides buffers instead of closing them
 " Preventing entering Ex mode
-nnoremap Q :bd %<CR>
+" nnoremap Q :bd %<CR>
 " select last paste in visual mode
-nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+" nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 " allows incsearch highlighting for range commands - VERY POWERFUL
-cnoremap $t <CR>:t''<CR>
-cnoremap $m <CR>:m''<CR>
-cnoremap $d <CR>:d<CR>``
+" cnoremap $t <CR>:t''<CR>
+" cnoremap $m <CR>:m''<CR>
+" cnoremap $d <CR>:d<CR>``
 " Sorting
 vmap <C-s> !sort<CR>
 " Splits
-nnoremap <silent> sv :vsplit<CR>
-nnoremap <silent> sh :split<CR>
+" nnoremap <silent> sv :vsplit<CR>
+" nnoremap <silent> sh :split<CR>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
