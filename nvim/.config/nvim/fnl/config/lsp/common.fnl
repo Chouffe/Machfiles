@@ -15,16 +15,16 @@
         warn  (.. prefix "SignWarn")
         info  (.. prefix "SignInfo")
         hint  (.. prefix "SignHint")]
-   (vim.fn.sign_define error {:text "x" :texthl error})
-   (vim.fn.sign_define warn  {:text "!" :texthl warn})
-   (vim.fn.sign_define info  {:text "i" :texthl info})
-   (vim.fn.sign_define hint  {:text "?" :texthl hint})))
+    (vim.fn.sign_define error {:text "x" :texthl error})
+    (vim.fn.sign_define warn  {:text "!" :texthl warn})
+    (vim.fn.sign_define info  {:text "i" :texthl info})
+    (vim.fn.sign_define hint  {:text "?" :texthl hint})))
 
 (defn- update-colorscheme []
- (set nvim.o.updatetime 1000) ;; Useful for the HoldCursor and HoldCursorI
- (nvim.ex.highlight! :link :LspReferenceText :Search)
- (nvim.ex.highlight! :link :LspReferenceRead :LspReferenceText)
- (nvim.ex.highlight! :link :LspReferenceWrite :LspReferenceText))
+  (set nvim.o.updatetime 1000) ;; Useful for the HoldCursor and HoldCursorI
+  (nvim.ex.highlight! :link :LspReferenceText :Search)
+  (nvim.ex.highlight! :link :LspReferenceRead :LspReferenceText)
+  (nvim.ex.highlight! :link :LspReferenceWrite :LspReferenceText))
 
 (defn- highlight-reference-when-idle
   [bufnr]
@@ -94,7 +94,7 @@
     {:K (nmap vim.lsp.buf.hover "Show documentation")
      :gd (nmap vim.lsp.buf.definition "Jump to definition")
      "[" {:d (nmap vim.diagnostic.goto_prev "Previous diagnostic")}
-     "]" {:d (nmap vim.diagnostic.goto_next "Next diagnostic")}}
+       "]" {:d (nmap vim.diagnostic.goto_next "Next diagnostic")}}
     {:buffer bufnr})
 
   (which-key.register
@@ -127,7 +127,7 @@
     (nvim.buf_set_option bufnr :omnifunc :v:lua.vim.lsp.omnifunc)
     (register-keybindings bufnr)
 
-      ;; Enable formatting and highlighting capabilities
+    ;; Enable formatting and highlighting capabilities
     (when (and document-formatting-on-save?
                client.resolved_capabilities.document_formatting)
       (format-on-save bufnr))
