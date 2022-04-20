@@ -23,6 +23,7 @@
 (defn- register-window-keybindings [prefix]
   (which-key.register
     {:w {:name "window"
+         :w [":w<CR>" "write|save"]
          :o [":only<CR>" "only"]
          :q [":q<CR>" "quit"]}
      :k [":vsplit<CR>" "vertical split"]
@@ -62,10 +63,25 @@
          :r [":<C-u>NvimTreeFindFileToggle<CR>" "find file toggle"]}
      :<CR> [":nohlsearch<CR>" "search highlighting off"]
      :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
+     :y ["\"+y" "copy into clipboard"]
      :s [":set spell!<CR>" "toggle spell"]
      :n [":set number!<CR>" "toggle number"]
      :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]}
-    {:prefix prefix}))
+    {:prefix prefix})
+
+  (which-key.register
+    {:gcc "toggle comment"
+     :<CR> [":nohlsearch<CR>" "search highlighting off"]
+     :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
+     :y ["\"+y" "copy into clipboard"]
+     :s [":set spell!<CR>" "toggle spell"]
+     :n [":set number!<CR>" "toggle number"]
+     :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]}
+    {})
+
+  (which-key.register
+    {:y ["\"+yy" "copy into clipboard"]}
+    {:prefix prefix :mode :v}))
 
 (defn- register-parinfer-keybindings [prefix]
   (which-key.register
