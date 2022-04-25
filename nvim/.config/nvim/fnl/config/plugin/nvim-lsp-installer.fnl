@@ -1,8 +1,9 @@
 (module config.plugin.nvim-lsp-installer
-  {autoload {lsp-clojure config.lsp.clojure
+  {autoload {lsp-bash config.lsp.bash
+             lsp-clojure config.lsp.clojure
+             lsp-common config.lsp.common
              lsp-lua config.lsp.lua
              lsp-python config.lsp.python
-             lsp-common config.lsp.common
              nvim-lsp-installer nvim-lsp-installer}})
 
 (defn config []
@@ -20,5 +21,8 @@
 
           (= "pyright" server-name)
           (setup server lsp-python.settings)
+
+          (= "bashls" server-name)
+          (setup server lsp-bash.settings)
 
           (print (.. "[nvim-lsp-installer] Not handled with exta settings: " server-name)))))))
