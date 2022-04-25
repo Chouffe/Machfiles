@@ -9,6 +9,11 @@ function tre() {
 tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
+function restart-gpg-agent() {
+    killall gpg-agent || true
+    gpg-agent --daemon
+}
+
 function fzf-git-branches() { git branch | fzf-tmux -d 15; }
 
 # with ag - respects .agignore and .gitignore
