@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function agf () { ag -G ".*$1\$" $2 }
+function agf () { ag -G ".*$1\$" "$2"; }
 
 # Create a new directory and enter it
 function mkd() { mkdir -p "$@" && cd "$_"; }
@@ -37,7 +37,7 @@ function json() {
 # List all filenames under .pasword-store directory in a
 # Turn filenames into a readable input for pass command
 _pwdstore-files() {
-  find $HOME/.password-store -type f \
+  find "$HOME/.password-store" -type f \
     | sed 's/.*\(\.password-store\/.*\)/\1/' \
     | grep -v '/\.' \
     | cut -d / -f2- \
@@ -51,8 +51,8 @@ _pwdstore-files() {
 pc() {
   local files pwdstore_file
   files=$(_pwdstore-files)
-  pwdstore_file=$(echo $files | fzf)
-  pass -c $(echo "$pwdstore_file")
+  pwdstore_file=$(echo "$files" | fzf)
+  pass -c "$pwdstore_file"
 }
 
 # pass show
@@ -76,7 +76,7 @@ pe() {
 vpn_tcp() {
   local servers server
   servers=$(ls /etc/openvpn/ovpn_tcp/)
-  server=$(echo $servers| fzf)
+  server=$(echo "$servers" | fzf)
   sudo openvpn $(echo "/etc/openvpn/ovpn_tcp/$server")
 }
 
@@ -132,7 +132,6 @@ ghpr() {
 #   fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
 #     git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 # }
-
 # Fuzzy search over git branches ordered by recency
 fbr () {
     git checkout $(git for-each-ref --sort=-committerdate refs/heads/ | awk '{print $3}' | cut -c $(echo " refs/head/" | wc -c)- | fzf-tmux)
@@ -140,7 +139,7 @@ fbr () {
 
 fd() {
   preview="git diff $@ --color=always -- {-1}"
-  git diff $@ --name-only | fzf -m --ansi --preview $preview
+  git diff $@ --name-only | fzf -m --ansi --preview "$preview"
 }
 
 # fco - checkout git branch/tag
@@ -155,7 +154,7 @@ fco() {
   target=$(
   (echo "$tags"; echo "$branches") |
   fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return
-  git checkout $(echo "$target" | awk '{print $2}')
+  git checkout "$(echo "$target" | awk '{print $2}')"
 }
 
 # fstash - easier way to deal with stashes
