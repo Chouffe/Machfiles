@@ -3,6 +3,7 @@
              nvim aniseed.nvim
              str aniseed.string
              functions config.general.functions
+             legendary legendary
              constants config.constants
              t telescope.builtin
              which-key which-key}})
@@ -10,6 +11,16 @@
 (defn- set-leader-keys [leader-key local-leader-key]
   (set nvim.g.mapleader leader-key)
   (set nvim.g.maplocalleader local-leader-key))
+
+(defn- buffer-keybindings [prefix]
+  {:b {:name "buffer"
+       :d [functions.delete_buffer "delete"]
+       :l [t.buffers "list"]
+       :n [":bnext<CR>" "next"]
+       :o [":only<CR>" "only"]
+       :p [":bprevious<CR>" "previous"]
+       :w [":w<CR>" "write|save"]}}
+  {:prefix prefix})
 
 (defn- register-buffer-keybindings [prefix]
   (which-key.register
@@ -21,6 +32,16 @@
          :p [":bprevious<CR>" "previous"]
          :w [":w<CR>" "write|save"]}}
     {:prefix prefix}))
+
+(defn- buffer-keybindings [prefix]
+  {:b {:name "buffer"
+       :d [functions.delete_buffer "delete"]
+       :l [t.buffers "list"]
+       :n [":bnext<CR>" "next"]
+       :o [":only<CR>" "only"]
+       :p [":bprevious<CR>" "previous"]
+       :w [":w<CR>" "write|save"]}}
+  {:prefix prefix})
 
 (defn- register-window-keybindings [prefix]
   (which-key.register
@@ -85,6 +106,7 @@
          :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]
          :x [":nohlsearch<CR>" "search highlighting off"]}
      :n [":set number!<CR>" "toggle number"]
+     :o [legendary.find "Legendary"]
      :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
      :s [":set spell!<CR>" "toggle spell"]
      :t {:name "NvimTree"

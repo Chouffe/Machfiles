@@ -54,6 +54,8 @@
    :tyru/open-browser.vim {:config (config :open-browser)}
    ; Display a popup with possible key bindings of the command you started ty
    :folke/which-key.nvim {:branch :main}
+   ; Define your keymaps, commands, and autocommands as simple Lua tables, building a legend at the same time.
+   :mrjones2014/legendary.nvim {}
    ; vim over: :substitute preview
    :osyo-manga/vim-over {}
    ; Motion plugin for neovim
@@ -124,6 +126,8 @@
                                  ;; Provides icons for cmp
                                  :onsails/lspkind-nvim {}}
                       :config (config :cmp)}
+
+   :folke/lsp-colors.nvim {}
 
    :kosayoda/nvim-lightbulb {:config (config :lightbulb)}
 

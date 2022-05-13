@@ -5,6 +5,7 @@
              str aniseed.string
              autocommands config.general.autocommands
              user-commands config.general.user_commands
+             keys config.keys.core
              keys-leader config.keys.leader
              keys-other config.keys.mappings
              plugins config.plugins}})
@@ -13,7 +14,6 @@
  (plugins.init)
  (autocommands.setup)
  (user-commands.setup)
- (keys-leader.register-keybindings)
- (keys-other.register-keybindings))
+ (keys.register))
 
 (init!)

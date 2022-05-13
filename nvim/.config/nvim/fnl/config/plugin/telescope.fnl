@@ -24,7 +24,7 @@
     (each [_ extension-name (ipairs extensions)]
       (telescope.load_extension extension-name))))
 
-(defn- register-keybindings []
+(defn register-keybindings []
   (which-key.register
     {:name "find"
      :b     (map t.buffers "Buffers")
@@ -57,5 +57,4 @@
                         :override_file_sorter true
                         :override_generic_sorter true}
                   :ui-select (themes.get_cursor)}
-     :pickers {:find_files {:find_command ["rg" "--files" "--iglob" "!.git" "--hidden"]}}})
-  (register-keybindings))
+     :pickers {:find_files {:find_command ["rg" "--files" "--iglob" "!.git" "--hidden"]}}}))
