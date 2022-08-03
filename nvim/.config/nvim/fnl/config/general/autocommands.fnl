@@ -22,13 +22,14 @@
       {:pattern "*"
        :group group-id
        :callback (fn [_] (vim.fn.clearmatches))
-       :desc "Clears matches"})
-    (vim.api.nvim_create_autocmd
-      :BufWritePre
-      {:pattern "*"
-       :group group-id
-       :callback functions.trim-whitespace
-       :desc "Trims whitespace and empty end of buffer blank lines"})))
+       :desc "Clears matches"})))
+    ; TODO: make sure that the buffer is not too large: it can take a long time otherwise
+    ; (vim.api.nvim_create_autocmd
+    ;   :BufWritePre
+    ;   {:pattern "*"
+    ;    :group group-id
+    ;    :callback functions.trim-whitespace
+    ;    :desc "Trims whitespace and empty end of buffer blank lines"})))
 
 (defn- register-qf-list-keybindings []
   (let [win-id (vim.fn.win_getid)]
