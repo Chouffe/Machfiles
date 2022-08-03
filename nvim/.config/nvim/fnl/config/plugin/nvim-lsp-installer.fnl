@@ -1,6 +1,7 @@
 (module config.plugin.nvim-lsp-installer
   {autoload {lsp-bash config.lsp.bash
              lsp-clojure config.lsp.clojure
+             lsp-rust config.lsp.rust
              lsp-common config.lsp.common
              lsp-lua config.lsp.lua
              lsp-python config.lsp.python
@@ -18,6 +19,9 @@
 
           (= "clojure_lsp" server-name)
           (setup server lsp-clojure.settings)
+
+          (= "rust_analyzer" server-name)
+          (setup server lsp-rust.settings)
 
           (= "pyright" server-name)
           (setup server lsp-python.settings)
