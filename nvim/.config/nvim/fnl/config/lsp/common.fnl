@@ -58,7 +58,8 @@
       :BufWritePre
       {:group group-id
        :pattern "<buffer>"
-       :callback (fn [_] (vim.lsp.buf.formatting_sync nil 1000))
+       ; :callback (fn [_] (vim.lsp.buf.formatting_sync nil 1000))
+       :callback (fn [_] (vim.lsp.buf.format nil 1000))
        :desc "Formats on save with LSP"})))
 
 (defn make-handlers []
@@ -104,7 +105,7 @@
 
   (which-key.register
     {:b {:name "buffer"
-         := (nmap vim.lsp.buf.formatting "Format buffer")
+         := (nmap vim.lsp.buf.format "Format buffer")
          :d (nmap vim.diagnostic.set_loclist "List diagnostics")}
      :f {:name "find"
          :d (nmap t.diagnostics "Diagnostics")
@@ -129,11 +130,11 @@
 
     ;; Enable formatting and highlighting capabilities
     (when (and document-formatting-on-save?
-               client.resolved_capabilities.document_formatting)
+               client.server_capabilities.documentFormattingProvider)
       (format-on-save bufnr))
 
     (when (and highlight-reference-when-idle?
-               client.resolved_capabilities.document_highlight)
+               client.server_capabilities.documentHighlightProvider)
       (highlight-reference-when-idle bufnr))
 
     (print (string.format "LSP ready. [%s]" (. client :name)))))
