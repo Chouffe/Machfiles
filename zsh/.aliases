@@ -90,6 +90,8 @@ alias ghc='stack exec -- ghc'
 alias ghci='stack exec -- ghci'
 # alias ghc-mod='stack exec -- ghc-mod'
 
+alias gpg-unlock="gpg-connect-agent updatestartuptty /bye"
+
 # NVM
 # alias loadnvm=\."$NVM_DIR/nvm.sh" && \. "$NVM_DIR/bash_completion"
 
