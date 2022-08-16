@@ -43,6 +43,9 @@ How to setup a work environment.
 
 ## Desktop: Regolith
 
+* Install from PPA as a package
+* Install i3xrocks-battery status
+* Install themes: https://regolith-desktop.com/docs/using-regolith/configuration/
 * Install rofi-pass: https://github.com/carnager/rofi-pass
 
 ## Change fonts
