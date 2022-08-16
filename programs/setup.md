@@ -34,6 +34,7 @@ How to setup a work environment.
   * xset q | grep rate
   * xset r rate 250 40
 * Enable the Compose Key by installing gnome-tweak-tool and enabling it
+* Setup a compose key for accents
 
 ## Editor: nvim
 
