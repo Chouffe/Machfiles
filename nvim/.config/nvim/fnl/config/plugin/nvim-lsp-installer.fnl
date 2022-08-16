@@ -1,5 +1,6 @@
 (module config.plugin.nvim-lsp-installer
-  {autoload {lsp-bash config.lsp.bash
+  {autoload {lspconfig lspconfig
+             lsp-bash config.lsp.bash
              lsp-clojure config.lsp.clojure
              lsp-rust config.lsp.rust
              lsp-common config.lsp.common
@@ -9,24 +10,9 @@
 
 (defn config []
   (lsp-common.define-signs "LspDiagnostics")
-  (nvim-lsp-installer.on_server_ready
-    (fn [server]
-      (let [server-name (. server :name)
-            setup (. server :setup)]
-        (if
-          (= "sumneko_lua" server-name)
-          (setup server lsp-lua.settings)
-
-          (= "clojure_lsp" server-name)
-          (setup server lsp-clojure.settings)
-
-          (= "rust_analyzer" server-name)
-          (setup server lsp-rust.settings)
-
-          (= "pyright" server-name)
-          (setup server lsp-python.settings)
-
-          (= "bashls" server-name)
-          (setup server lsp-bash.settings)
-
-          (print (.. "[nvim-lsp-installer] Not handled with exta settings: " server-name)))))))
+  (nvim-lsp-installer.setup {})
+  (lspconfig.clojure_lsp.setup lsp-clojure.settings)
+  (lspconfig.sumneko_lua.setup lsp-lua.settings)
+  (lspconfig.rust_analyzer.setup lsp-rust.settings)
+  (lspconfig.pyright.setup lsp-python.settings)
+  (lspconfig.bashls.setup lsp-bash.settings))
