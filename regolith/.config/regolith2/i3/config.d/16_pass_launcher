@@ -1,0 +1,2 @@
+## Launch // Pass Search // <>p
+bindsym $mod+p exec ROFI_PASS_CONFIG=/home/chouffe/rofi-pass/config /home/chouffe/rofi-pass/rofi-pass
