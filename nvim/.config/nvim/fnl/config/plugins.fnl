@@ -13,6 +13,8 @@
    :wbthomason/packer.nvim {}
    ; nvim config and plugins in Fennel
    :Olical/aniseed {:branch :develop}
+   ; Run Fennel inside Neovim on startup with Aniseed
+   :Olical/nvim-local-fennel {}
    ; ====================================
    ; Comment out stuff
    :tpope/vim-commentary {}
