@@ -2,7 +2,16 @@
   {autoload {nvim aniseed.nvim
              constants config.constants
              a aniseed.core
-             packer packer}})
+             packer packer
+             
+             ;; Requires to fix
+             config-nvim-tree config.plugin.nvim-tree
+             config-theme config.plugin.theme
+             config-cmp config.plugin.cmp
+             config-telescope config.plugin.telescope
+             config-sexp config.plugin.sexp
+             config-treesitter config.plugin.treesitter
+             }})
 
 (defn- config [name]
   (string.format "require('config.plugin.%s').config()" name))
@@ -12,7 +21,8 @@
    ; Plugin Manager
    :wbthomason/packer.nvim {}
    ; nvim config and plugins in Fennel
-   :Olical/aniseed {:branch :develop}
+   ; :Olical/aniseed {:branch :develop}
+   :Olical/aniseed {}
    ; Run Fennel inside Neovim on startup with Aniseed
    :Olical/nvim-local-fennel {}
    ; ====================================
@@ -63,7 +73,7 @@
    ; Motion plugin for neovim
    :ggandor/lightspeed.nvim {}
 
-   ; Navigation
+   ; ; Navigation
    :kyazdani42/nvim-tree.lua {:requires {:kyazdani42/nvim-web-devicons {}}
                               :config (config :nvim-tree)}
 
@@ -75,15 +85,15 @@
                     :config (config :conjure)}
    :guns/vim-sexp {:config (config :sexp)} ;; For some reason the config is not called
    :tpope/vim-sexp-mappings-for-regular-people {:ft constants.lisp-filetypes}
-   :eraserhd/parinfer-rust {:ft constants.lisp-filetypes
+   :eraserhd/parinfer-rust {:ft [:clojure :fennel :scheme :lisp :timl]
                             :config (config :parinfer)
                             :run "cargo build --release"}
 
    ; Fennel
    :bakpakin/fennel.vim {}
 
-   ; Python
-   :Vimjas/vim-python-pep8-indent {:ft :python}
+   ; ; Python
+   ; :Vimjas/vim-python-pep8-indent {:ft :python}
 
    ; FZF
    :junegunn/fzf {:run "./install --all"
@@ -95,7 +105,7 @@
    ; :itchyny/lightline.vim {}
    :nvim-lualine/lualine.nvim {:requires {:kyazdani42/nvim-web-devicons {}}}
 
-   ; Telescope: file searching
+   ; ; Telescope: file searching
    :nvim-telescope/telescope.nvim {:requires {:nvim-telescope/telescope-file-browser.nvim {}
                                               :nvim-telescope/telescope-fzf-native.nvim {:branch :main :run "make"}
                                               ; :xiyaowong/telescope-emoji.nvim {}
@@ -105,16 +115,15 @@
                                               :nvim-lua/plenary.nvim {}}
                                    :config (config :telescope)}
 
-    ; Treesitter: parsing system
-   :nvim-treesitter/nvim-treesitter {:requires {:p00f/nvim-ts-rainbow {}}
-                                     :run ":TSUpdate"
+   ; Treesitter: parsing system
+   :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"
                                      :config (config :treesitter)}
 
-   ;; Language Server Protocol
-   ; A collection of common configurations for Neovim's built in LSP
-   :neovim/nvim-lspconfig {}
-   ; Adds the missing :LspInstall <language> command to conveniently install
-   :williamboman/nvim-lsp-installer {:config (config :nvim-lsp-installer)}
+   ; ;; Language Server Protocol
+   ; ; A collection of common configurations for Neovim's built in LSP
+   ; :neovim/nvim-lspconfig {}
+   ; ; Adds the missing :LspInstall <language> command to conveniently install
+   ; ; :williamboman/nvim-lsp-installer {:config (config :nvim-lsp-installer)}
    ; Autocomplete
    :hrsh7th/nvim-cmp {:requires {:hrsh7th/cmp-buffer {}
                                  :hrsh7th/cmp-nvim-lsp {}
@@ -123,13 +132,12 @@
                                  :lukas-reineke/cmp-rg {}
                                  :hrsh7th/cmp-path {}
                                  :hrsh7th/cmp-cmdline {}
-                                 :hrsh7th/nvim-cmp {}
                                  :hrsh7th/cmp-nvim-lua {}
                                  ;; Provides icons for cmp
                                  :onsails/lspkind-nvim {}}
                       :config (config :cmp)}
 
-   :folke/lsp-colors.nvim {}
+   ; :folke/lsp-colors.nvim {}
 
    :kosayoda/nvim-lightbulb {:config (config :lightbulb)}
 
@@ -176,4 +184,12 @@
 
 (defn init []
   (packer.init {:max_jobs 50})
-  (use-all plugins))
+  (use-all plugins)
+
+  ;; To Fix
+  (config-treesitter.config)
+  (config-nvim-tree.config)
+  (config-theme.config)
+  (config-cmp.config)
+  (config-telescope.config)
+  (config-sexp.config))
