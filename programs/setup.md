@@ -53,3 +53,5 @@ How to setup a work environment.
 
 * Use the Nerdfont repo to download patched fonts: https://github.com/ryanoasis/nerd-fonts
 * Follow this guide to set it up in Alacritty: https://www.behova.net/fonts-in-alacritty/
+* Liste des fonts: https://devfonts.gafi.dev/
+* Option to clone the repo and install all fonts on the system
