@@ -2,8 +2,12 @@
   {autoload {nvim aniseed.nvim
              constants config.constants
              a aniseed.core
+
+             ; Package Managers
              lazy lazy
+             mason mason
              
+             config-lsp config.lsp.core
              config-lightbulb config.plugin.lightbulb
              config-conjure config.plugin.conjure
              config-open-browser config.plugin.open-browser
@@ -72,6 +76,11 @@
    ; Motion plugin for neovim
    :ggandor/lightspeed.nvim
 
+   ;; Packages
+   :williamboman/mason.nvim
+   :williamboman/mason-lspconfig.nvim
+   :neovim/nvim-lspconfig
+
    ; Filesystem Navigation
    {1 :kyazdani42/nvim-tree.lua 
     :dependencies [:kyazdani42/nvim-web-devicons]
@@ -83,6 +92,9 @@
                    :tweekmonster/fzf-filemru]}
    {1 :nvim-telescope/telescope.nvim
     :dependencies [:nvim-lua/plenary.nvim
+                   :nvim-telescope/telescope-symbols.nvim
+                   :nvim-telescope/telescope-ui-select.nvim
+                   :nvim-lua/popup.nvim
                    {1 :nvim-telescope/telescope-fzf-native.nvim :build "make"}]
 
     :tag "0.1.4"}
@@ -140,12 +152,17 @@
     :priority 1000
     :opts {}}
    :joshdick/onedark.vim
-   :projekt0n/github-nvim-theme
-])
+   :projekt0n/github-nvim-theme])
+
 
 (defn init []
   (lazy.setup specs)
   ;; Configure the UI theme
   (config-theme.config)
   ;; Configure the autocompletion
-  (config-cmp.config))
+  (config-cmp.config)
+  ;; Packages
+  (mason.setup)
+
+  ;; LSP
+  (config-lsp.config))
