@@ -6,21 +6,23 @@
              legendary legendary
              constants config.constants
              t telescope.builtin
+             trouble trouble
              which-key which-key}})
 
 (defn- set-leader-keys [leader-key local-leader-key]
   (set nvim.g.mapleader leader-key)
   (set nvim.g.maplocalleader local-leader-key))
 
-(defn- buffer-keybindings [prefix]
-  {:b {:name "buffer"
-       :d [functions.delete_buffer "delete"]
-       :l [t.buffers "list"]
-       :n [":bnext<CR>" "next"]
-       :o [":only<CR>" "only"]
-       :p [":bprevious<CR>" "previous"]
-       :w [":w<CR>" "write|save"]}}
-  {:prefix prefix})
+(defn- register-trouble-keybindings [prefix]
+  (which-key.register
+    {:x {:name "trouble"
+         :x [trouble.toggle "all"]
+         :w [(fn [] (trouble.toggle :workspace_diagnostics)) "workspace diagnostics"]
+         :d [(fn [] (trouble.toggle :document_diagnostics)) "document diagnostics"]
+         :q [(fn [] (trouble.toggle :quickfix)) "quickfix"]
+         :l [(fn [] (trouble.toggle :loclist)) "loclist"]
+         :r [(fn [] (trouble.toggle :lsp_references)) "lsp references"]}}
+    {:prefix prefix}))
 
 (defn- register-buffer-keybindings [prefix]
   (which-key.register
@@ -32,16 +34,6 @@
          :p [":bprevious<CR>" "previous"]
          :w [":w<CR>" "write|save"]}}
     {:prefix prefix}))
-
-(defn- buffer-keybindings [prefix]
-  {:b {:name "buffer"
-       :d [functions.delete_buffer "delete"]
-       :l [t.buffers "list"]
-       :n [":bnext<CR>" "next"]
-       :o [":only<CR>" "only"]
-       :p [":bprevious<CR>" "previous"]
-       :w [":w<CR>" "write|save"]}}
-  {:prefix prefix})
 
 (defn- register-window-keybindings [prefix]
   (which-key.register
@@ -137,5 +129,6 @@
   (register-git-keybindings :<Leader>)
   (register-misc-keybindings :<Leader>)
   (register-location-list-keybindings :<Leader>)
+  (register-trouble-keybindings :<Leader>)
   (register-quickfix-keybindings :<Leader>)
   (register-parinfer-keybindings :<Localleader>))

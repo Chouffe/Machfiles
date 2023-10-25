@@ -139,7 +139,8 @@
    :christoomey/vim-tmux-navigator
    :edkolev/tmuxline.vim
    
-   ;; Theme and colorschemes
+   ;; UI: Theme and colorschemes
+   :stevearc/dressing.nvim
    {1 :kosayoda/nvim-lightbulb :config config-lightbulb.config}
    :marko-cerovac/material.nvim
    ; Minimalist status/tabline for vim
@@ -147,6 +148,8 @@
     :dependencies [:kyazdani42/nvim-web-devicons]}
    {1 :yamatsum/nvim-nonicons
     :dependencies [:kyazdani42/nvim-web-devicons]}
+   {1 :folke/trouble.nvim 
+    :dependencies [:nvim-tree/nvim-web-devicons]}
    {1 :folke/tokyonight.nvim
     :lazy false
     :priority 1000
