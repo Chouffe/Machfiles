@@ -9,6 +9,7 @@
              
              config-lsp config.lsp.core
              config-lightbulb config.plugin.lightbulb
+             config-vim-illuminate config.plugin.vim-illuminate
              config-conjure config.plugin.conjure
              config-open-browser config.plugin.open-browser
              config-neomake config.plugin.neomake
@@ -75,6 +76,8 @@
    :osyo-manga/vim-over
    ; Motion plugin for neovim
    :ggandor/lightspeed.nvim
+   ; Highlight automatically other uses of the word under the cursor
+   {1 :RRethy/vim-illuminate :config config-vim-illuminate.config}
 
    ;; Packages
    :williamboman/mason.nvim
@@ -113,11 +116,11 @@
    ; Grammar parsing
    {1 :nvim-treesitter/nvim-treesitter
     :build ":TSUpdate"
+    :dependencies [:HiPhish/rainbow-delimiters.nvim]
     :config config-treesitter.config}
 
    ; Autocomplete
    {1 :hrsh7th/nvim-cmp
-    ; :config config-cmp.config
     :dependencies [:hrsh7th/cmp-buffer
                    :hrsh7th/cmp-nvim-lsp
                    :PaterJason/cmp-conjure
@@ -127,6 +130,7 @@
                    :hrsh7th/cmp-cmdline
                    :hrsh7th/cmp-nvim-lua
                    :onsails/lspkind-nvim]}
+
    ;; Git
    :tpope/vim-fugitive
    :tpope/vim-rhubarb 
