@@ -47,12 +47,13 @@
 (defn config []
   (mason-lspconfig.setup
     {:ensure_installed [:pyright
+                        :bashls
                         :lua_ls 
                         :fennel_language_server]})
 
-  ;; TODO: move to other ns?
   (lspconfig.pyright.setup {})
   (lspconfig.lua_ls.setup {})
+  (lspconfig.bashls.setup {})
   (lspconfig.fennel_language_server.setup {})
 
   ;; TODO: setup default config from here: https://github.com/neovim/nvim-lspconfig
