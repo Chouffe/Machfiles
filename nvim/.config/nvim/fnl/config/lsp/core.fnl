@@ -48,11 +48,13 @@
   (mason-lspconfig.setup
     {:ensure_installed [:pyright
                         :bashls
+                        :yamlls
                         :lua_ls 
                         :fennel_language_server]})
 
   (lspconfig.pyright.setup {})
   (lspconfig.lua_ls.setup {})
+  (lspconfig.yamlls.setup {})
   (lspconfig.bashls.setup {})
   (lspconfig.fennel_language_server.setup {})
 
