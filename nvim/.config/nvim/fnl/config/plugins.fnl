@@ -12,7 +12,6 @@
              config-neomake config.plugin.neomake
              config-nvim-tree config.plugin.nvim-tree
              config-telescope config.plugin.telescope
-             config-sexp config.plugin.sexp
              config-treesitter config.plugin.treesitter}})
 
 (local specs 
@@ -103,7 +102,7 @@
    ; {1 :guns/vim-sexp 
    ;  :dependencies [:folke/which-key.nvim] 
    ;  :config config-sexp.config}
-   {1 :guns/vim-sexp :config (. (require :config.plugin.sexp2) :config)}
+   {1 :guns/vim-sexp :config (. (require :config.plugin.sexp) :config)}
    :tpope/vim-sexp-mappings-for-regular-people
    {1 :eraserhd/parinfer-rust 
     :build "cargo build --release" 

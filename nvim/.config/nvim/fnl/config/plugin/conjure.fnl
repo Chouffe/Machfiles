@@ -116,12 +116,10 @@
 
 (fn config []
   (setup)
-  ;; TODO: investigate why plugins can't load the config function in sexp
-  ;; Hack for now
-  (let [sexp (require :config.plugin.sexp2)]
-    (sexp.config))
-  (let [group-name :plugin_conjure
+  (let [sexp-config (require :config.plugin.sexp)
+        group-name :plugin_conjure
         group-id (vim.api.nvim_create_augroup group-name {})]
+    (sexp-config.config)
     (vim.api.nvim_create_autocmd
       :FileType
       {:group group-id
