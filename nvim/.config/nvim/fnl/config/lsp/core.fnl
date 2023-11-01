@@ -47,6 +47,7 @@
       {:ensure_installed [:pyright
                           :bashls
                           :yamlls
+                          :html
                           :lua_ls 
                           :fennel_language_server]})
     (lspconfig.pyright.setup {})
@@ -58,6 +59,7 @@
        :single_file_support true
        :settings {:fennel {:diagnostics {:globals [:vim :jit :comment]}
                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}})
+    (lspconfig.html.setup {})
     (lspconfig.yamlls.setup {})
     (lspconfig.bashls.setup {})
 

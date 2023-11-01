@@ -88,6 +88,9 @@
 
     :tag "0.1.4"}
 
+   ; Hugo
+   :phelipetls/vim-hugo
+
    ; Clojure
    {1 :Olical/conjure :config (. (require :config.plugin.conjure) :config)}
    ; {1 :guns/vim-sexp 
@@ -161,7 +164,6 @@
   (let [config-theme (require :config.theme)
         config-cmp (require :config.plugin.cmp)
         mason (require :mason)]
-
     ;; Configure the UI theme
     (config-theme.config)
     ;; Configure the autocompletion
