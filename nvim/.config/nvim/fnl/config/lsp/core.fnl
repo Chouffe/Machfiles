@@ -1,11 +1,3 @@
-; (module config.lsp.core
-;   {autoload {a aniseed.core
-;              nvim aniseed.nvim
-;              mason-lspconfig mason-lspconfig
-;              lspconfig lspconfig
-;              which-key which-key
-;              t telescope.builtin}})
-
 (fn nmap [function label opts]
   (let [a (require :aniseed.core)]
     (a.merge [function label] opts)))
