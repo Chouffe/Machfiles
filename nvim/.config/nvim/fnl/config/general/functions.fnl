@@ -1,10 +1,9 @@
-(module config.general.functions
-  {autoload {nvim conjure.aniseed.nvim
-             lib lib.core
-             u config.general.utils
-             a aniseed.core}})
+(local nvim (require :aniseed.nvim))
+(local lib (require :lib.core))
+(local u (require :config.general.utils))
+(local a (require :aniseed.core))
 
-(defn toggle-highlight-at-colorcolumn []
+(fn toggle-highlight-at-colorcolumn []
   "Toggles the color specified by colorcolumn."
   (let [colorcolumn nvim.o.colorcolumn
         textwidth nvim.o.textwidth]
@@ -19,33 +18,34 @@
 
       (set vim.o.colorcolumn ""))))
 
-(defn remove-line [bufnr idx]
-  "Remove the line at index `idx` in buffer `bufnr`. 0 for current buffer."
+; "Remove the line at index `idx` in buffer `bufnr`. 0 for current buffer."
+(fn remove-line [bufnr idx]
   (nvim.buf_set_lines bufnr idx (a.inc idx) true []))
 
-(defn remove-empty-lines-end-buffer [bufnr]
-  "Removes all empty lines at the end of buffer `bufnr`."
+;  "Removes all empty lines at the end of buffer `bufnr`.")
+(fn remove-empty-lines-end-buffer [bufnr]
   (let [blank-lines-end-buffer (->> (nvim.buf_get_lines bufnr 0 -1 false)
                                     (a.map-indexed (fn [[idx line]] [idx line]))
                                     (lib.reverse)
-                                    (lib.take-while (fn [[idx line]] (a.empty? line)))
+                                    (lib.take-while (fn [[_idx line]] (a.empty? line)))
                                     (a.map a.first))]
-    (each [index line-index (ipairs blank-lines-end-buffer)]
+    (each [_index line-index (ipairs blank-lines-end-buffer)]
       (remove-line bufnr (a.dec line-index)))))
 
-(defn remove-empty-lines-end-current-buffer []
-  "Removes all empty lines at the end of the current buffer."
+; "Removes all empty lines at the end of the current buffer."
+(fn remove-empty-lines-end-current-buffer []
   (remove-empty-lines-end-buffer 0))
 
-(defn trim-whitespace []
-  "Trims whitespace from the current buffer.
-  Also removes empty lines at the end of the buffer."
+; "Trims whitespace from the current buffer.
+;  Also removes empty lines at the end of the buffer."
+(fn trim-whitespace []
   (nvim.command "%substitute/\\s\\+$//e")
   (remove-empty-lines-end-current-buffer))
 
-(defn toggle-parinfer
+
+; "Toggles Parinfer editing mode"
+(fn toggle-parinfer
   []
-  "Toggles Parinfer editing mode"
   (if (= nvim.g.parinfer_enabled 0)
     (do
       (print "Enabling Parinfer")
@@ -60,8 +60,8 @@
     (nvim.command "echomsg \"No write since last change\"")
     (nvim.command "echohl NONE")))
 
-(defn delete_buffer []
-  "Deletes the current buffer."
+; "Deletes the current buffer."
+(fn delete_buffer []
   (let [total-nr-buffers (-> (nvim.fn.range 1 (nvim.fn.bufnr "$"))
                              (nvim.fn.filter "buflisted(v:val)")
                              (a.count))]
@@ -86,3 +86,10 @@
 (comment
   ;; Try this from the REPL by adding empty line at the end of this file
   (remove-empty-lines-end-current-buffer))
+
+{: toggle-highlight-at-colorcolumn
+ : remove-line
+ : remove-empty-lines-end-buffer
+ : trim-whitespace
+ : toggle-parinfer
+ : delete_buffer}
