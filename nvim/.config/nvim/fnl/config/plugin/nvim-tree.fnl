@@ -1,7 +1,5 @@
-(module config.plugin.nvim-tree
-  {autoload {a aniseed.core
-             nvim aniseed.nvim
-             nvim-tree nvim-tree}})
+(fn config []
+  (let [nvim-tree (require :nvim-tree)]
+    (nvim-tree.setup)))
 
-(defn config []
-  (nvim-tree.setup))
+{: config}

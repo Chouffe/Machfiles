@@ -10,7 +10,6 @@
              config-lsp config.lsp.core
              config-lightbulb config.plugin.lightbulb
              config-neomake config.plugin.neomake
-             config-nvim-tree config.plugin.nvim-tree
              config-telescope config.plugin.telescope
              config-treesitter config.plugin.treesitter}})
 
@@ -80,9 +79,12 @@
    :neovim/nvim-lspconfig
 
    ; Filesystem Navigation
+   ; {1 :kyazdani42/nvim-tree.lua 
+   ;  :dependencies [:kyazdani42/nvim-web-devicons]
+   ;  :config config-nvim-tree.config}
    {1 :kyazdani42/nvim-tree.lua 
     :dependencies [:kyazdani42/nvim-web-devicons]
-    :config config-nvim-tree.config}
+    :config (. (require :config.plugin.nvim-tree) :config)}
    {1 :junegunn/fzf 
     :build "./install --all" 
     :dependencies [:ibhagwan/fzf-lua 
