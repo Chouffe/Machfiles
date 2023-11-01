@@ -1,23 +1,15 @@
-(module config.plugin.theme
-  {autoload {a aniseed.core
-             theme github-theme
-             nvim aniseed.nvim
-             material-functions material.functions
-             material material
-             lualine lualine}})
+(local nvim (require :aniseed.nvim))
+(local material-functions (require :material.functions))
+(local material (require :material))
+(local lualine (require :lualine))
 
-(defn- disable-background-color-erase
-  []
+(fn disable-background-color-erase []
   "Disable BCE so that color schemes render properly when inside 256-color tmux
   and GNU screen. See also http://snk.tuxfamily.org/log/vim-256color-bce.html"
   (when (string.find nvim.o.term "256color")
     (set nvim.o.background :dark)))
 
-; (defn setup []
-;   (theme.setup {:theme_style "dark"
-;                 :comment_style "italic"}))
-
-(defn config []
+(fn config []
   (nvim.ex.set :termguicolors)     ;; True color support (will work only in tmux)
   (set nvim.o.t_Co "256")            ;; Number of colors used in terminal
   ; (set nvim.o.t_Co 256)            ;; Number of colors used in terminal
@@ -49,3 +41,5 @@
   (nvim.ex.set :cursorline)               ;; highlight the line you are on
   (nvim.ex.set :cursorline :cursorcolumn) ;; highlight the column you are on
   (nvim.ex.highlight :clear :SignColumn))
+
+{: config}

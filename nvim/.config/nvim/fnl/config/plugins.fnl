@@ -12,7 +12,6 @@
              config-conjure config.plugin.conjure
              config-neomake config.plugin.neomake
              config-nvim-tree config.plugin.nvim-tree
-             config-theme config.plugin.theme
              config-cmp config.plugin.cmp
              config-telescope config.plugin.telescope
              config-sexp config.plugin.sexp
@@ -164,7 +163,9 @@
 (defn init []
   (lazy.setup specs)
   ;; Configure the UI theme
+  (local config-theme (require :config.theme))
   (config-theme.config)
+  ; (config-theme.config)
   ;; Configure the autocompletion
   (config-cmp.config)
   ;; Packages
