@@ -9,7 +9,6 @@
              
              config-lsp config.lsp.core
              config-lightbulb config.plugin.lightbulb
-             config-vim-illuminate config.plugin.vim-illuminate
              config-conjure config.plugin.conjure
              config-open-browser config.plugin.open-browser
              config-neomake config.plugin.neomake
@@ -77,7 +76,8 @@
    ; Motion plugin for neovim
    :ggandor/lightspeed.nvim
    ; Highlight automatically other uses of the word under the cursor
-   {1 :RRethy/vim-illuminate :config config-vim-illuminate.config}
+   {1 :RRethy/vim-illuminate :config (. (require :config.plugin.illuminate) :config)}
+                                       
 
    ;; Packages
    :williamboman/mason.nvim
