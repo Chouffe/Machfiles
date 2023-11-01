@@ -87,8 +87,8 @@
 
 (fn register-keymaps [_args]
   (let [which-key (require :which-key)
-        lib (require :lib.core2)
-        util (require :lib.util2)
+        lib (require :lib.core)
+        util (require :lib.util)
         bufnr (nvim.get_current_buf)]
     (each [mode keymap (pairs {:n (lib.deep-merge keymaps-n
                                                   keymaps-nxo)
@@ -109,8 +109,8 @@
       (util.bmap! bufnr "i" lhs rhs {:noremap false}))))
 
 (fn config []
-  (let [util (require :lib.util2)
-        constants (require :config.constants2)
+  (let [util (require :lib.util)
+        constants (require :config.constants)
         group-name :plugin_sexp
         group-id (vim.api.nvim_create_augroup group-name {})]
     (util.set-opts :g:sexp_ {:filetypes ""})

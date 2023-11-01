@@ -1,7 +1,6 @@
-(module lib.core
-  {autoload {a aniseed.core}})
+(local a (require :aniseed.core))
 
-(defn reverse [coll]
+(fn reverse [coll]
   "Returns a collection of the items in coll in reverse order."
   (if (a.empty? coll)
     coll
@@ -12,7 +11,7 @@
 (comment
   (reverse [1 2 3 4]))
 
-(defn take-while [pred coll]
+(fn take-while [pred coll]
   "Returns a coll of successive items from coll while
   (pred item) returns logical true. pred must be free of side-effects."
   (. (a.reduce (fn [{: ys : done?} x]
@@ -33,4 +32,8 @@
 ;     (table.insert t 4)
 ;    t))
 
-(def deep-merge (partial vim.tbl_deep_extend "keep"))
+(local deep-merge (partial vim.tbl_deep_extend "keep"))
+
+{: reverse
+ : take-while
+ : deep-merge}

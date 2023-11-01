@@ -158,6 +158,7 @@
   (let [config-theme (require :config.theme)
         config-cmp (require :config.plugin.cmp)
         mason (require :mason)]
+
     ;; Configure the UI theme
     (config-theme.config)
     ;; Configure the autocompletion
