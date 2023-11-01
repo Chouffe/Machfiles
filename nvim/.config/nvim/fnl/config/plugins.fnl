@@ -1,10 +1,4 @@
-(module config.plugins
-  {autoload {nvim aniseed.nvim
-             constants config.constants
-             a aniseed.core
-
-             config-lsp config.lsp.core
-             config-treesitter config.plugin.treesitter}})
+(local constants (require :config.constants2))
 
 (local specs 
   [
@@ -111,7 +105,7 @@
    {1 :nvim-treesitter/nvim-treesitter
     :build ":TSUpdate"
     :dependencies [:HiPhish/rainbow-delimiters.nvim]
-    :config config-treesitter.config}
+    :config (. (require :config.plugin.treesitter) :config)}
 
    ; Autocomplete
    {1 :hrsh7th/nvim-cmp
@@ -157,7 +151,7 @@
    :projekt0n/github-nvim-theme])
 
 
-(defn init []
+(fn init []
   (let [lazy (require :lazy)]
     (lazy.setup specs))
 
@@ -172,4 +166,7 @@
     (mason.setup))
 
   ;; LSP
-  (config-lsp.config))
+  (let [config-lsp (require :config.lsp.core)]
+    (config-lsp.config)))
+
+{: init}

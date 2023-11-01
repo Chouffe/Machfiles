@@ -11,7 +11,8 @@
              plugins config.plugins}})
 
 (defn- init! []
- (plugins.init)
+  (let [plugins (require :config.plugins)]
+    (plugins.init))
  (autocommands.setup)
  (user-commands.setup)
  (keys.register))
