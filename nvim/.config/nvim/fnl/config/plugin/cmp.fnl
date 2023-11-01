@@ -1,16 +1,14 @@
-(module config.plugin.cmp
-  {autoload {nvim aniseed.nvim
-             lspkind lspkind
-             cmp cmp}})
+(local lspkind (require :lspkind))
+(local cmp (require :cmp))
 
-(def- cmp-src-menu-items
+(local cmp-src-menu-items
   {:nvim_lsp "lsp"
    :buffer   "buffer"
    :conjure  "conjure"
    :tmux     "tmux"
    :rg       "ripgrep"})
 
-(def- cmp-srcs
+(local cmp-srcs
   [{:name :nvim_lsp}
    {:name :nvim_lua}
    {:name :conjure}
@@ -20,7 +18,7 @@
    {:name :tmux
     :options {:all_panes false :label "tmux"}}])
 
-(def- format-fn
+(local format-fn
   (lspkind.cmp_format
     {:with_text false ; do not show text alongside icons
      ; prevent the popup from showing more than provided
@@ -36,7 +34,7 @@
                         ""))
                item)}))
 
-(def- mapping
+(local mapping
   {:<C-p> (cmp.mapping.select_prev_item)
    :<C-n> (cmp.mapping.select_next_item)
    :<C-u> (cmp.mapping.scroll_docs (- 4))
@@ -46,8 +44,7 @@
    :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Insert
                                :select false} [:i :c])})
 
-(defn config []
-  "Setup cmp with desired settings"
+(fn config []
   (cmp.setup {:formatting {:format format-fn}
               :mapping mapping
               :sources cmp-srcs})
@@ -56,3 +53,5 @@
   (cmp.setup.cmdline :: {:mapping (cmp.mapping.preset.cmdline)
                          :sources [{:name :cmdline}
                                    {:name :path}]}))
+
+{: config}

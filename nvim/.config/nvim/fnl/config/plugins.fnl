@@ -12,7 +12,6 @@
              config-conjure config.plugin.conjure
              config-neomake config.plugin.neomake
              config-nvim-tree config.plugin.nvim-tree
-             config-cmp config.plugin.cmp
              config-telescope config.plugin.telescope
              config-sexp config.plugin.sexp
              config-treesitter config.plugin.treesitter}})
@@ -167,7 +166,9 @@
   (config-theme.config)
   ; (config-theme.config)
   ;; Configure the autocompletion
+  (local config-cmp (require :config.plugin.cmp))
   (config-cmp.config)
+  ; (config-cmp.config)
   ;; Packages
   (mason.setup)
 
