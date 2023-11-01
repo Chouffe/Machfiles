@@ -1,13 +1,11 @@
-(module config.keys.core
-  {autoload {a aniseed.core
-             nvim aniseed.nvim
-             legendary legendary
-             config-telescope config.plugin.telescope
-             keys-leader config.keys.leader
-             keys-mappings config.keys.mappings}})
+(fn register []
+  (let [legendary (require :legendary)
+        keys-leader (require :config.keys.leader)
+        keys-mappings (require :config.keys.mappings)
+        config-telescope (require :config.plugin.telescope)]
+    (legendary.setup)
+    (keys-leader.register-keybindings)
+    (keys-mappings.register-keybindings)
+    (config-telescope.register-keybindings)))
 
-(defn register []
-  (legendary.setup)
-  (keys-leader.register-keybindings)
-  (keys-mappings.register-keybindings)
-  (config-telescope.register-keybindings))
+{: register}

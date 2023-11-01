@@ -1,7 +1,9 @@
-(module config.constants)
-
-(def lisp-filetypes
+(local lisp-filetypes
   [:clojure :fennel :scheme :lisp :timl])
 
-(def leader-key " ")
-(def local-leader-key ",")
+(local leader-key " ")
+(local local-leader-key ",")
+
+{: lisp-filetypes
+ : leader-key
+ : local-leader-key}

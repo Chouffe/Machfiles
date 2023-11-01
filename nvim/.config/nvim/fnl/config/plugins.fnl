@@ -1,4 +1,4 @@
-(local constants (require :config.constants2))
+(local constants (require :config.constants))
 
 (local specs 
   [

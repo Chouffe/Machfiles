@@ -1,11 +1,6 @@
-(module config.general.autocommands
-  {autoload {a aniseed.core
-             functions config.general.functions
-             nvim aniseed.nvim
-             util lib.util
-             which-key which-key}})
+(local nvim (require :aniseed.nvim))
 
-(defn- python-setup []
+(fn python-setup []
   (let [python-group-id (vim.api.nvim_create_augroup :python_config {})]
     (vim.api.nvim_create_autocmd
       :BufWritePost
@@ -15,7 +10,7 @@
                    (vim.api.nvim_command ":silent !black %"))
        :desc "Format python code with Black"})))
 
-(defn- general-clean-setup []
+(fn general-clean-setup []
   (let [group-id (vim.api.nvim_create_augroup :config_group {})]
     (vim.api.nvim_create_autocmd
       :BufWinLeave
@@ -31,14 +26,16 @@
     ;    :callback functions.trim-whitespace
     ;    :desc "Trims whitespace and empty end of buffer blank lines"})))
 
-(defn- register-qf-list-keybindings []
-  (let [win-id (vim.fn.win_getid)]
+(fn register-qf-list-keybindings []
+  (let [win-id (vim.fn.win_getid)
+        which-key (require :which-key)
+        util (require :lib.util)]
     (when (util.loclist? win-id)
       (which-key.register
         {:<CR> [":.ll<CR>" "jump"]}
         {:buffer (nvim.get_current_buf)}))))
 
-(defn- quickfix-list-setup []
+(fn quickfix-list-setup []
   (let [group-id (vim.api.nvim_create_augroup :quickfix_list_group {})]
     (vim.api.nvim_create_autocmd
       :FileType
@@ -47,7 +44,9 @@
        :callback register-qf-list-keybindings
        :desc "Registers quickfix list keybindings"})))
 
-(defn setup []
+(fn setup []
   (python-setup)
   (general-clean-setup)
   (quickfix-list-setup))
+
+{: setup}
