@@ -3,12 +3,7 @@
              constants config.constants
              a aniseed.core
 
-             ; Package Managers
-             lazy lazy
-             mason mason
-             
              config-lsp config.lsp.core
-             config-telescope config.plugin.telescope
              config-treesitter config.plugin.treesitter}})
 
 (local specs 
@@ -89,6 +84,7 @@
                    :junegunn/fzf.vim 
                    :tweekmonster/fzf-filemru]}
    {1 :nvim-telescope/telescope.nvim
+    :config (. (require :config.plugin.telescope) :config)
     :dependencies [:nvim-lua/plenary.nvim
                    :nvim-telescope/telescope-symbols.nvim
                    :nvim-telescope/telescope-ui-select.nvim
@@ -162,17 +158,18 @@
 
 
 (defn init []
-  (lazy.setup specs)
-  ;; Configure the UI theme
-  (local config-theme (require :config.theme))
-  (config-theme.config)
-  ; (config-theme.config)
-  ;; Configure the autocompletion
-  (local config-cmp (require :config.plugin.cmp))
-  (config-cmp.config)
-  ; (config-cmp.config)
-  ;; Packages
-  (mason.setup)
+  (let [lazy (require :lazy)]
+    (lazy.setup specs))
+
+  (let [config-theme (require :config.theme)
+        config-cmp (require :config.plugin.cmp)
+        mason (require :mason)]
+    ;; Configure the UI theme
+    (config-theme.config)
+    ;; Configure the autocompletion
+    (config-cmp.config)
+    ;; Packages
+    (mason.setup))
 
   ;; LSP
   (config-lsp.config))
