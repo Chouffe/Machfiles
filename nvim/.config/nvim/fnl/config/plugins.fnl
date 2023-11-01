@@ -70,7 +70,8 @@
    ;  :dependencies [:kyazdani42/nvim-web-devicons]
    ;  :config config-nvim-tree.config}
    {1 :kyazdani42/nvim-tree.lua 
-    :dependencies [:kyazdani42/nvim-web-devicons]
+    ; :dependencies [:kyazdani42/nvim-web-devicons]
+    :dependencies [:nvim-tree/nvim-web-devicons]
     :config (. (require :config.plugin.nvim-tree) :config)}
    {1 :junegunn/fzf 
     :build "./install --all" 
@@ -138,9 +139,11 @@
    :marko-cerovac/material.nvim
    ; Minimalist status/tabline for vim
    {1 :nvim-lualine/lualine.nvim
-    :dependencies [:kyazdani42/nvim-web-devicons]}
+    ; :dependencies [:kyazdani42/nvim-web-devicons]
+    :dependencies [:nvim-tree/nvim-web-devicons]}
    {1 :yamatsum/nvim-nonicons
-    :dependencies [:kyazdani42/nvim-web-devicons]}
+    ; :dependencies [:kyazdani42/nvim-web-devicons]
+    :dependencies [:nvim-tree/nvim-web-devicons]}
    {1 :folke/trouble.nvim 
     :dependencies [:nvim-tree/nvim-web-devicons]}
    {1 :folke/tokyonight.nvim
