@@ -8,8 +8,6 @@
              mason mason
              
              config-lsp config.lsp.core
-             config-lightbulb config.plugin.lightbulb
-             config-neomake config.plugin.neomake
              config-telescope config.plugin.telescope
              config-treesitter config.plugin.treesitter}})
 
@@ -145,7 +143,8 @@
    
    ;; UI: Theme and colorschemes
    :stevearc/dressing.nvim
-   {1 :kosayoda/nvim-lightbulb :config config-lightbulb.config}
+   {1 :kosayoda/nvim-lightbulb 
+    :config (. (require :config.plugin.lightbulb) :config)}
    :marko-cerovac/material.nvim
    ; Minimalist status/tabline for vim
    {1 :nvim-lualine/lualine.nvim
