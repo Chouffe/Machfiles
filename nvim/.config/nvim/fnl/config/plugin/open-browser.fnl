@@ -1,8 +1,5 @@
-(module config.plugin.open-browser
-  {autoload {nvim aniseed.nvim}})
-
-(defn config []
-  ;; Recommended Setting from openbrowser introduction
+(fn config []
+  (local nvim (require :aniseed.nvim))
   (set nvim.g.netrw_nogx 1)
   (set nvim.g.openbrowser_browser_commands
        [{:name "chromium" :args ["{browser}" "{uri}"]}
@@ -12,6 +9,7 @@
   (nvim.set_keymap :v :gx "<Plug>(openbrowser-smart-search)" {}))
 
 (comment
+  (local nvim (require :aniseed.nvim))
   (set nvim.g.openbrowser_browser_commands
        [{:name "chromium" :args ["{browser}" "{uri}"]}])
   (nvim.print nvim.g.openbrowser_browser_commands)
@@ -19,3 +17,5 @@
   (config)
   ;; Open with gx
   "http://clojure.com")
+
+{: config}

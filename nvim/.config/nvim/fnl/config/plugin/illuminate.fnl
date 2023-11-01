@@ -1,3 +1,5 @@
-{:config (fn [] 
-           (local illuminate (require :illuminate))
-           (illuminate.configure {:delay 200}))}
+(fn config []
+  (local illuminate (require :illuminate))
+  (illuminate.configure {:delay 200}))
+
+{: config}

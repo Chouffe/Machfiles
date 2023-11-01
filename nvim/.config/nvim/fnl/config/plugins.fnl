@@ -10,7 +10,6 @@
              config-lsp config.lsp.core
              config-lightbulb config.plugin.lightbulb
              config-conjure config.plugin.conjure
-             config-open-browser config.plugin.open-browser
              config-neomake config.plugin.neomake
              config-nvim-tree config.plugin.nvim-tree
              config-theme config.plugin.theme
@@ -66,7 +65,7 @@
    ; Place, toggle and display marks.
    :kshenoy/vim-signature
    ; Open URI with your favorite browser - fix gx in nvim
-   {1 :tyru/open-browser.vim :config config-open-browser.config}
+   {1 :tyru/open-browser.vim :config (. (require :config.plugin.open-browser) :config)}
    ; Display a popup with possible key bindings of the command you started ty
    :folke/which-key.nvim
    ; Define your keymaps, commands, and autocommands as simple Lua tables, building a legend at the same time.
