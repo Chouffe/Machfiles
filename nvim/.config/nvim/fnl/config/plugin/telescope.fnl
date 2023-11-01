@@ -1,14 +1,3 @@
-; (module config.plugin.telescope
-;   {autoload {a aniseed.core
-;              nvim aniseed.nvim
-;              telescope telescope
-;              t telescope.builtin
-;              actions telescope.actions
-;              themes telescope.themes
-;              which-key which-key}})
-
-(local a (require :aniseed.core))
-
 (fn make-telescope-mappings [telescope-actions]
   {:<C-A> telescope-actions.toggle_all
    :<C-H> telescope-actions.which_key
@@ -19,7 +8,8 @@
    :<Esc> telescope-actions.close})
 
 (fn map [function label opts]
-  (a.merge [function label] opts))
+  (let [a (require :aniseed.core)]
+    (a.merge [function label] opts)))
 
 (fn load-extensions []
   (let [extensions ["fzf" "ui-select"]
