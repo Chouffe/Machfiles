@@ -42,7 +42,6 @@
 (fn config []
   (let [mason-lspconfig (require :mason-lspconfig)
         lspconfig (require :lspconfig)
-        lspconfig-configs (require :lspconfig.configs)
         nvim (require :aniseed.nvim)]
     (mason-lspconfig.setup
       {:ensure_installed [:pyright
@@ -50,23 +49,17 @@
                           :yamlls
                           :lua_ls 
                           :fennel_language_server]})
-
     (lspconfig.pyright.setup {})
-    (lspconfig.lua_ls.setup {})
+    (lspconfig.lua_ls.setup 
+      {:settings {:Lua {:diagnostics {:globals [:vim]}}}})
+    (lspconfig.fennel_language_server.setup
+      {:filetypes [:fennel]
+       :root_dir (lspconfig.util.root_pattern :fnl :lua)
+       :single_file_support true
+       :settings {:fennel {:diagnostics {:globals [:vim :jit :comment]}
+                           :workspace {:library (vim.api.nvim_list_runtime_paths)}}}})
     (lspconfig.yamlls.setup {})
     (lspconfig.bashls.setup {})
-
-    ;; Getting along with nvim: https://github.com/rydesun/fennel-language-server
-    (local lspconfig (require :lspconfig))
-    (local lspconfig-configs (require :lspconfig.configs))
-    (local a (require :aniseed.core))
-    (a.assoc-in lspconfig-configs.fennel_language_server [:default_config :filtypes] [:fennel])
-    (a.assoc-in lspconfig-configs.fennel_language_server [:default_config :single_file_support] true)
-    (a.assoc-in lspconfig-configs.fennel_language_server [:default_config :root_dir] (lspconfig.util.root_pattern "fnl"))
-    (a.assoc-in lspconfig-configs.fennel_language_server [:default_config :settings :fennel :diagnostics :globals] [:vim])
-    (a.assoc-in lspconfig-configs.fennel_language_server [:default_config :settings :fennel :workspace :library] (vim.api.nvim_list_runtime_paths))
-    lspconfig-configs.fennel_language_server
-    (lspconfig.fennel_language_server.setup {})
 
   ;; TODO: setup default config from here: https://github.com/neovim/nvim-lspconfig
 
