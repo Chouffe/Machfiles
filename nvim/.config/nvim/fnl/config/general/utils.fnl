@@ -1,6 +1,4 @@
-(module config.general.utils)
-
-(defn empty? [x]
+(fn empty? [x]
   (or (= x nil) (= x "") (= x 0)))
 
 (comment
@@ -13,3 +11,5 @@
   (empty? 1)
   (empty? [])
   (empty? 42))
+
+{: empty?}
