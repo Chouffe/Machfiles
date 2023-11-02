@@ -46,6 +46,7 @@
     (mason-lspconfig.setup
       {:ensure_installed [:pyright
                           :bashls
+                          :clojure_lsp
                           :yamlls
                           :html
                           :lua_ls 
@@ -59,6 +60,7 @@
        :single_file_support true
        :settings {:fennel {:diagnostics {:globals [:vim :jit :comment]}
                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}})
+    (lspconfig.clojure_lsp.setup {})
     (lspconfig.html.setup {})
     (lspconfig.yamlls.setup {})
     (lspconfig.bashls.setup {})
