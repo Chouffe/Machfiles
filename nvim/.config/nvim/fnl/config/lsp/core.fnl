@@ -42,6 +42,8 @@
 (fn config []
   (let [mason-lspconfig (require :mason-lspconfig)
         lspconfig (require :lspconfig)
+        cmp-nvim-lsp (require :cmp_nvim_lsp)
+        capabilities (cmp-nvim-lsp.default_capabilities)
         nvim (require :aniseed.nvim)]
     (mason-lspconfig.setup
       {:ensure_installed [:pyright
@@ -51,19 +53,27 @@
                           :html
                           :lua_ls 
                           :fennel_language_server]})
-    (lspconfig.pyright.setup {})
+    ;; Setting up the LSPs
+    (lspconfig.pyright.setup 
+      {:capabilities capabilities})
     (lspconfig.lua_ls.setup 
-      {:settings {:Lua {:diagnostics {:globals [:vim]}}}})
+      {:capabilities capabilities
+       :settings {:Lua {:diagnostics {:globals [:vim]}}}})
     (lspconfig.fennel_language_server.setup
-      {:filetypes [:fennel]
+      {:capabilities capabilities
+       :filetypes [:fennel]
        :root_dir (lspconfig.util.root_pattern :fnl :lua)
        :single_file_support true
        :settings {:fennel {:diagnostics {:globals [:vim :jit :comment]}
                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}})
-    (lspconfig.clojure_lsp.setup {})
-    (lspconfig.html.setup {})
-    (lspconfig.yamlls.setup {})
-    (lspconfig.bashls.setup {})
+    (lspconfig.clojure_lsp.setup 
+      {:capabilities capabilities})
+    (lspconfig.html.setup 
+      {:capabilities capabilities})
+    (lspconfig.yamlls.setup 
+      {:capabilities capabilities})
+    (lspconfig.bashls.setup 
+      {:capabilities capabilities})
 
   ;; TODO: setup default config from here: https://github.com/neovim/nvim-lspconfig
 
