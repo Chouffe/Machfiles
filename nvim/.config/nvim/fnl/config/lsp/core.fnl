@@ -39,12 +39,34 @@
           :x (nmap t.lsp_code_actions "Code action")}}
      {:prefix "<LocalLeader>" :buffer bufnr})))
 
+(fn format-on-save-autocommand
+  [bufnr]
+  (let [group-name (string.format "lsp_format_%d" bufnr)
+        group-id (vim.api.nvim_create_augroup group-name {})]
+    (vim.api.nvim_create_autocmd
+      :BufWritePre
+      {:group group-id
+       :pattern "<buffer>"
+       ; :callback (fn [_] (vim.lsp.buf.formatting_sync nil 1000))
+       :callback (fn [_] (vim.lsp.buf.format nil 1000))
+       :desc "Formats on save with LSP"})))
+
+(fn make-on-attach-handler 
+  [{: document-formatting-on-save?}]
+  (fn [client bufnr]
+    (when (and document-formatting-on-save?
+               client.server_capabilities.documentFormattingProvider)
+      (format-on-save-autocommand bufnr))))
+      
+    
 (fn config []
   (let [mason-lspconfig (require :mason-lspconfig)
         lspconfig (require :lspconfig)
         cmp-nvim-lsp (require :cmp_nvim_lsp)
         capabilities (cmp-nvim-lsp.default_capabilities)
         nvim (require :aniseed.nvim)]
+
+    ;; Make sure some lsp servers are always installed
     (mason-lspconfig.setup
       {:ensure_installed [:pyright
                           :bashls
@@ -53,6 +75,7 @@
                           :html
                           :lua_ls 
                           :fennel_language_server]})
+
     ;; Setting up the LSPs
     (lspconfig.pyright.setup 
       {:capabilities capabilities})
@@ -67,7 +90,10 @@
        :settings {:fennel {:diagnostics {:globals [:vim :jit :comment]}
                            :workspace {:library (vim.api.nvim_list_runtime_paths)}}}})
     (lspconfig.clojure_lsp.setup 
-      {:capabilities capabilities})
+      {:on_attach 
+       (make-on-attach-handler {:document-formatting-on-save? true})
+       :capabilities capabilities
+       :root_dir (lspconfig.util.root_pattern ".git")})
     (lspconfig.html.setup 
       {:capabilities capabilities})
     (lspconfig.yamlls.setup 
@@ -83,7 +109,6 @@
      {:group (vim.api.nvim_create_augroup :UserLspConfig {})
       :callback (fn [ev]
                   (let [bufnr ev.buf]
-                    ; (print (vim.inspect ev))
                     ;; Set omnicompletion with LSP
                     (nvim.buf_set_option bufnr :omnifunc :v:lua.vim.lsp.omnifunc)
                     ;; Register keybindings
