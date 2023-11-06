@@ -6,19 +6,22 @@
   (let [which-key (require :which-key)
         t (require :telescope.builtin)]
     (which-key.register
-      {:gq ["<Cmd>lua vim.lsp.buf.range_formatting()<CR><Esc>" "Format selection"]}
+      ;; TODO: fix the setup here
+      ; {:gq ["<Cmd>lua vim.lsp.buf.range_formatting()<CR><Esc>" "Format selection"]}
+      {:gq (nmap vim.lsp.buf.range_formatting "Format selection")}
       {:buffer bufnr :mode "v"})
 
-  ;; TODO: fix the setup here
     (which-key.register
       {:K (nmap vim.lsp.buf.hover "Show documentation")
        :gd (nmap vim.lsp.buf.definition "Jump to definition")
+       :gi (nmap vim.lsp.buf.implementation "Jump to implementation")
        "[" {:d (nmap vim.diagnostic.goto_prev "Previous diagnostic")}
        "]" {:d (nmap vim.diagnostic.goto_next "Next diagnostic")}}
       {:buffer bufnr})
 
     (which-key.register
       {:x {:name "transform"
+           ;; TODO: use the regular code action from vim.lsp.buf
            :x ["<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR><Esc>" "Code action"]}}
       {:prefix "<LocalLeader>" :buffer bufnr :mode "v"})
 
@@ -35,8 +38,10 @@
           ; :d ["<Cmd>lua vim.diagnostic.open_float()<CR>" "View diagnostics"]
           :h (nmap vim.lsp.buf.signature_help "Signature help")}
       :x {:name "transform"
-          :r (nmap vim.lsp.buf.rename "Rename symbol")
-          :x (nmap t.lsp_code_actions "Code action")}}
+          :a (nmap vim.lsp.buf.code_action "Code action")
+          :x (nmap vim.lsp.buf.code_action "Code action")
+          :f (nmap (fn [] (vim.lsp.buf.format {:async true})) "Format buffer")
+          :r (nmap vim.lsp.buf.rename "Rename symbol")}}
      {:prefix "<LocalLeader>" :buffer bufnr})))
 
 (fn format-on-save-autocommand
