@@ -6,8 +6,6 @@
   (let [which-key (require :which-key)
         t (require :telescope.builtin)]
     (which-key.register
-      ;; TODO: fix the setup here
-      ; {:gq ["<Cmd>lua vim.lsp.buf.range_formatting()<CR><Esc>" "Format selection"]}
       {:gq (nmap vim.lsp.buf.range_formatting "Format selection")}
       {:buffer bufnr :mode "v"})
 
@@ -21,8 +19,7 @@
 
     (which-key.register
       {:x {:name "transform"
-           ;; TODO: use the regular code action from vim.lsp.buf
-           :x ["<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR><Esc>" "Code action"]}}
+           :x (nmap vim.lsp.buf.code_action "Code action")}}
       {:prefix "<LocalLeader>" :buffer bufnr :mode "v"})
 
    (which-key.register
