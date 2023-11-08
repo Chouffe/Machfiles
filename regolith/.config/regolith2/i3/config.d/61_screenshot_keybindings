@@ -1,0 +1,9 @@
+## Taken from this link: https://github.com/regolith-linux/regolith-desktop/issues/648#issuecomment-1351576891
+
+bindsym --release Print exec --no-startup-id "gnome-screenshot"
+
+bindsym --release Shift+Print exec --no-startup-id "gnome-screenshot -a"
+
+## Hack taken from here: https://askubuntu.com/questions/1196914/gnome-screenshot-cant-copy-to-clipboard-in-ubuntu-18-04
+## Requires xclip installed
+bindsym --release Ctrl+Print exec --no-startup-id "gnome-screenshot -acf /tmp/test && cat /tmp/test | xclip -i -selection clipboard -target image/png"
