@@ -36,6 +36,12 @@ How to setup a work environment.
 * Enable the Compose Key by installing gnome-tweak-tool and enabling it
 * Setup a compose key for accents
 
+## File Browsing: ranger
+
+* Install ranger
+* Install w3m: `sudo apt install w3m-img`
+* Install devicons: `git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicon`
+
 ## Editor: nvim
 
 * Install vim-plug
