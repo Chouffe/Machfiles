@@ -54,12 +54,12 @@
        :desc "Formats on save with LSP"})))
 
 (fn make-on-attach-handler 
-  [{: document-formatting-on-save?}]
+  [{: document-formatting-on-save? : force?}]
   (fn [client bufnr]
-    (when (and document-formatting-on-save?
-               client.server_capabilities.documentFormattingProvider)
+    (when (or (and document-formatting-on-save?
+                  client.server_capabilities.documentFormattingProvider)
+              (and document-formatting-on-save? force?))
       (format-on-save-autocommand bufnr))))
-      
     
 (fn config []
   (let [mason-lspconfig (require :mason-lspconfig)
@@ -80,7 +80,9 @@
 
     ;; Setting up the LSPs
     (lspconfig.pyright.setup 
-      {:capabilities capabilities})
+      {:on_attach (make-on-attach-handler {:force? true 
+                                           :document-formatting-on-save? true})
+       :capabilities capabilities})
     (lspconfig.lua_ls.setup 
       {:capabilities capabilities
        :settings {:Lua {:diagnostics {:globals [:vim]}}}})
