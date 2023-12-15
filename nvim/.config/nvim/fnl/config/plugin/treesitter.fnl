@@ -10,6 +10,12 @@
                  ;; Do not enable for files with more than n lines, int
                  :max_file_lines nil}
        :indent {:enable true}
+       :incremental_selection {:enable true
+                               :keymaps {:init_selection "<C-n>"
+                                         :node_incremental "<C-n>"
+                                         :scope_incremental "<C-s>"
+                                         :node_decremental "<C-m>"}}
+                                         
        :ensure_installed ["bash"
                           "c"
                           "clojure" 
