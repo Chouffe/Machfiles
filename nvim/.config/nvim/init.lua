@@ -1,6 +1,6 @@
 -- Entrypoint for my Neovim configuration!
--- We simply bootstrap packer and Aniseed here.
--- It's then up to Aniseed to compile and load fnl/config/init.fnl
+-- We simply bootstrap lazy and aniseed here.
+-- It's then up to aniseed to compile and load fnl/config/init.fnl
 
 local fn = vim.fn
 
