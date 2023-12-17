@@ -3,6 +3,8 @@
     (mason-null-ls.setup {:ensure_installed ["black"
                                              "isort"
                                              "ruff"
+                                             "fnlfmt"
+                                             "markdownlint"
                                              "docformatter"
                                              "shellcheck"
                                              "shfmt"]})))

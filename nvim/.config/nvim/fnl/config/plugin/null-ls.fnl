@@ -6,6 +6,13 @@
                               null-ls.builtins.formatting.isort
                               null-ls.builtins.formatting.docformatter
                               null-ls.builtins.formatting.black
+
+                              ;; Fennel
+                              null-ls.builtins.formatting.fnlfmt
+
+                              ;; Markdown
+                              null-ls.builtins.diagnostics.markdownlint
+
                               
                               ;; Shell
                               null-ls.builtins.diagnostics.shellcheck
