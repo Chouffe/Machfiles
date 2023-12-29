@@ -44,13 +44,13 @@
 (fn format-on-save-autocommand
   [bufnr]
   (let [group-name (string.format "lsp_format_%d" bufnr)
-        group-id (vim.api.nvim_create_augroup group-name {})]
+        group-id (vim.api.nvim_create_augroup group-name {})
+        timeout-ms 5000]
     (vim.api.nvim_create_autocmd
       :BufWritePre
       {:group group-id
        :pattern "<buffer>"
-       ; :callback (fn [_] (vim.lsp.buf.formatting_sync nil 1000))
-       :callback (fn [_] (vim.lsp.buf.format nil 1000))
+       :callback (fn [_] (vim.lsp.buf.format nil timeout-ms))
        :desc "Formats on save with LSP"})))
 
 (fn make-on-attach-handler 
@@ -60,6 +60,15 @@
                   client.server_capabilities.documentFormattingProvider)
               (and document-formatting-on-save? force?))
       (format-on-save-autocommand bufnr))))
+
+; (let [(ok wf) (pcall require :vim.lsp._watchfiles)]
+;   ok)
+
+(fn disable-lsp-watcher []
+  (print "Disabling lsp Watcher")
+  (let [(ok wf) (pcall require :vim.lsp._watchfiles)]
+    (if ok
+      (tset wf :_watchfunc (fn [] (fn []))))))
     
 (fn config []
   (let [mason-lspconfig (require :mason-lspconfig)
@@ -67,6 +76,8 @@
         cmp-nvim-lsp (require :cmp_nvim_lsp)
         capabilities (cmp-nvim-lsp.default_capabilities)
         nvim (require :aniseed.nvim)]
+
+    (disable-lsp-watcher)
 
     ;; Make sure some lsp servers are always installed
     (mason-lspconfig.setup

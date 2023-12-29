@@ -27,7 +27,6 @@
     null-ls.builtins.formatting.docformatter
     null-ls.builtins.formatting.black
     null-ls.builtins.diagnostics.ruff))
-  
-                    
+    ; (null-ls.setup {:debug true})))
 
 {: config}
