@@ -62,6 +62,8 @@
               :williamboman/mason.nvim
               :williamboman/mason-lspconfig.nvim
               :neovim/nvim-lspconfig
+              {1 :j-hui/fidget.nvim
+               :config (. (require :config.plugin.fidget-nvim) :config)}
               ; Filesystem Navigation
               ; {1 :kyazdani42/nvim-tree.lua
               ;  :dependencies [:kyazdani42/nvim-web-devicons]
@@ -103,7 +105,8 @@
               ; Grammar parsing
               {1 :nvim-treesitter/nvim-treesitter
                :build ":TSUpdate"
-               :dependencies [:HiPhish/rainbow-delimiters.nvim]
+               :dependencies [:HiPhish/rainbow-delimiters.nvim
+                              :windwp/nvim-ts-autotag]
                :config (. (require :config.plugin.treesitter) :config)}
               ; Autocomplete
               {1 :hrsh7th/nvim-cmp
@@ -140,6 +143,11 @@
               :airblade/vim-gitgutter
               :mhinz/vim-signify
               :lambdalisue/vim-gita
+              {1 :NeogitOrg/neogit
+               :dependencies [:nvim-lua/plenary.nvim
+                              :sindrets/diffview.nvim
+                              :nvim-telescope/telescope.nvim]
+               :config true}
               ;; Tmux
               :tmux-plugins/vim-tmux
               :christoomey/vim-tmux-navigator
