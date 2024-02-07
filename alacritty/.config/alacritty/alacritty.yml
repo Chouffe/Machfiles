@@ -69,6 +69,7 @@ font:
     x: 0
     y: 0
 window:
+  opacity: 0.9
   padding:
     x: 2
     y: 2
@@ -80,7 +81,7 @@ window:
   #   # scrollback is enabled (history > 0).
   #   multiplier: 10
 
-# Allow terminal applications to change Alacritty's window title.
+  # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
 
   # # If `true`, bold text is drawn using the bright color variants.
@@ -100,6 +101,5 @@ key_bindings:
   # - { key: Add, mods: Control, action: IncreaseFontSize }
   # - { key: Subtract, mods: Control, action: DecreaseFontSize }
   # - { key: N, mods: Control, action: SpawnNewInstance }
-
 # Setting the background opacity
-window: {opacity: 0.90}
+# window: {opacity: 0.90}
