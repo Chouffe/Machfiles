@@ -30,7 +30,6 @@ foreground = "#D8DEE9"
 blinking = "Never"
 
 [font]
-ligatures = true
 size = 16.0
 
 [font.bold]
@@ -85,7 +84,6 @@ mods = "Control"
 
 [window]
 dynamic_title = true
-history = 10000
 live_config_reload = true
 opacity = 0.9
 save_to_clipboard = true
