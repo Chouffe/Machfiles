@@ -84,10 +84,7 @@ mods = "Control"
 
 [window]
 dynamic_title = true
-live_config_reload = true
 opacity = 0.9
-save_to_clipboard = true
-semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window.padding]
 x = 2
