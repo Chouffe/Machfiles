@@ -122,20 +122,6 @@ RPROMPT=""
 # [[ -f /home/chouffe/udemy/aws/lambda/node_modules/tabtab/.completions/slss.zsh ]] && . /home/chouffe/udemy/aws/lambda/node_modules/tabtab/.completions/slss.zsh
 #
 #
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/chouffe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/chouffe/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/chouffe/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/chouffe/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 #
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -165,6 +151,10 @@ bindkey \^U backward-kill-line
 # }
 # zle -N backward-kill-dir
 
+# rbenv initialization
+# eval "$(rbenv init -)"
+# eval "$(~/.rbenv/bin/rbenv init - bash)"
+
 # direnv hook
 eval "$(direnv hook zsh)"
 
@@ -177,3 +167,6 @@ if [ -f '/home/chouffe/google-cloud-sdk/path.zsh.inc' ]; then . '/home/chouffe/g
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/chouffe/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/chouffe/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
