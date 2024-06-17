@@ -143,11 +143,13 @@
               :airblade/vim-gitgutter
               :mhinz/vim-signify
               :lambdalisue/vim-gita
-              {1 :NeogitOrg/neogit
-               :dependencies [:nvim-lua/plenary.nvim
-                              :sindrets/diffview.nvim
-                              :nvim-telescope/telescope.nvim]
-               :config true}
+              ; {1 :NeogitOrg/neogit
+              ;  :dependencies [:nvim-lua/plenary.nvim
+              ;                 :sindrets/diffview.nvim
+              ;                 :nvim-telescope/telescope.nvim]
+              ;  :config true}
+              ;; Copilot
+              ; :github/copilot.vim
               ;; Tmux
               :tmux-plugins/vim-tmux
               :christoomey/vim-tmux-navigator

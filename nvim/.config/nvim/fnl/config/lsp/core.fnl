@@ -81,6 +81,7 @@
     ;; Make sure some lsp servers are always installed
     (mason-lspconfig.setup {:ensure_installed [:pyright
                                                :bashls
+                                               :tsserver
                                                :clojure_lsp
                                                :yamlls
                                                :html
@@ -90,6 +91,9 @@
     (lspconfig.pyright.setup {:on_attach (make-on-attach-handler {:force? true
                                                                   :document-formatting-on-save? true})
                               : capabilities})
+    (lspconfig.tsserver.setup {:on_attach (make-on-attach-handler {:force? true
+                                                                   :document-formatting-on-save? true})
+                               : capabilities})
     (lspconfig.lua_ls.setup {: capabilities
                              :settings {:Lua {:diagnostics {:globals [:vim]}}}})
     (lspconfig.fennel_language_server.setup {: capabilities

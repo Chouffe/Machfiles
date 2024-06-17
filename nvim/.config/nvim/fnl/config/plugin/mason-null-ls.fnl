@@ -3,13 +3,17 @@
     (mason-null-ls.setup {:ensure_installed [:black
                                              :isort
                                              :prettier
-                                             :ruff
+                                             ; :ruff
+                                             :clj_kondo
+                                             :cljstyle
                                              :zprint
                                              :fnlfmt
                                              :yamllint
+                                             :cfn_lint
                                              :markdownlint
-                                             :docformatter
-                                             :shellcheck
+                                             ; :docformatter
+                                             ; :shellcheck
+                                             :shellharden
                                              :shfmt]})))
 
 {: config}
