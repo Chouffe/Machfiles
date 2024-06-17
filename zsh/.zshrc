@@ -57,7 +57,7 @@ unset file;
 # plugins=(git lein autojump sudo tmux jsontools python cabal)
 # virtualenvwrapper
 # plugins=(aws pass docker git gitfast git-extras tig fasd extract lein sudo tmux jsontools python cabal brew web-search zsh-autosuggestions zsh-syntax-highlighting dotenv)
-plugins=(aws pass docker git gitfast git-extras tig fasd extract lein sudo tmux jsontools python cabal brew web-search zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(aws pass docker git gitfast git-extras tig fasd extract lein sudo tmux jsontools python cabal brew web-search zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 

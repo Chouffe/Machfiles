@@ -36,7 +36,7 @@ alias j=z
 alias jj=zz
 
 # Search
-alias agl='ag --pager="less -R"'  # Adds a pager to prevent flooding the terminal
+alias agl='ag --pager="less -R"' # Adds a pager to prevent flooding the terminal
 
 # Copy/Paste
 alias pbcopy='xclip -selection clipboard'
