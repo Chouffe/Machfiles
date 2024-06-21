@@ -1,6 +1,6 @@
 (fn register []
   (let [legendary (require :legendary)
-        keys-leader (require :config.keys.leader2)
+        keys-leader (require :config.keys.leader)
         keys-mappings (require :config.keys.mappings)
         config-telescope (require :config.plugin.telescope)]
     (legendary.setup)

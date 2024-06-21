@@ -4,16 +4,15 @@
     (set nvim.g.maplocalleader local-leader-key)))
 
 (fn register-trouble-keybindings [prefix]
-  (let [which-key (require :which-key)
-        trouble (require :trouble)]
+  (let [which-key (require :which-key)]
     (which-key.register
       {:x {:name "trouble"
-           :x [trouble.toggle "all"]
-           :w [(fn [] (trouble.toggle :workspace_diagnostics)) "workspace diagnostics"]
-           :d [(fn [] (trouble.toggle :document_diagnostics)) "document diagnostics"]
-           :q [(fn [] (trouble.toggle :quickfix)) "quickfix"]
-           :l [(fn [] (trouble.toggle :loclist)) "loclist"]
-           :r [(fn [] (trouble.toggle :lsp_references)) "lsp references"]}}
+           :x [":Trouble diagnostics toggle<cr>" "Diagnostics (Trouble) "]
+           :X [":Trouble diagnostics toggle filter.buf=0<cr>" "Buffer Diagnostics (Trouble) "]
+           :s [":Trouble symbols toggle focus=false<cr>" "Symbols (Trouble)"]
+           :q [":Trouble qflist toggle<cr>" "Quickfix List (Trouble) "]
+           :l [":Trouble loclist toggle<cr>" "Location List (Trouble) "]
+           :r [":Trouble lsp toggle focus=false win.position=right<cr>" "LSP Definitions / references / ... (Trouble)"]}}
       {:prefix prefix})))
 
 (fn register-buffer-keybindings [prefix]

@@ -167,6 +167,8 @@
                ; :dependencies [:kyazdani42/nvim-web-devicons]
                :dependencies [:nvim-tree/nvim-web-devicons]}
               {1 :folke/trouble.nvim
+               :opts {}
+               :cmd :Trouble
                :dependencies [:nvim-tree/nvim-web-devicons]}
               {1 :folke/tokyonight.nvim :lazy false :priority 1000 :opts {}}
               :joshdick/onedark.vim

@@ -14,7 +14,7 @@
                               ; null-ls.builtins.formatting.cljstyle
                               null-ls.builtins.diagnostics.clj_kondo
                               ;; Fennel
-                              null-ls.builtins.formatting.fnlfmt
+                              ; null-ls.builtins.formatting.fnlfmt
                               ;; Markdown
                               null-ls.builtins.diagnostics.markdownlint
                               null-ls.builtins.formatting.markdownlint
