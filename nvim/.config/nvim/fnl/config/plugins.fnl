@@ -8,8 +8,6 @@
               :Olical/nvim-local-fennel
               ; Display a popup with possible key bindings of the command you started ty
               :folke/which-key.nvim
-              ; Comment out stuff
-              :tpope/vim-commentary
               ; Readline style insertion
               :tpope/vim-rsi
               ; Heuristically set buffer options
@@ -64,10 +62,21 @@
               :neovim/nvim-lspconfig
               {1 :j-hui/fidget.nvim
                :config (. (require :config.plugin.fidget-nvim) :config)}
-              ; Filesystem Navigation
-              ; {1 :kyazdani42/nvim-tree.lua
-              ;  :dependencies [:kyazdani42/nvim-web-devicons]
-              ;  :config config-nvim-tree.config}
+              ; LSP
+              {1 :ray-x/lsp_signature.nvim
+               :event :VeryLazy
+               :opts {}
+               :config (fn [_ opts] (let [lsp-signature (require :lsp_signature)] (lsp-signature.setup opts)))}
+              ; {
+              ;   "ray-x/lsp_signature.nvim",
+              ;   event = "VeryLazy",
+              ;   opts = {},
+              ;   config = function(_, opts) require'lsp_signature'.setup(opts) end}
+
+                            ; Filesystem Navigation
+                            ; {1 :kyazdani42/nvim-tree.lua
+                            ;  :dependencies [:kyazdani42/nvim-web-devicons]
+                            ;  :config config-nvim-tree.config}
               {1 :kyazdani42/nvim-tree.lua
                ; :dependencies [:kyazdani42/nvim-web-devicons]
                :dependencies [:nvim-tree/nvim-web-devicons]
@@ -143,11 +152,11 @@
               :airblade/vim-gitgutter
               :mhinz/vim-signify
               :lambdalisue/vim-gita
-              ; {1 :NeogitOrg/neogit
-              ;  :dependencies [:nvim-lua/plenary.nvim
-              ;                 :sindrets/diffview.nvim
-              ;                 :nvim-telescope/telescope.nvim]
-              ;  :config true}
+              {1 :NeogitOrg/neogit
+               :dependencies [:nvim-lua/plenary.nvim
+                              :sindrets/diffview.nvim
+                              :nvim-telescope/telescope.nvim]
+               :config true}
               ;; Copilot
               ; :github/copilot.vim
               ;; Tmux
@@ -155,6 +164,7 @@
               :christoomey/vim-tmux-navigator
               :edkolev/tmuxline.vim
               ;; UI: Theme and colorschemes
+              :nyoom-engineering/oxocarbon.nvim
               :stevearc/dressing.nvim
               {1 :kosayoda/nvim-lightbulb
                :config (. (require :config.plugin.lightbulb) :config)}
@@ -166,13 +176,15 @@
               {1 :yamatsum/nvim-nonicons
                ; :dependencies [:kyazdani42/nvim-web-devicons]
                :dependencies [:nvim-tree/nvim-web-devicons]}
+              :rebelot/kanagawa.nvim
+              {1 :folke/tokyonight.nvim :lazy false :priority 1000 :opts {}}
+              :joshdick/onedark.vim
+              :projekt0n/github-nvim-theme
+              ; Trouble
               {1 :folke/trouble.nvim
                :opts {}
                :cmd :Trouble
-               :dependencies [:nvim-tree/nvim-web-devicons]}
-              {1 :folke/tokyonight.nvim :lazy false :priority 1000 :opts {}}
-              :joshdick/onedark.vim
-              :projekt0n/github-nvim-theme])
+               :dependencies [:nvim-tree/nvim-web-devicons]}])
 
 (fn init []
   (let [lazy (require :lazy)]

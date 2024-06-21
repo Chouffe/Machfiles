@@ -2,9 +2,7 @@
 -- We simply bootstrap lazy and aniseed here.
 -- It's then up to aniseed to compile and load fnl/config/init.fnl
 
-local fn = vim.fn
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local packages_path = vim.fn.stdpath("data") .. "/lazy"
 
 ---@param name string

@@ -1,10 +1,5 @@
 (local nvim (require :aniseed.nvim))
-
-(fn disable-background-color-erase []
-  "Disable BCE so that color schemes render properly when inside 256-color tmux
-  and GNU screen. See also http://snk.tuxfamily.org/log/vim-256color-bce.html")
-  ; (when (string.find nvim.o.term :256color)
-  ;   (set nvim.o.background :dark)))
+(local lualine (require :lualine))
 
 (fn config []
   (let [; material-functions (require :material.functions)
@@ -16,8 +11,8 @@
     ;; Number of colors used in terminal
     ;; (set nvim.o.t_Co 256)
     ;; Number of colors used in terminal
-    (disable-background-color-erase)
-    (set nvim.o.background :dark)
+    ; (disable-background-color-erase)
+    ; (set nvim.o.background :dark)
     ;; Set the background as dark
     ;; set the gruvbox coloscheme
     ;; ------------------------------
@@ -34,12 +29,14 @@
     ;; (nvim.command "colorscheme hybrid_material")
     ;; Set tokyonight as colorscheme
     ;; ------------------------------
-    ;; (nvim.command "colorscheme tokyonight-moon")
-    (nvim.command "colorscheme tokyonight-storm")
-    (lualine.setup {:options {:theme :tokyonight}})
+    ; (nvim.command "colorscheme tokyonight-moon")
+    ; (nvim.command "colorscheme tokyonight-storm")
+    ; (lualine.setup {:options {:theme :tokyonight}})
+    (nvim.command "colorscheme kanagawa")
+    ; (lualine.setup {:options {:theme :kanagawa}})
     ;; Make the background color transparent
-    (nvim.ex.highlight :Normal :guibg=None :ctermbg=NONE)
-    (nvim.ex.set :cursorline)
+    ; (nvim.ex.highlight :Normal :guibg=None :ctermbg=NONE)
+    ; (nvim.ex.set :cursorline)
     ;; highlight the line you are on
     (nvim.ex.set :cursorline :cursorcolumn)
     ;; highlight the column you are on
