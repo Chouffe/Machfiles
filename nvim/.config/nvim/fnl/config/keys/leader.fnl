@@ -57,6 +57,7 @@
   (let [which-key (require :which-key)]
     (which-key.register
       {:g {:name "git"
+           :n [":Neogit<cr>" "Neogit"]
            :b [":Git blame<CR>" "blame"]
            :c [":Git commit<CR>" "commit"]
            :d {:name "conflict resolution"
