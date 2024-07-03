@@ -164,20 +164,27 @@
               :christoomey/vim-tmux-navigator
               :edkolev/tmuxline.vim
               ;; UI: Theme and colorschemes
-              :nyoom-engineering/oxocarbon.nvim
+              {1 :nyoom-engineering/oxocarbon.nvim}
               :stevearc/dressing.nvim
               {1 :kosayoda/nvim-lightbulb
                :config (. (require :config.plugin.lightbulb) :config)}
               :marko-cerovac/material.nvim
               ; Minimalist status/tabline for vim
               {1 :nvim-lualine/lualine.nvim
-               ; :dependencies [:kyazdani42/nvim-web-devicons]
                :dependencies [:nvim-tree/nvim-web-devicons]}
               {1 :yamatsum/nvim-nonicons
-               ; :dependencies [:kyazdani42/nvim-web-devicons]
                :dependencies [:nvim-tree/nvim-web-devicons]}
-              :rebelot/kanagawa.nvim
-              {1 :folke/tokyonight.nvim :lazy false :priority 1000 :opts {}}
+              {1 :rebelot/kanagawa.nvim
+               :lazy false
+               :priority 1000
+               :opts {}
+               :config (fn [] (vim.cmd "colorscheme kanagawa"))}
+              ; {1 :folke/tokyonight.nvim
+              ;  :lazy false
+              ;  :priority 1000
+              ;  :opts {}
+              ;  :config (fn [] (vim.cmd "colorscheme tokyonight-storm"))}
+               ; :config (fn [] (. (require :config.theme) :config))}
               :joshdick/onedark.vim
               :projekt0n/github-nvim-theme
               ; Trouble
