@@ -21,3 +21,4 @@ scratch.py
 .tern-port
 .clj-kondo
 .zenhub_token
+.lsp/
