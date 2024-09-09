@@ -114,9 +114,9 @@
     (lspconfig.yamlls.setup {:on_attach (make-on-attach-handler {:force? true
                                                                  :document-formatting-on-save? true})
                              : capabilities})
-    (lspconfig.bashls.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                 :document-formatting-on-save? true})
-                             : capabilities})
+    ; (lspconfig.bashls.setup {:on_attach (make-on-attach-handler {:force? true
+    ;                                                              :document-formatting-on-save? true})
+    ;                          : capabilities})
     ;; TODO: setup default config from here: https://github.com/neovim/nvim-lspconfig
     ;; TODO setup global mappings too
     (vim.api.nvim_create_autocmd :LspAttach

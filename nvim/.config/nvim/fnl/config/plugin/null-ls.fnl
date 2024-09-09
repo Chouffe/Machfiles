@@ -19,10 +19,10 @@
                               null-ls.builtins.diagnostics.markdownlint
                               null-ls.builtins.formatting.markdownlint
                               ;; Yaml
-                              null-ls.builtins.diagnostics.yamllint
+                              null-ls.builtins.diagnostics.yamllint]})))
                               ;; Shell
                               ; null-ls.builtins.diagnostics.shellcheck
-                              null-ls.builtins.formatting.shellharden
-                              null-ls.builtins.formatting.shfmt]})))
+                              ; null-ls.builtins.formatting.shellharden
+                              ; null-ls.builtins.formatting.shfmt]})))
 
 {: config}

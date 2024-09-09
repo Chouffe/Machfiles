@@ -22,3 +22,4 @@ scratch.py
 .clj-kondo
 .zenhub_token
 .lsp/
+.scratch/
