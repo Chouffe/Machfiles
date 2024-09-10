@@ -65,6 +65,12 @@ cmd + shift + ctrl - k : yabai -m window --display north; yabai -m display --foc
 shift + alt - p : yabai -m window --space prev;
 shift + alt - n : yabai -m window --space next;
 
+# # move to space #
+# cmd - 1 : yabai -m space --focus 1
+# cmd - 2 : yabai -m space --focus 2
+# cmd - 4 : yabai -m space --focus 4
+# cmd - 5 : yabai -m space --focus 5
+
 # move window to space #
 cmd + shift - 1 : yabai -m window --space 1;
 cmd + shift - 2 : yabai -m window --space 2;
