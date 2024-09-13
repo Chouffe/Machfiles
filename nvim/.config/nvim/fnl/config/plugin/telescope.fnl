@@ -30,7 +30,8 @@
        :m     (map t.marks "Marks")
        :n     (map #(t.find_files {:cwd "~/notes"}) "Search Notes")
        :o     (map t.oldfiles "Oldfiles")
-       :r     (map t.resume "Resume last Telescope")
+       :r     (map t.lsp_references "lsp references")
+       :R     (map t.resume "Resume last Telescope")
        :s     (map t.symbols "Symbols")
        :t     (map t.builtin "Telescope pickers")
        :v {:name "vim"
