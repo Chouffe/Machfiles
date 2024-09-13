@@ -130,7 +130,20 @@
                               :hrsh7th/cmp-nvim-lsp-signature-help
                               :onsails/lspkind-nvim]}
               ;; Dap
-              ;; :mfussenegger/nvim-dap
+              {1 :mfussenegger/nvim-dap
+               :dependencies [:rcarriga/nvim-dap-ui :nvim-neotest/nvim-nio]}
+              {1 :rcarriga/nvim-dap-ui
+               :dependencies [:nvim-neotest/nvim-nio]
+               :config true}
+              :jay-babu/mason-nvim-dap.nvim
+              {1 :theHamsta/nvim-dap-virtual-text
+               :dependencies [:mfussenegger/nvim-dap]
+               :config true}
+              {1 :leoluz/nvim-dap-go :config true}
+              {1 :mfussenegger/nvim-dap-python
+               :config (fn [] (let [dap-python (require :dap-python)]
+                                (dap-python.setup "python")))}
+
               ;; {1 :mfussenegger/nvim-dap-python
               ;;  :ft :python
               ;;  :config (fn [_ _]
@@ -198,13 +211,16 @@
     (lazy.setup specs))
   (let [config-theme (require :config.theme)
         config-cmp (require :config.plugin.cmp)
-        mason (require :mason)]
+        mason (require :mason)
+        mason-nvim-dap (require :config.plugin.mason-nvim-dap)]
     ;; Configure the UI theme
     (config-theme.config)
     ;; Configure the autocompletion
     (config-cmp.config)
     ;; Packages
-    (mason.setup))
+    (mason.setup)
+    ;; DAP
+    (mason-nvim-dap.setup))
   ;; LSP
   (let [config-lsp (require :config.lsp.core)]
     (config-lsp.config)))

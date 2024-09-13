@@ -125,7 +125,9 @@
       {:prefix prefix})))
 
 (fn register-keybindings []
-  (let [constants (require :config.constants)]
+  (let [constants (require :config.constants)
+        debugging (require :config.debugging)]
+    (debugging.register-keybindings :<Leader>)
     (set-leader-keys constants.leader-key constants.local-leader-key))
   (register-window-keybindings :<Leader>)
   (register-buffer-keybindings :<Leader>)

@@ -4,10 +4,12 @@
   (let [plugins (require :config.plugins)
         autocommands (require :config.general.autocommands)
         user-commands (require :config.general.user_commands)
-        keys (require :config.keys.core)]
+        keys (require :config.keys.core)
+        debugging (require :config.debugging)]
     (plugins.init)
     (autocommands.setup)
     (user-commands.setup)
-    (keys.register)))
+    (keys.register)
+    (debugging.setup)))
 
 (init!)
