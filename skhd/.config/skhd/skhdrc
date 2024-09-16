@@ -9,8 +9,8 @@ cmd - h : yabai -m window --focus west
 cmd - l : yabai -m window --focus east
 
 #change focus between external displays (left and right)
-cmd - s: yabai -m display --focus west
-cmd - g: yabai -m display --focus east
+# cmd - s: yabai -m display --focus west
+# cmd - g: yabai -m display --focus east
 
 # -- Modifying the Layout --
 
@@ -25,16 +25,16 @@ cmd + shift - 0x2A : yabai -m space --mirror y-axis
 cmd + shift - 0x1B : yabai -m space --mirror x-axis
 
 # toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+# shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 
 # -- Modifying Window Size --
 
 # maximize a window
-cmd - f : yabai -m window --toggle zoom-fullscreen
+cmd + shift - f : yabai -m window --toggle zoom-fullscreen
 
 # Float / unfloat window and center on screen
-cmd - t: yabai -m window --toggle float --grid 4:4:1:1:2:2
+cmd - z: yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # balance out tree of windows (resize to occupy same area)
 # shift + alt - e : yabai -m space --balance
@@ -83,5 +83,5 @@ cmd + shift - 7 : yabai -m window --space 7;
 # -- Starting/Stopping/Restarting Yabai --
 
 # stop/start/restart yabai
-cmd - s : yabai --stop-service
-cmd - r : yabai --restart-service
+# cmd - s : yabai --stop-service
+# cmd - r : yabai --restart-service
