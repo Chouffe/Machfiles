@@ -5,11 +5,13 @@
         autocommands (require :config.general.autocommands)
         user-commands (require :config.general.user_commands)
         keys (require :config.keys.core)
-        debugging (require :config.debugging)]
+        debugging (require :config.debugging)
+        notifications (require :config.notifications)]
     (plugins.init)
     (autocommands.setup)
     (user-commands.setup)
     (keys.register)
-    (debugging.setup)))
+    (debugging.setup)
+    (notifications.setup)))
 
 (init!)

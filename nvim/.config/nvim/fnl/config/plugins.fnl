@@ -22,6 +22,13 @@
               :tpope/vim-unimpaired
               ; Asynchronous build and test dispatcher
               :tpope/vim-dispatch
+              {1 :nvim-neotest/neotest
+               :dependencies [:nvim-neotest/nvim-nio
+                              :nvim-lua/plenary.nvim
+                              :antoinemadec/FixCursorHold.nvim
+                              :nvim-treesitter/nvim-treesitter]
+               :config (. (require :config.plugin.neotest) :config)}
+              :nvim-neotest/neotest-python
               ; Project configuration
               :tpope/vim-projectionist
               ; Enable repeating supported plugin maps with '.'
@@ -144,13 +151,6 @@
                :config (fn [] (let [dap-python (require :dap-python)]
                                 (dap-python.setup "python")))}
 
-              ;; {1 :mfussenegger/nvim-dap-python
-              ;;  :ft :python
-              ;;  :config (fn [_ _]
-              ;;            (let [path :/home/chouffe/miniconda3/envs/debugpy
-              ;;                  dap-python (require :dap-python)]
-              ;;              (dap-python.setup path)))
-              ;;  :dependencies [:mfussenegger/nvim-dap]}
               ;; Linting and formatting
               {1 :nvimtools/none-ls.nvim
                :dependencies [:nvim-lua/plenary.nvim]
@@ -172,6 +172,12 @@
                :config true}
               ;; Copilot
               ; :github/copilot.vim
+              ;; Remote development
+              {1 :amitds1997/remote-nvim.nvim
+               :dependencies [:nvim-lua/plenary.nvim
+                              :MunifTanjim/nui.nvim
+                              :nvim-telescope/telescope.nvim]
+               :config true}
               ;; Tmux
               :tmux-plugins/vim-tmux
               :christoomey/vim-tmux-navigator
@@ -182,6 +188,7 @@
               {1 :kosayoda/nvim-lightbulb
                :config (. (require :config.plugin.lightbulb) :config)}
               :marko-cerovac/material.nvim
+              :rcarriga/nvim-notify
               ; Minimalist status/tabline for vim
               {1 :nvim-lualine/lualine.nvim
                :dependencies [:nvim-tree/nvim-web-devicons]}
