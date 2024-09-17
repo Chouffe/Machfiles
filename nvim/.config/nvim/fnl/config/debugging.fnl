@@ -3,7 +3,6 @@
         dap (require :dap)
         dapui (require :dapui)
         dap-widgets (require :dap.ui.widgets)]
-    (print (.. prefix :d))
     (which-key.add
       [{1 (.. prefix :d) :group "debug"}
        {1 (.. prefix :db) 2 dap.toggle_breakpoint :desc "breakpoint toggle"}

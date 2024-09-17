@@ -7,7 +7,8 @@
               ; Run Fennel inside Neovim on startup with Aniseed
               :Olical/nvim-local-fennel
               ; Display a popup with possible key bindings of the command you started ty
-              :folke/which-key.nvim
+              {1 :folke/which-key.nvim
+               :dependencies [:echasnovski/mini.icons :kyazdani42/nvim-web-devicons]}
               ; Readline style insertion
               :tpope/vim-rsi
               ; Heuristically set buffer options
