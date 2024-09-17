@@ -136,6 +136,7 @@
                               :hrsh7th/cmp-cmdline
                               :hrsh7th/cmp-nvim-lua
                               :hrsh7th/cmp-nvim-lsp-signature-help
+                              :rcarriga/cmp-dap
                               :onsails/lspkind-nvim]}
               ;; Dap
               {1 :mfussenegger/nvim-dap

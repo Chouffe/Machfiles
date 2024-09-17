@@ -10,7 +10,7 @@
        {1 (.. prefix :do) 2 dap.step_over :desc "step over"}
        {1 (.. prefix :di) 2 dap.step_into :desc "step into"}
        {1 (.. prefix :dc) 2 dap.continue :desc "continue"}
-       {1 (.. prefix :de) 2 dap.eval :desc "eval"}
+       {1 (.. prefix :de) 2 dapui.eval :desc "eval"}
        {1 (.. prefix :dr) 2 dap.repl :desc "repl"}
        {1 (.. prefix :du) 2 dapui.toggle :desc "ui toggle"}
        {1 (.. prefix :dp) 2 dap-widgets.preview :desc "preview"}

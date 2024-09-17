@@ -74,7 +74,7 @@
         themes (require :telescope.themes)]
     (telescope.setup
       {:defaults {:mappings {:i telescope-mappings}
-                  :file_ignore_patterns ["node_modules" ".venv"]}
+                  :file_ignore_patterns ["node_modules" ".venv" "__pycache__"]}
        :extensions {:fzf {:case_mode :smart_case
                           :fuzzy true
                           :override_file_sorter true

@@ -54,9 +54,14 @@
                                           [:i :c])})
 
 (fn config []
+  ; Setting up cmp-dap here: https://github.com/rcarriga/cmp-dap
   (cmp-plugin.setup {:formatting {:format format-fn}
+                     :enabled (fn [] (let [cmp-dap (require :cmp_dap)]
+                                       (cmp-dap.is_dap_buffer)))
                      :mapping cmp-mapping
                      :sources cmp-srcs})
+  (cmp-plugin.setup.filetype {1 ["dap-repl" "dapui_watches" "dapui_hover"]
+                              :sources [{:name :dap}]})
   (cmp-plugin.setup.cmdline "/"
                             {:mapping (cmp-plugin.mapping.preset.cmdline)
                              :sources [{:name :buffer}]})
