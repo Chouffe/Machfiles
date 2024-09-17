@@ -5,40 +5,64 @@
 
 (fn register-trouble-keybindings [prefix]
   (let [which-key (require :which-key)]
-    (which-key.register
-      {:x {:name "trouble"
-           :x [":Trouble diagnostics toggle<cr>" "Diagnostics (Trouble) "]
-           :X [":Trouble diagnostics toggle filter.buf=0<cr>" "Buffer Diagnostics (Trouble) "]
-           :s [":Trouble symbols toggle focus=false<cr>" "Symbols (Trouble)"]
-           :q [":Trouble qflist toggle<cr>" "Quickfix List (Trouble) "]
-           :l [":Trouble loclist toggle<cr>" "Location List (Trouble) "]
-           :r [":Trouble lsp toggle focus=false win.position=right<cr>" "LSP Definitions / references / ... (Trouble)"]}}
-      {:prefix prefix})))
+    (which-key.add
+      [{1 (.. prefix :x) :group "trouble"}
+       {1 (.. prefix :xx) 2 ":Trouble diagnostics toggle<cr>" :desc "global"}
+       {1 (.. prefix :xX) 2 ":Trouble diagnostics toggle filter.buf=0<cr>" :desc "buffer"}
+       {1 (.. prefix :xs) 2 ":Trouble symbols toggle focus=false<cr>" :desc "symbols"}
+       {1 (.. prefix :xq) 2 ":Trouble qflist toggle<cr>" :desc "quickfix"}
+       {1 (.. prefix :xl) 2 ":Trouble loclist toggle<cr>" :desc "loclist"}
+       {1 (.. prefix :xr) 2 ":Trouble lsp toggle focus=false win.position=right<cr>" :desc "lsp"}])))
+
+    ; (which-key.register
+    ;   {:x {:name "trouble"
+    ;        :x [":Trouble diagnostics toggle<cr>" "Diagnostics (Trouble) "]
+    ;        :X [":Trouble diagnostics toggle filter.buf=0<cr>" "Buffer Diagnostics (Trouble) "]
+    ;        :s [":Trouble symbols toggle focus=false<cr>" "Symbols (Trouble)"]
+    ;        :q [":Trouble qflist toggle<cr>" "Quickfix List (Trouble) "]
+    ;        :l [":Trouble loclist toggle<cr>" "Location List (Trouble) "]
+    ;        :r [":Trouble lsp toggle focus=false win.position=right<cr>" "LSP Definitions / references / ... (Trouble)"]}}
+    ;   {:prefix prefix})))
 
 (fn register-buffer-keybindings [prefix]
   (let [which-key (require :which-key)
         functions (require :config.general.functions)
         t (require :telescope.builtin)]
-    (which-key.register
-      {:b {:name "buffer"
-           :d [functions.delete_buffer "delete"]
-           :l [t.buffers "list"]
-           :n [":bnext<CR>" "next"]
-           :o [":only<CR>" "only"]
-           :p [":bprevious<CR>" "previous"]
-           :w [":w<CR>" "write|save"]}}
-      {:prefix prefix})))
+    (which-key.add
+      [{1 (.. prefix :b) :group "buffer"}
+       {1 (.. prefix :b :d) 2 functions.delete_buffer :desc "delete"}
+       {1 (.. prefix :b :l) 2 t.buffers :desc "list"}
+       {1 (.. prefix :b :n) 2 ":bnext<CR>" :desc "next"}
+       {1 (.. prefix :b :o) 2 ":only<CR>" :desc "only"}
+       {1 (.. prefix :b :p) 2 ":bprevious<CR>" :desc "previous"}
+       {1 (.. prefix :b :w) 2 ":w<CR>" :desc "write"}])))
+    ; (which-key.register
+    ;   {:b {:name "buffer"
+    ;        :d [functions.delete_buffer "delete"]
+    ;        :l [t.buffers "list"]
+    ;        :n [":bnext<CR>" "next"]
+    ;        :o [":only<CR>" "only"]
+    ;        :p [":bprevious<CR>" "previous"]
+    ;        :w [":w<CR>" "write|save"]}}
+    ;   {:prefix prefix})))
 
 (fn register-window-keybindings [prefix]
   (let [which-key (require :which-key)]
-    (which-key.register
-      {:w {:name "window"
-           :o [":only<CR>" "only"]
-           :w [":w<CR>" "write|save"]
-           :q [":q<CR>" "quit"]}
-       :j [":split<CR>" "horizontal split"]
-       :k [":vsplit<CR>" "vertical split"]}
-      {:prefix prefix})))
+    (which-key.add
+      [{1 (.. prefix :w) :group "window"}
+       {1 (.. prefix :w :o) 2 ":only<CR>" :desc "only"}
+       {1 (.. prefix :w :w) 2 ":w<CR>" :desc "write"}
+       {1 (.. prefix :w :q) 2 ":q<CR>" :desc "quit"}
+       {1 (.. prefix :j) 2 ":split<CR>" :desc "horizontal split"}
+       {1 (.. prefix :k) 2 ":vsplit<CR>" :desc "vertical split"}])))
+    ; (which-key.register
+    ;   {:w {:name "window"
+    ;        :o [":only<CR>" "only"]
+    ;        :w [":w<CR>" "write|save"]
+    ;        :q [":q<CR>" "quit"]}
+    ;    :j [":split<CR>" "horizontal split"]
+    ;    :k [":vsplit<CR>" "vertical split"]}
+    ;   {:prefix prefix})))
 
 (fn register-formatting-keybindings [prefix]
   (let [which-key (require :which-key)]

@@ -27,7 +27,7 @@
        {1 :<Leader>f<CR> 2 ":Telescope " :desc "enter find command..." :silent false}
        {1 :<Leader>fR 2 t.resume :desc "resume last telescope"}
        {1 :<Leader>fb 2 t.buffers :desc "buffers"}
-       {1 :<Leader>ff 2 t.files :desc "files"}
+       {1 :<Leader>ff 2 t.find_files :desc "files"}
        {1 :<Leader>fg 2 t.live_grep :desc "live grep"}
        {1 :<Leader>fh 2 t.help_tags :desc "help tags"}
        {1 :<Leader>fk 2 t.keymaps :desc "keymaps"}
