@@ -55,11 +55,13 @@
 
 (fn config []
   ; Setting up cmp-dap here: https://github.com/rcarriga/cmp-dap
-  (cmp-plugin.setup {:formatting {:format format-fn}
-                     :enabled (fn [] (let [cmp-dap (require :cmp_dap)]
-                                       (cmp-dap.is_dap_buffer)))
-                     :mapping cmp-mapping
-                     :sources cmp-srcs})
+  (let [nvim (require :aniseed.nvim)
+        cmp-dap (require :cmp_dap)]
+    (cmp-plugin.setup {:formatting {:format format-fn}
+                       :enabled #(or (not= (nvim.buf_get_option 0 :buftype) :prompt)
+                                     (cmp-dap.is_dap_buffer))
+                       :mapping cmp-mapping
+                       :sources cmp-srcs}))
   (cmp-plugin.setup.filetype {1 ["dap-repl" "dapui_watches" "dapui_hover"]
                               :sources [{:name :dap}]})
   (cmp-plugin.setup.cmdline "/"
