@@ -3,6 +3,22 @@
     (set nvim.g.mapleader leader-key)
     (set nvim.g.maplocalleader local-leader-key)))
 
+(fn register-neotest-keybindings [prefix]
+  (let [neotest (require :neotest)
+        which-key (require :which-key)]
+    (which-key.add
+      [{1 (.. prefix :t) :group "test"}
+       {1 (.. prefix :t :F) 2 #(neotest.run.run {1 "vim.fn.expand('%')" :strategy :dap}) :desc "debug file"}
+       {1 (.. prefix :t :L) 2 #(neotest.run.run_last {:strategy :dap}) :desc "debug last"}
+       {1 (.. prefix :t :a) 2 #(neotest.run.attach) :desc "attach"}
+       {1 (.. prefix :t :f) 2 #(neotest.run.run {1 "vim.fn.expand('%')"}) :desc "file"}
+       {1 (.. prefix :t :l) 2 #(neotest.run.run_last) :desc "last"}
+       {1 (.. prefix :t :n) 2 #(neotest.run.run) :desc "nearest"}
+       {1 (.. prefix :t :N) 2 #(neotest.run.run {:strategy :dap}) :desc "debug nearest"}
+       {1 (.. prefix :t :o) 2 #(neotest.output.open {:enter true}) :desc "output"}
+       {1 (.. prefix :t :s) 2 #(neotest.run.stop) :desc "stop"}
+       {1 (.. prefix :t :S) 2 #(neotest.summary.toggle) :desc "summary"}])))
+
 (fn register-trouble-keybindings [prefix]
   (let [which-key (require :which-key)]
     (which-key.add
@@ -161,6 +177,7 @@
   (register-location-list-keybindings :<Leader>)
   (register-trouble-keybindings :<Leader>)
   (register-quickfix-keybindings :<Leader>)
-  (register-parinfer-keybindings :<Localleader>))
+  (register-parinfer-keybindings :<Localleader>)
+  (register-neotest-keybindings :<Leader>))
 
 {: register-keybindings}

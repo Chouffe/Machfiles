@@ -89,6 +89,9 @@
                ; :dependencies [:kyazdani42/nvim-web-devicons]
                :dependencies [:nvim-tree/nvim-web-devicons]
                :config (. (require :config.plugin.nvim-tree) :config)}
+              {1 :stevearc/oil.nvim
+               :dependencies [:echasnovski/mini.icons]
+               :config true}
               {1 :junegunn/fzf
                :build "./install --all"
                :dependencies [:ibhagwan/fzf-lua
@@ -149,9 +152,9 @@
                :dependencies [:mfussenegger/nvim-dap]
                :config true}
               {1 :leoluz/nvim-dap-go :config true}
-              {1 :mfussenegger/nvim-dap-python
-               :config (fn [] (let [dap-python (require :dap-python)]
-                                (dap-python.setup "python")))}
+              {1 :mfussenegger/nvim-dap-python}
+               ; :config (fn [] (let [dap-python (require :dap-python)]
+               ;                  (dap-python.setup "python")))}
 
               ;; Linting and formatting
               {1 :nvimtools/none-ls.nvim

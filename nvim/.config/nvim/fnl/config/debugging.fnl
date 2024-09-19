@@ -43,6 +43,8 @@
     (set dap.listeners.before.event_exited.dapui_config dapui.close)))
 
 (fn setup []
+  (let [dap-python (require :dap-python)]
+    (dap-python.setup "python"))
   (setup-dap-ui))
 
 {: setup-dap-ui

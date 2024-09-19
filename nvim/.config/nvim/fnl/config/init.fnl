@@ -8,10 +8,10 @@
         debugging (require :config.debugging)
         notifications (require :config.notifications)]
     (plugins.init)
+    (notifications.setup)
     (autocommands.setup)
     (user-commands.setup)
     (keys.register)
-    (debugging.setup)
-    (notifications.setup)))
+    (debugging.setup)))
 
 (init!)
