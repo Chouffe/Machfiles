@@ -10,8 +10,8 @@ set autoindent        " Indentation
 set smartindent       " Indentation
 " }}}
 set spelllang=en_us              " Set region to American English
-" set mouse=a                      " Enable mouse usage in terminal vim
-set mouse=                       " Disable mouse usage in terminal vim
+set mouse=a                      " Enable mouse usage in terminal vim
+"set mouse=                       " Disable mouse usage in terminal vim
 " set relativenumber               " Enable relative number
 set number                       " Enable hybrid mode
 set encoding=utf-8               " UTF-8 encoding

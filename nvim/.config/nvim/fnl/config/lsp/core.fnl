@@ -82,6 +82,7 @@
     (mason-lspconfig.setup {:ensure_installed [:pyright
                                                :bashls
                                                ; :ts_ls
+                                               :jinja_lsp
                                                :clojure_lsp
                                                :yamlls
                                                :html
@@ -91,6 +92,9 @@
     (lspconfig.pyright.setup {:on_attach (make-on-attach-handler {:force? true
                                                                   :document-formatting-on-save? true})
                               : capabilities})
+    (lspconfig.jinja_lsp.setup {:on_attach (make-on-attach-handler {:force? true
+                                                                    :document-formatting-on-save? true})
+                                : capabilities})
     ; (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
     ;                                                             :document-formatting-on-save? true})
     ;                         : capabilities})

@@ -1,7 +1,8 @@
 (fn config []
-  (let [treesitter (require :nvim-treesitter.configs)]
-    (treesitter.setup {:autotag {:enable true}
-                       :highlight {:enable true}
+  (let [treesitter (require :nvim-treesitter.configs)
+        nvim-ts-autotag (require :nvim-ts-autotag)]
+    (nvim-ts-autotag.setup)
+    (treesitter.setup {:highlight {:enable true}
                        :rainbow {:enable true
                                  ;; List of languages you want to disable the plugin for
                                  ; :disable [:cpp]
