@@ -1,46 +1,71 @@
-(fn nmap [function label opts]
-  (let [a (require :aniseed.core)]
-    (a.merge [function label] opts)))
+; (fn nmap [function label opts]
+;   (let [a (require :aniseed.core)]
+;     (a.merge [function label] opts)))
 
 (fn register-keybindings [bufnr]
   (let [which-key (require :which-key)
         t (require :telescope.builtin)]
-    (which-key.register {:gq (nmap vim.lsp.buf.range_formatting
-                                   "Format selection")}
-                        {:buffer bufnr :mode :v})
-    (which-key.register {:K (nmap vim.lsp.buf.hover "Show documentation")
-                         :gd (nmap vim.lsp.buf.definition "Jump to definition")
-                         :gi (nmap vim.lsp.buf.implementation
-                                   "Jump to implementation")
-                         "[" {:d (nmap vim.diagnostic.goto_prev
-                                       "Previous diagnostic")}
-                         "]" {:d (nmap vim.diagnostic.goto_next
-                                       "Next diagnostic")}}
-                        {:buffer bufnr})
-    (which-key.register {:x {:name :transform
-                             :x (nmap vim.lsp.buf.code_action "Code action")}}
-                        {:prefix :<LocalLeader> :buffer bufnr :mode :v})
-    (which-key.register {:b {:name :buffer
-                             := (nmap vim.lsp.buf.format "Format buffer")
-                             :d (nmap vim.diagnostic.set_loclist
-                                      "List diagnostics")}
-                         :f {:name :find
-                             :d (nmap t.diagnostics :Diagnostics)
-                             :r (nmap t.lsp_references :References)
-                             :s (nmap t.lsp_document_symbols "Document symbols")
-                             :S (nmap t.lsp_workspace_symbols
-                                      "Workspace symbols")}
-                         :v {:name :view
-                             ; :d ["<Cmd>lua vim.diagnostic.open_float()<CR>" "View diagnostics"]
-                             :h (nmap vim.lsp.buf.signature_help
-                                      "Signature help")}
-                         :x {:name :transform
-                             :a (nmap vim.lsp.buf.code_action "Code action")
-                             :x (nmap vim.lsp.buf.code_action "Code action")
-                             :f (nmap (fn [] (vim.lsp.buf.format {:async true}))
-                                      "Format buffer")
-                             :r (nmap vim.lsp.buf.rename "Rename symbol")}}
-                        {:prefix :<LocalLeader> :buffer bufnr})))
+    (which-key.add
+      [{1 :gq 2 vim.lsp.buf.range_formatting :buffer bufnr :desc "format selection" :mode [:v]}
+       {1 :K 2 vim.lsp.buf.hover :desc "show documentation" :buffer bufnr}
+       {1 :gd 2 vim.lsp.buf.definition :desc "jump to definition" :buffer bufnr}
+       {1 :gi 2 vim.lsp.buf.implementation :desc "jump to implementation" :buffer bufnr}
+       {1 "[d " 2 vim.diagnostic.goto_prev :desc "previous diagnostic" :buffer bufnr}
+       {1 "]d" 2 vim.diagnostic.goto_next :desc "next diagnostic" :buffer bufnr}
+       {1 (.. :<LocalLeader> :x) :group "transform" :buffer bufnr :mode [:v]}
+       {1 (.. :<LocalLeader> :x :x) 2 vim.lsp.buf.code_action :desc "code action" :buffer bufnr :mode [:v]}
+       {1 (.. :<LocalLeader> :b) :group "buffer lsp" :buffer bufnr}
+       {1 (.. :<LocalLeader> :b :=) 2 vim.lsp.buf.format :desc "format" :buffer bufnr}
+       {1 (.. :<LocalLeader> :b :d) 2 vim.diagnostic.set_loclist :desc "list diagnostics" :buffer bufnr}
+       {1 (.. :<LocalLeader> :f) :group "find lsp" :buffer bufnr}
+       {1 (.. :<LocalLeader> :f :d) 2 t.diagnostics :desc "diagnostics" :buffer bufnr}
+       {1 (.. :<LocalLeader> :f :r) 2 t.lsp_references :desc "references" :buffer bufnr}
+       {1 (.. :<LocalLeader> :f :s) 2 t.lsp_document_symbols :desc "document symbols" :buffer bufnr}
+       {1 (.. :<LocalLeader> :f :S) 2 t.lsp_workspace_symbols :desc "workspace symbols" :buffer bufnr}
+       {1 (.. :<LocalLeader> :v) :group "view lsp" :buffer bufnr}
+       {1 (.. :<LocalLeader> :v :h) 2 vim.lsp.buf.signature_help :desc "signature help" :buffer bufnr}
+       {1 (.. :<LocalLeader> :x) :group "transform" :buffer bufnr}
+       {1 (.. :<LocalLeader> :x :a) 2 vim.lsp.buf.code_action :desc "code action" :buffer bufnr}
+       {1 (.. :<LocalLeader> :x :x) 2 vim.lsp.buf.code_action :desc "code action" :buffer bufnr}
+       {1 (.. :<LocalLeader> :x :f) 2 #(vim.lsp.buf.format {:async true})  :desc "format buffer" :buffer bufnr}
+       {1 (.. :<LocalLeader> :x :r) 2 vim.lsp.buf.rename :desc "rename symbol" :buffer bufnr}])))
+
+    ; (which-key.register {:gq (nmap vim.lsp.buf.range_formatting
+    ;                                "Format selection")}
+    ;                     {:buffer bufnr :mode :v})
+    ; (which-key.register {:K (nmap vim.lsp.buf.hover "Show documentation")
+    ;                      :gd (nmap vim.lsp.buf.definition "Jump to definition")
+    ;                      :gi (nmap vim.lsp.buf.implementation
+    ;                                "Jump to implementation")
+    ;                      "[" {:d (nmap vim.diagnostic.goto_prev
+    ;                                    "Previous diagnostic")}
+    ;                      "]" {:d (nmap vim.diagnostic.goto_next
+    ;                                    "Next diagnostic")}}
+    ;                     {:buffer bufnr})
+    ; (which-key.register {:x {:name :transform
+    ;                          :x (nmap vim.lsp.buf.code_action "Code action")}}
+    ;                     {:prefix :<LocalLeader> :buffer bufnr :mode :v})
+    ; (which-key.register {:b {:name :buffer
+    ;                          := (nmap vim.lsp.buf.format "Format buffer")
+    ;                          :d (nmap vim.diagnostic.set_loclist
+    ;                                   "List diagnostics")}
+    ;                      :f {:name :find
+    ;                          :d (nmap t.diagnostics :Diagnostics)
+    ;                          :r (nmap t.lsp_references :References)
+    ;                          :s (nmap t.lsp_document_symbols "Document symbols")
+    ;                          :S (nmap t.lsp_workspace_symbols
+    ;                                   "Workspace symbols")}
+    ;                      :v {:name :view
+    ;                          ; :d ["<Cmd>lua vim.diagnostic.open_float()<CR>" "View diagnostics"]
+    ;                          :h (nmap vim.lsp.buf.signature_help
+    ;                                   "Signature help")}
+    ;                      :x {:name :transform
+    ;                          :a (nmap vim.lsp.buf.code_action "Code action")
+    ;                          :x (nmap vim.lsp.buf.code_action "Code action")
+    ;                          :f (nmap (fn [] (vim.lsp.buf.format {:async true}))
+    ;                                   "Format buffer")
+    ;                          :r (nmap vim.lsp.buf.rename "Rename symbol")}}
+    ;                     {:prefix :<LocalLeader> :buffer bufnr})))
 
 (fn format-on-save-autocommand [bufnr]
   (let [group-name (string.format "lsp_format_%d" bufnr)
@@ -49,9 +74,7 @@
     (vim.api.nvim_create_autocmd :BufWritePre
                                  {:group group-id
                                   :pattern :<buffer>
-                                  :callback (fn [_]
-                                              (vim.lsp.buf.format nil
-                                                                  timeout-ms))
+                                  :callback #(vim.lsp.buf.format nil timeout-ms)
                                   :desc "Formats on save with LSP"})))
 
 ;; Here is how to fix the gq issue with null-ls
@@ -82,7 +105,7 @@
     (mason-lspconfig.setup {:ensure_installed [:pyright
                                                :bashls
                                                ; :ts_ls
-                                               :jinja_lsp
+                                               ; :jinja_lsp
                                                :clojure_lsp
                                                :yamlls
                                                :html
@@ -92,9 +115,9 @@
     (lspconfig.pyright.setup {:on_attach (make-on-attach-handler {:force? true
                                                                   :document-formatting-on-save? true})
                               : capabilities})
-    (lspconfig.jinja_lsp.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                    :document-formatting-on-save? true})
-                                : capabilities})
+    ; (lspconfig.jinja_lsp.setup {:on_attach (make-on-attach-handler {:force? true
+    ;                                                                 :document-formatting-on-save? true})
+    ;                             : capabilities})
     ; (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
     ;                                                             :document-formatting-on-save? true})
     ;                         : capabilities})
