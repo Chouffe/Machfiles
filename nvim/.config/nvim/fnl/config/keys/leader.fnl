@@ -66,87 +66,124 @@
 
 (fn register-formatting-keybindings [prefix]
   (let [which-key (require :which-key)]
-    (which-key.register
-      {:F {:name "format"
-           :e [":%!jet --pretty<CR>" "Format edn"]
-           :j [":%!jq --sort-keys<CR>" "Format json"]}}
-      {:prefix prefix})
-    (which-key.register
-      {:F {:name "format"
-           :j [":!jq --sort-keys<CR>" "Format json"]
-           :e [":!jet --pretty<CR>" "Format edn"]}}
-      {:prefix prefix :mode :v})))
+    (which-key.add
+      [{1 (.. prefix :F) :group "Format" :mode [:n :v]}
+       {1 (.. prefix :F :e) 2 ":%!jet --pretty<CR>" :desc "edn" :mode [:n :v]}
+       {1 (.. prefix :F :j) 2 ":%!jq --sort-keys<CR>" :desc "json" :mode [:n :v]}])))
 
 (fn register-git-keybindings [prefix]
   (let [which-key (require :which-key)]
-    (which-key.register
-      {:g {:name "git"
-           :n [":Neogit<cr>" "Neogit"]
-           :b [":Git blame<CR>" "blame"]
-           :c [":Git commit<CR>" "commit"]
-           :d {:name "conflict resolution"
-               :s [":Gvdiffsplit!<CR>" "diff split"]
-               :h [":diffget //2<CR>" "get left"]
-               :l [":diffget //3<CR>" "get right"]}
-           :g {:name "sync"
-               :p [":Git push<CR>" "push"]
-               :l [":Git pull<CR>" "pull"]}
-           :s [":Git<CR>" "status"]}}
-      {:prefix prefix})))
+    (which-key.add
+      [{1 (.. prefix :g) :group "git"}
+       {1 (.. prefix :g :n) 2 ":Neogit<CR>" :desc "neogit"}
+       {1 (.. prefix :g :b) 2 ":Git blame<CR>" :desc "blame"}
+       {1 (.. prefix :g :c) 2 ":Git commit<CR>" :desc "commit"}
+       {1 (.. prefix :g :d) :group "conflict resolution"}
+       {1 (.. prefix :g :s) 2 ":Git<CR>" :desc "status"}
+       {1 (.. prefix :g :d :s) 2 ":Gvdiffsplit!<CR>" :desc "diff split"}
+       {1 (.. prefix :g :d :h) 2 ":diffget //2<CR>" :desc "get left"}
+       {1 (.. prefix :g :d :l) 2 ":diffget //3<CR>" :desc "get right"}
+       {1 (.. prefix :g :g) :group "sync"}
+       {1 (.. prefix :g :g :p) 2 ":Git push<CR>" :desc "push"}
+       {1 (.. prefix :g :g :l) 2 ":Git pull<CR>" :desc "pull"}])))
+    ; (which-key.register
+    ;   {:g {:name "git"
+    ;        :n [":Neogit<cr>" "Neogit"]
+    ;        :b [":Git blame<CR>" "blame"]
+    ;        :c [":Git commit<CR>" "commit"]
+    ;        :d {:name "conflict resolution"
+    ;            :s [":Gvdiffsplit!<CR>" "diff split"]
+    ;            :h [":diffget //2<CR>" "get left"]
+    ;            :l [":diffget //3<CR>" "get right"]}
+    ;        :g {:name "sync"
+    ;            :p [":Git push<CR>" "push"]
+    ;            :l [":Git pull<CR>" "pull"]}
+    ;        :s [":Git<CR>" "status"]}}
+    ;   {:prefix prefix})))
 
 (fn register-location-list-keybindings [prefix]
   (let [which-key (require :which-key)]
-    (which-key.register
-      {:l {:name "location list"
-           :l [":lopen<CR>" "open"]
-           :n [":lnext<CR>" "next"]
-           :o [":lopen<CR>" "open"]
-           :p [":lprev<CR>" "previous"]
-           :x [":lclose<CR>" "close"]}}
-      {:prefix prefix})))
+    (which-key.add
+      [{1 (.. prefix :l) :group "location list"}
+       {1 (.. prefix :l :l) 2 ":lopen<CR>" :desc "open"}
+       {1 (.. prefix :l :n) 2 ":lnext<CR>" :desc "next"}
+       {1 (.. prefix :l :o) 2 ":lopen<CR>" :desc "open"}
+       {1 (.. prefix :l :p) 2 ":lprevious<CR>" :desc "previous"}
+       {1 (.. prefix :l :x) 2 ":lclose<CR>" :desc "close"}])))
+    ; (which-key.register
+    ;   {:l {:name "location list"
+    ;        :l [":lopen<CR>" "open"]
+    ;        :n [":lnext<CR>" "next"]
+    ;        :o [":lopen<CR>" "open"]
+    ;        :p [":lprev<CR>" "previous"]
+    ;        :x [":lclose<CR>" "close"]}}
+    ;   {:prefix prefix})))
 
 (fn register-quickfix-keybindings [prefix]
   (let [which-key (require :which-key)]
-    (which-key.register
-      {:c {:name "quickfix list"
-           :c [":copen<CR>" "open"]
-           :n [":cnext<CR>" "next"]
-           :o [":copen<CR>" "open"]
-           :p [":cprev<CR>" "previous"]
-           :x [":cclose<CR>" "close"]}}
-      {:prefix prefix})))
+    (which-key.add
+      [{1 (.. prefix :c) :group "quickfix list"}
+       {1 (.. prefix :c :c) 2 ":copen<CR>" :desc "open"}
+       {1 (.. prefix :c :n) 2 ":cnext<CR>" :desc "next"}
+       {1 (.. prefix :c :o) 2 ":copen<CR>" :desc "open"}
+       {1 (.. prefix :c :p) 2 ":cprevious<CR>" :desc "previous"}
+       {1 (.. prefix :c :x) 2 ":cclose<CR>" :desc "close"}])))
+    ; (which-key.register
+    ;   {:c {:name "quickfix list"
+    ;        :c [":copen<CR>" "open"]
+    ;        :n [":cnext<CR>" "next"]
+    ;        :o [":copen<CR>" "open"]
+    ;        :p [":cprev<CR>" "previous"]
+    ;        :x [":cclose<CR>" "close"]}}
+    ;   {:prefix prefix})))
 
 (fn register-misc-keybindings [prefix]
   (let [which-key (require :which-key)
         legendary (require :legendary)]
-    (which-key.register
-      {:h {:name "highlight"
-           :c [":ToggleHiglightAtColorColumn<CR>" "toggle highlight at column"]
-           :x [":nohlsearch<CR>" "search highlighting off"]}
-       :n [":set number!<CR>" "toggle number"]
-       :o [legendary.find "Legendary"]
-       :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
-       :s [":set spell!<CR>" "toggle spell"]
-       :t {:name "NvimTree"
-           :r [":<C-u>NvimTreeFindFileToggle<CR>" "find file toggle"]
-           :t [":<C-u>NvimTreeToggle<CR>" "toggle"]}
-       :y ["\"+y" "copy into clipboard"]}
-      {:prefix prefix})
-
-    (which-key.register
-      {:y ["\"+yy" "copy into clipboard"]}
-      {:prefix prefix :mode :v})
-
-    (which-key.register
-      {:gcc "toggle comment"}
-      {})))
+    (which-key.add
+      [{1 (.. prefix :h) :group "highlight"}
+       {1 (.. prefix :h :c) 2 ":togglehiglightatcolorcolumn<CR>" :desc "column toggle"}
+       {1 (.. prefix :h :x) 2 ":nohlsearch<CR>" :desc "search off"}
+       {1 (.. prefix :n) 2 ":set number!<CR>" :desc "number toggle"}
+       {1 (.. prefix :o) 2 legendary.find :desc "open legendary"}
+       {1 (.. prefix :p) 2 ":set paste!<CR>\"+p :set paste!<CR>" :desc "paste from clipboard"}
+       {1 (.. prefix :s) 2 ":set spell!<CR>" :desc "spell toggle"}
+       {1 (.. prefix :t) :group "NvimTree"}
+       {1 (.. prefix :t :t) 2 ":<C-u>NvimTreeToggle<CR>" :desc "toggle"}
+       {1 (.. prefix :t :r) 2 ":<C-u>NvimTreeFindFileToggle<CR>" :desc "find file toggle"}
+       {1 (.. prefix :y) 2 "\"+yy" :desc "copy into clipboard" :mode [:n :v]}
+       {1 (.. :g :c :c) :desc "comment toggle"}])))
+    ; (which-key.register
+    ;   {:h {:name "highlight"
+    ;        :c [":togglehiglightatcolorcolumn<cr>" "toggle highlight at column"]
+    ;        :x [":nohlsearch<CR>" "search highlighting off"]}
+    ;    :n [":set number!<CR>" "toggle number"]
+    ;    :o [legendary.find "Legendary"]
+    ;    :p [":set paste!<CR>\"+p :set paste!<CR>" "paste from clipboard"]
+    ;    :s [":set spell!<CR>" "toggle spell"]
+    ;    :t {:name "NvimTree"
+    ;        :r [":<C-u>NvimTreeFindFileToggle<CR>" "find file toggle"]
+    ;        :t [":<C-u>NvimTreeToggle<CR>" "toggle"]}
+    ;    :y ["\"+y" "copy into clipboard"]}
+    ;   {:prefix prefix})
+    ;
+    ; (which-key.register
+    ;   {:y ["\"+yy" "copy into clipboard"]}
+    ;   {:prefix prefix :mode :v})
+    ;
+    ; (which-key.register
+    ;   {:gcc "toggle comment"}
+    ;   {})))
 
 (fn register-parinfer-keybindings [prefix]
   (let [which-key (require :which-key)]
-    (which-key.register
-      {:p {:name "parinfer"
-           :p [":ParinferToggle<CR>" "toggle"]}}
-      {:prefix prefix})))
+    (which-key.add
+      [{1 (.. prefix :p) :group "Parinfer"}
+       {1 (.. prefix :p) 2 ":ParinferToggle<CR>" :desc "toggle"}])))
+    ; (which-key.register
+    ;   {:p {:name "parinfer"
+    ;        :p [":ParinferToggle<CR>" "toggle"]}}
+    ;   {:prefix prefix})))
 
 (fn register-keybindings []
   (let [constants (require :config.constants)
