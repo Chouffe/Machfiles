@@ -23,6 +23,10 @@
               :tpope/vim-unimpaired
               ; Asynchronous build and test dispatcher
               :tpope/vim-dispatch
+              ; Task runner
+              {1 :stevearc/overseer.nvim
+               :config true}
+              ; Neotest
               {1 :nvim-neotest/neotest
                :dependencies [:nvim-neotest/nvim-nio
                               :nvim-lua/plenary.nvim
