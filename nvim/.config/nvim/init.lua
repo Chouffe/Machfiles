@@ -40,4 +40,8 @@ vim.g["aniseed#env"] = {
 }
 
 -- Source viml config files
-vim.cmd [[ source ~/.config/nvim/viml/init.vim ]]
+-- vim.cmd [[ source ~/.config/nvim/viml/init.vim ]]
+
+local config_home = os.getenv("XDG_CONFIG_HOME") or "~/.config"
+local viml_init_path = config_home .. "/nvim/viml/init.vim"
+vim.cmd("source " .. vim.fn.expand(viml_init_path))
