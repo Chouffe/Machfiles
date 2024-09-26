@@ -153,6 +153,27 @@
     ;        :x [":cclose<CR>" "close"]}}
     ;   {:prefix prefix})))
 
+(fn register-task-runner-keybindings [prefix]
+  (let [which-key (require :which-key)]
+    (which-key.add
+      [{1 (.. prefix :o) :group "task runner"}
+       {1 (.. prefix :o :o) 2 ":OverseerRun<CR>" :desc "run"}
+       {1 (.. prefix :o :v) 2 ":OverseerToggle!<CR>" :desc "toggle"}
+       {1 (.. prefix :o :c) 2 ":OverseerRunCmd<CR>" :desc "run command"}
+       {1 (.. prefix :o :a) 2 ":OverseerQuickAction<CR>" :desc "quick action on last task"}
+       {1 (.. prefix :o :t) 2 ":OverseerTaskAction<CR>" :desc "select task to run an action on"}])))
+
+(fn register-remote-keybindings [prefix]
+  (let [which-key (require :which-key)]
+    (which-key.add
+      [{1 (.. prefix :r) :group "remote"}
+       {1 (.. prefix :r :r) 2 ":RemoteStart<CR>" :desc "start"}
+       {1 (.. prefix :r :s) 2 ":RemoteStart<CR>" :desc "start"}
+       {1 (.. prefix :r :S) 2 ":RemoteStop<CR>" :desc "stop"}
+       {1 (.. prefix :r :q) 2 ":RemoteStop<CR>" :desc "stop"}
+       {1 (.. prefix :r :l) 2 ":RemoteLog<CR>" :desc "log"}
+       {1 (.. prefix :r :i) 2 ":RemoteInfo<CR>" :desc "info"}])))
+
 (fn register-misc-keybindings [prefix]
   (let [which-key (require :which-key)]
     (which-key.add
@@ -160,7 +181,6 @@
        {1 (.. prefix :h :c) 2 ":togglehiglightatcolorcolumn<CR>" :desc "column toggle"}
        {1 (.. prefix :h :x) 2 ":nohlsearch<CR>" :desc "search off"}
        {1 (.. prefix :n) 2 ":set number!<CR>" :desc "number toggle"}
-       ; {1 (.. prefix :o) 2 legendary.find :desc "open legendary"}
        {1 (.. prefix :p) 2 ":set paste!<CR>\"+p :set paste!<CR>" :desc "paste from clipboard"}
        {1 (.. prefix :s) 2 ":set spell!<CR>" :desc "spell toggle"}
        {1 (.. prefix :t) :group "NvimTree"}
@@ -210,6 +230,8 @@
   (register-formatting-keybindings :<Leader>)
   (register-git-keybindings :<Leader>)
   (register-misc-keybindings :<Leader>)
+  (register-task-runner-keybindings :<Leader>)
+  (register-remote-keybindings :<Leader>)
   (register-location-list-keybindings :<Leader>)
   (register-trouble-keybindings :<Leader>)
   (register-quickfix-keybindings :<Leader>)
