@@ -154,14 +154,13 @@
     ;   {:prefix prefix})))
 
 (fn register-misc-keybindings [prefix]
-  (let [which-key (require :which-key)
-        legendary (require :legendary)]
+  (let [which-key (require :which-key)]
     (which-key.add
       [{1 (.. prefix :h) :group "highlight"}
        {1 (.. prefix :h :c) 2 ":togglehiglightatcolorcolumn<CR>" :desc "column toggle"}
        {1 (.. prefix :h :x) 2 ":nohlsearch<CR>" :desc "search off"}
        {1 (.. prefix :n) 2 ":set number!<CR>" :desc "number toggle"}
-       {1 (.. prefix :o) 2 legendary.find :desc "open legendary"}
+       ; {1 (.. prefix :o) 2 legendary.find :desc "open legendary"}
        {1 (.. prefix :p) 2 ":set paste!<CR>\"+p :set paste!<CR>" :desc "paste from clipboard"}
        {1 (.. prefix :s) 2 ":set spell!<CR>" :desc "spell toggle"}
        {1 (.. prefix :t) :group "NvimTree"}
