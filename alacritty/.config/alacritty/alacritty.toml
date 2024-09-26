@@ -1,45 +1,21 @@
-[colors.bright]
-black = "#4C566A"
-blue = "#5e81ac"
-cyan = "#88c0d0"
-green = "#A3BE8C"
-magenta = "#B48EAD"
-red = "#bf616a"
-white = "#abb2bf"
-yellow = "#D7BA7D"
+import = ["~/.config/alacritty/rose-pine-moon.toml"]
 
-[colors.cursor]
-cursor = "#ECEFF4"
-text = "#3B4252"
-
-[colors.normal]
-black = "#4C566A"
-blue = "#5e81ac"
-cyan = "#88c0d0"
-green = "#A3BE8C"
-magenta = "#B48EAD"
-red = "#bf616a"
-white = "#abb2bf"
-yellow = "#D7BA7D"
-
-[colors.primary]
-background = "#232731"
-foreground = "#D8DEE9"
 
 [cursor.style]
 blinking = "Never"
 
 [font]
-size = 16.0
-
+# size = 16.0
+size = 22.0
+#
 [font.bold]
 family = "FiraMono Nerd Font"
 style = "Bold"
-
+#
 [font.glyph_offset]
 x = 0
 y = 0
-
+#
 [font.italic]
 family = "FiraMono Nerd Font"
 style = "Italic"
@@ -85,7 +61,13 @@ mods = "Control"
 [window]
 dynamic_title = true
 opacity = 0.9
+# Mac OS config to turn option to alt key
+option_as_alt = "Both"
+# Hiding the title bar
+decorations = "none"
+
 
 [window.padding]
 x = 2
 y = 2
+
