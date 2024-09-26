@@ -194,6 +194,7 @@
               ;; UI: Theme and colorschemes
               {1 :nyoom-engineering/oxocarbon.nvim}
               :stevearc/dressing.nvim
+              {1 :rose-pine/neovim :name "rose-pine"}
               {1 :kosayoda/nvim-lightbulb
                :config (. (require :config.plugin.lightbulb) :config)}
               :marko-cerovac/material.nvim
