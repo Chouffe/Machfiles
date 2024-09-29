@@ -32,7 +32,7 @@
     ; (lualine.setup {:options {:theme :tokyonight}})
     ; (nvim.command "colorscheme tokyonight-storm")
     (nvim.command "colorscheme rose-pine-moon")
-    (lualine.setup {:options {:theme :rose-pine-moon}})
+    (lualine.setup {:options {:theme :rose-pine}})
     ; (lualine.setup {:options {:theme :kanagawa}})
     ; (nvim.command "colorscheme kanagawa")
     ;; Make the background color transparent
