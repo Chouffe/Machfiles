@@ -79,18 +79,7 @@
                :event :VeryLazy
                :opts {}
                :config (fn [_ opts] (let [lsp-signature (require :lsp_signature)] (lsp-signature.setup opts)))}
-              ; {
-              ;   "ray-x/lsp_signature.nvim",
-              ;   event = "VeryLazy",
-              ;   opts = {},
-              ;   config = function(_, opts) require'lsp_signature'.setup(opts) end}
-
-                            ; Filesystem Navigation
-                            ; {1 :kyazdani42/nvim-tree.lua
-                            ;  :dependencies [:kyazdani42/nvim-web-devicons]
-                            ;  :config config-nvim-tree.config}
               {1 :kyazdani42/nvim-tree.lua
-               ; :dependencies [:kyazdani42/nvim-web-devicons]
                :dependencies [:nvim-tree/nvim-web-devicons]
                :config (. (require :config.plugin.nvim-tree) :config)}
               {1 :stevearc/oil.nvim
@@ -189,7 +178,17 @@
                :config true}
               ;; Tmux
               :tmux-plugins/vim-tmux
-              :christoomey/vim-tmux-navigator
+              {1 :christoomey/vim-tmux-navigator
+               :cmd ["TmuxNavigateLeft"
+                     "TmuxNavigateDown"
+                     "TmuxNavigateUp"
+                     "TmuxNavigateRight"
+                     "TmuxNavigatePrevious"]
+               :keys [["<c-h>" "<cmd><C-U>TmuxNavigateLeft<cr>"]
+                      ["<c-j>" "<cmd><C-U>TmuxNavigateDown<cr>"]
+                      ["<c-k>" "<cmd><C-U>TmuxNavigateUp<cr>"]
+                      ["<c-l>" "<cmd><C-U>TmuxNavigateRight<cr>"]
+                      ["<c-\\>" "<cmd><C-U>TmuxNavigatePrevious<cr>"]]}
               :edkolev/tmuxline.vim
               ;; UI: Theme and colorschemes
               {1 :nyoom-engineering/oxocarbon.nvim}
