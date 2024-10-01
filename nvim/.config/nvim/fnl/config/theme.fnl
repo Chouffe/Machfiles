@@ -1,4 +1,5 @@
 (local nvim (require :aniseed.nvim))
+(local lualine (require :lualine))
 
 (fn config []
   (let [; material-functions (require :material.functions)
