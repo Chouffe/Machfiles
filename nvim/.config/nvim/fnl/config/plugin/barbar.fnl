@@ -3,8 +3,10 @@
     (barbar.setup
       {:animation false
        :auto_hide true
-       :icons {:separator_at_end false
-               :separator {:left "" :right ""}}})))
+       :icons {:pinned {:button "" :filename true}
+               :button false
+               :separator_at_end true
+               :separator {:left "▎" :right ""}}})))
 
 (fn register-keybindings []
   (let [which-key (require :which-key)]
