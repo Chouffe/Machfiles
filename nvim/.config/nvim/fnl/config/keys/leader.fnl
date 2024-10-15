@@ -160,7 +160,10 @@
        {1 (.. prefix :o :o) 2 ":OverseerRun<CR>" :desc "run"}
        {1 (.. prefix :o :v) 2 ":OverseerToggle!<CR>" :desc "toggle"}
        {1 (.. prefix :o :c) 2 ":OverseerRunCmd<CR>" :desc "run command"}
-       {1 (.. prefix :o :a) 2 ":OverseerQuickAction<CR>" :desc "quick action on last task"}
+       {1 (.. prefix :o :a) :group "quick action"}
+       {1 (.. prefix :o :a :a) 2 ":OverseerQuickAction<CR>" :desc "quick action on last task"}
+       {1 (.. prefix :o :a :s) 2 ":OverseerQuickAction OpenVsplit<CR>" :desc "vsplit"}
+       {1 (.. prefix :o :a :o) 2 ":OverseerQuickAction Open" :desc "open"}
        {1 (.. prefix :o :t) 2 ":OverseerTaskAction<CR>" :desc "select task to run an action on"}])))
 
 (fn register-remote-keybindings [prefix]
