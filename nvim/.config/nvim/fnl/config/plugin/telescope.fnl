@@ -33,10 +33,12 @@
        {1 :<Leader>fk 2 t.keymaps :desc "keymaps"}
        {1 :<Leader>fm 2 t.marks :desc "marks"}
        {1 :<Leader>fn 2 #(t.find_files {:cwd "~/notes"}) :desc "notes"}
+       {1 :<Leader>fN 2 ":Telescope notify<CR>" :desc "notifications"}
        {1 :<Leader>fo 2 t.oldfiles :desc "old files"}
        {1 :<Leader>fr 2 t.lsp_references :desc "lsp references"}
        {1 :<Leader>fs 2 t.symbols :desc "symbols"}
-       {1 :<Leader>ft 2 t.builtin :desc "telescope pickers"}
+       {1 :<Leader>fT 2 t.builtin :desc "telescope pickers"}
+       {1 :<Leader>ft 2 ":TodoTelescope<CR>" :desc "find todos, fixmes, bugs"}
        {1 :<Leader>fv :group "vim"}
        {1 :<Leader>fvg 2 #(t.live_grep {:cwd "~/.config/nvim"}) :desc "live grep config"}
        {1 :<Leader>fvf 2 #(t.find_files {:cwd "~/.config/nvim"}) :desc "files"}

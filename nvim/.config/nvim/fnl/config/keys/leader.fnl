@@ -23,6 +23,7 @@
   (let [which-key (require :which-key)]
     (which-key.add
       [{1 (.. prefix :x) :group "trouble"}
+       {1 (.. prefix :xt) 2 ":Trouble todo<CR>" :desc "todo, fixme, bugs..."}
        {1 (.. prefix :xx) 2 ":Trouble diagnostics toggle<cr>" :desc "global"}
        {1 (.. prefix :xX) 2 ":Trouble diagnostics toggle filter.buf=0<cr>" :desc "buffer"}
        {1 (.. prefix :xs) 2 ":Trouble symbols toggle focus=false<cr>" :desc "symbols"}
@@ -178,18 +179,20 @@
        {1 (.. prefix :r :i) 2 ":RemoteInfo<CR>" :desc "info"}])))
 
 (fn register-misc-keybindings [prefix]
-  (let [which-key (require :which-key)]
+  (let [nvim-notify (require :notify)
+        which-key (require :which-key)]
     (which-key.add
       [{1 (.. prefix :h) :group "highlight"}
        {1 (.. prefix :h :c) 2 ":togglehiglightatcolorcolumn<CR>" :desc "column toggle"}
        {1 (.. prefix :h :x) 2 ":nohlsearch<CR>" :desc "search off"}
-       {1 (.. prefix :n) 2 ":set number!<CR>" :desc "number toggle"}
+       {1 (.. prefix :n :n) 2 ":set number!<CR>" :desc "number toggle"}
        {1 (.. prefix :p) 2 ":set paste!<CR>\"+p :set paste!<CR>" :desc "paste from clipboard"}
        {1 (.. prefix :s) 2 ":set spell!<CR>" :desc "spell toggle"}
        {1 (.. prefix :t) :group "NvimTree"}
        {1 (.. prefix :t :t) 2 ":<C-u>NvimTreeToggle<CR>" :desc "toggle"}
        {1 (.. prefix :t :r) 2 ":<C-u>NvimTreeFindFileToggle<CR>" :desc "find file toggle"}
        {1 (.. prefix :y) 2 "\"+yy" :desc "copy into clipboard" :mode [:n :v]}
+       {1 (.. prefix :n :x) 2 #(nvim-notify.dismiss) :desc "dismiss notification"}
        {1 (.. :g :c :c) :desc "comment toggle"}])))
     ; (which-key.register
     ;   {:h {:name "highlight"

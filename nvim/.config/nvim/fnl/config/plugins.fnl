@@ -62,7 +62,10 @@
                :event :VeryLazy
                :dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
                :config (. (require :config.plugin.noice) :config)}
-               
+              {1 :folke/todo-comments.nvim
+               :dependencies [:nvim-lua/plenary.nvim]
+               :config #(let [todo-comments (require :todo-comments)]
+                          (todo-comments.setup {}))}
               ; vim over: :substitute preview
               :osyo-manga/vim-over
               ; Motion plugin for neovim
