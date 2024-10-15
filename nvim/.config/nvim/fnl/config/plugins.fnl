@@ -57,10 +57,12 @@
               ; Open URI with your favorite browser - fix gx in nvim
               {1 :tyru/open-browser.vim
                :config (. (require :config.plugin.open-browser) :config)}
-              ; Display a popup with possible key bindings of the command you started ty
-              :folke/which-key.nvim
-              ; Define your keymaps, commands, and autocommands as simple Lua tables, building a legend at the same time.
-              ; :mrjones2014/legendary.nvim
+              ; plugin that completely replaces the UI for messages, cmdline and the popupmenu.
+              {1 :folke/noice.nvim
+               :event :VeryLazy
+               :dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
+               :config (. (require :config.plugin.noice) :config)}
+               
               ; vim over: :substitute preview
               :osyo-manga/vim-over
               ; Motion plugin for neovim
@@ -77,7 +79,6 @@
               ; LSP
               {1 :ray-x/lsp_signature.nvim
                :event :VeryLazy
-               :opts {}
                :config (fn [_ opts] (let [lsp-signature (require :lsp_signature)] (lsp-signature.setup opts)))}
               {1 :kyazdani42/nvim-tree.lua
                :dependencies [:nvim-tree/nvim-web-devicons]
@@ -104,9 +105,6 @@
               ; Clojure
               {1 :Olical/conjure
                :config (. (require :config.plugin.conjure) :config)}
-              ; {1 :guns/vim-sexp
-              ;  :dependencies [:folke/which-key.nvim]
-              ;  :config config-sexp.config}
               {1 :guns/vim-sexp
                :config (. (require :config.plugin.sexp) :config)}
               :tpope/vim-sexp-mappings-for-regular-people
@@ -201,6 +199,11 @@
               ; Minimalist status/tabline for vim
               {1 :nvim-lualine/lualine.nvim
                :dependencies [:nvim-tree/nvim-web-devicons]}
+              {1 :romgrk/barbar.nvim
+               :dependencies [:lewis6991/gitsigns.nvim :nvim-tree/nvim-web-devicons]
+               :init #(let [nvim (require :aniseed.nvim)]
+                        (set nvim.g.barbar_auto_setup false))
+               :config (. (require :config.plugin.barbar) :config)}
               {1 :yamatsum/nvim-nonicons
                :dependencies [:nvim-tree/nvim-web-devicons]}
               {1 :rebelot/kanagawa.nvim
