@@ -70,6 +70,7 @@
        {1 (.. prefix :w :o) 2 ":only<CR>" :desc "only"}
        {1 (.. prefix :w :w) 2 ":w<CR>" :desc "write"}
        {1 (.. prefix :w :q) 2 ":q<CR>" :desc "quit"}
+       {1 (.. prefix :w :c) 2 ":q<CR>" :desc "close"}
        {1 (.. prefix :j) 2 ":split<CR>" :desc "horizontal split"}
        {1 (.. prefix :k) 2 ":vsplit<CR>" :desc "vertical split"}])))
     ; (which-key.register
