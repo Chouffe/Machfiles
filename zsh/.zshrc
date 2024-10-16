@@ -19,14 +19,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="aussiegeek"
 # ZSH_THEME="Soliah"
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,functions,aliases,exports,bindings,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -67,8 +59,9 @@ unset file;
 # plugins=(git lein autojump sudo tmux jsontools python cabal)
 # virtualenvwrapper
 # plugins=(aws pass docker git gitfast git-extras tig fasd extract lein sudo tmux jsontools python cabal brew web-search zsh-autosuggestions zsh-syntax-highlighting dotenv)
-plugins=(aws pass docker git gitfast git-extras tig fasd extract lein sudo tmux jsontools python cabal brew web-search zsh-autosuggestions zsh-syntax-highlighting zsh-completions pyenv)
+plugins=(aws pass docker git gitfast git-extras tig fasd extract lein sudo tmux jsontools python cabal brew web-search zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
 
+export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -113,7 +106,7 @@ fi
 
 # Right Prompt
 # RPROMPT="$FG[013]%D{%H:%M}%{$reset_color%}$FG[015] %D{»} %{$reset_color%}$FG[014]%D{%m/%d}%{$reset_color%}"
-RPROMPT=""
+# RPROMPT=""
 
 # added by travis gem
 # [ -f /home/chouffe/.travis/travis.sh ] && source /home/chouffe/.travis/travis.sh
@@ -168,13 +161,13 @@ bindkey \^U backward-kill-line
 # direnv hook
 eval "$(direnv hook zsh)"
 
-show_virtual_env() {
-  if [ -n "$CONDA_DEFAULT_ENV" ]; then
-    echo "($(basename $CONDA_DEFAULT_ENV))"
-  fi
-}
-export show_virtual_env
-PS1='$(show_virtual_env)'$PS1
+# show_virtual_env() {
+#   if [ -n "$CONDA_DEFAULT_ENV" ]; then
+#     echo "($(basename $CONDA_DEFAULT_ENV))"
+#   fi
+# }
+# export show_virtual_env
+# PS1='$(show_virtual_env)'$PS1
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -191,11 +184,13 @@ if [ -f '/Users/arthur/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/arthur/g
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/arthur/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/arthur/google-cloud-sdk/completion.zsh.inc'; fi
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don’t want to commit.
+for file in ~/.{path,functions,aliases,exports,bindings,extra}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
