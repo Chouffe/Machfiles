@@ -7,15 +7,18 @@ blinking = "Never"
 [font]
 # size = 16.0
 size = 22.0
-#
-[font.bold]
-family = "FiraMono Nerd Font"
-style = "Bold"
-#
+
+# [font.normal]
+# family = "MesloLGS NF"
+
 [font.glyph_offset]
 x = 0
 y = 0
-#
+
+[font.bold]
+family = "FiraMono Nerd Font"
+style = "Bold"
+
 [font.italic]
 family = "FiraMono Nerd Font"
 style = "Italic"

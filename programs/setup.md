@@ -61,3 +61,4 @@ How to setup a work environment.
 * Follow this guide to set it up in Alacritty: https://www.behova.net/fonts-in-alacritty/
 * Liste des fonts: https://devfonts.gafi.dev/
 * Option to clone the repo and install all fonts on the system
+* Install the following font: Meslo Nerd Font patched for Powerlevel10k: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#meslo-nerd-font-patched-for-powerlevel10k
