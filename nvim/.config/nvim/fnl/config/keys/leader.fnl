@@ -189,9 +189,9 @@
        {1 (.. prefix :n :n) 2 ":set number!<CR>" :desc "number toggle"}
        {1 (.. prefix :p) 2 ":set paste!<CR>\"+p :set paste!<CR>" :desc "paste from clipboard"}
        {1 (.. prefix :s) 2 ":set spell!<CR>" :desc "spell toggle"}
-       {1 (.. prefix :t) :group "NvimTree"}
-       {1 (.. prefix :t :t) 2 ":<C-u>NvimTreeToggle<CR>" :desc "toggle"}
-       {1 (.. prefix :t :r) 2 ":<C-u>NvimTreeFindFileToggle<CR>" :desc "find file toggle"}
+       {1 (.. prefix :e) :group "NvimTree"}
+       {1 (.. prefix :e :e) 2 ":<C-u>NvimTreeToggle<CR>" :desc "toggle"}
+       {1 (.. prefix :e :r) 2 ":<C-u>NvimTreeFindFileToggle<CR>" :desc "find file toggle"}
        {1 (.. prefix :y) 2 "\"+yy" :desc "copy into clipboard" :mode [:n :v]}
        {1 (.. prefix :n :x) 2 #(nvim-notify.dismiss) :desc "dismiss notification"}
        {1 (.. :g :c :c) :desc "comment toggle"}])))
