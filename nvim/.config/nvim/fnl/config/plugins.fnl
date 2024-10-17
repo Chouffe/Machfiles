@@ -23,6 +23,12 @@
               :tpope/vim-unimpaired
               ; Asynchronous build and test dispatcher
               :tpope/vim-dispatch
+              ; Harpoon
+              {1 :ThePrimeagen/harpoon
+               :branch "harpoon2"
+               :dependencies [:nvim-lua/plenary.nvim]
+               :config (. (require :config.plugin.harpoon) :config)}
+
               ; Task runner
               {1 :stevearc/overseer.nvim
                :config true}
