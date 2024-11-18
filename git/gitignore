@@ -23,3 +23,14 @@ scratch.py
 .zenhub_token
 .lsp/
 .scratch/
+tmux/.tmux/plugins/
+.venv/
+__pycache__
+
+
+# Scratch folders
+.scratch
+
+# Direnv
+.direnv
+.envrc
