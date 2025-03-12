@@ -1,15 +1,19 @@
-import = ["~/.config/alacritty/rose-pine-moon.toml"]
 
+[terminal.shell]
+program = "tmux"
+
+# [env]
+# TERM="xterm-256color"
 
 [cursor.style]
 blinking = "Never"
 
-[font]
-# size = 16.0
-size = 22.0
-
 # [font.normal]
 # family = "MesloLGS NF"
+
+[font]
+size = 16.0
+# size = 22.0
 
 [font.glyph_offset]
 x = 0
@@ -73,4 +77,9 @@ decorations = "none"
 [window.padding]
 x = 2
 y = 2
+
+[general]
+import = ["~/.config/alacritty/rose-pine-moon.toml"]
+
+[terminal]
 
