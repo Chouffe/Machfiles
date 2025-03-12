@@ -1,2 +1,4 @@
-!regolith.look.path: /usr/share/regolith-look/nord
-regolith.look.path: /usr/share/regolith-look/solarized-dark
+regolith.wallpaper.file: ~/.config/regolith2/wallpapers/fitz_roy_2.jpg
+regolith.wallpaper.options: zoom
+!regolith.look.path: /usr/share/regolith-look/solarized-dark
+regolith.look.path: /usr/share/regolith-look/dracula
