@@ -4,6 +4,8 @@
                               ; null-ls.builtins.formatting.trim_whitespace
                               null-ls.builtins.diagnostics.trail_space
                               null-ls.builtins.formatting.prettier
+                              ; HTML
+                              null-ls.builtins.formatting.djlint
                               ;; Python
                               ; null-ls.builtins.diagnostics.ruff
                               null-ls.builtins.formatting.isort
@@ -18,6 +20,10 @@
                               ;; Markdown
                               null-ls.builtins.diagnostics.markdownlint
                               null-ls.builtins.formatting.markdownlint
+                              ;; Terraform
+                              null-ls.builtins.diagnostics.terraform_validate
+                              ;; Docker
+                              null-ls.builtins.diagnostics.hadolint
                               ;; Yaml
                               null-ls.builtins.diagnostics.yamllint]})))
                               ;; Shell

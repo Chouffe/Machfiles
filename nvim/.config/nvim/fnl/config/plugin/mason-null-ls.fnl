@@ -2,7 +2,9 @@
   (let [mason-null-ls (require :mason-null-ls)]
     (mason-null-ls.setup {:ensure_installed [:black
                                              :isort
+                                             :djlint
                                              :prettier
+                                             :hadolint
                                              ; :ruff
                                              :clj_kondo
                                              :cljstyle
@@ -13,6 +15,7 @@
                                              :markdownlint
                                              ; :docformatter
                                              ; :shellcheck
+                                             :terraform_validate
                                              :shellharden
                                              :shfmt]})))
 
