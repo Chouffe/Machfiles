@@ -105,5 +105,8 @@ alias gpg-unlock="gpg-connect-agent updatestartuptty /bye"
 
 alias glances='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host --network host -it docker.io/nicolargo/glances'
 
+# Lazydocker
+alias lzd="lazydocker"
+
 # Dev pitch
 # alias awss='aws-vault --backend=pass exec -m `ykman oath code --single AWS_test` --no-session pitch_admin -- aws'
