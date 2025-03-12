@@ -20,6 +20,7 @@
                                           :c
                                           :clojure
                                           :diff
+                                          :dockerfile
                                           :fennel
                                           :go
                                           :html
