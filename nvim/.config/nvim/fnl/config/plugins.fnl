@@ -2,6 +2,11 @@
 
 (local specs [; plugin manager
               :folke/lazy.nvim
+              ; A collection of small QoL plugins for Neovim.
+              {1 :folke/snacks.nvim
+               :priority 1000
+               :lazy false
+               :opts {:dashboard {:enabled true :example "advanced"}}}
               ; nvim config and plugins in Fennel
               :Olical/aniseed
               ; Run Fennel inside Neovim on startup with Aniseed
@@ -49,7 +54,7 @@
               ; Continuously updated session files (to be used with tmux resurect)
               :tpope/vim-obsession
               ; The fancy start screen for Vim
-              :mhinz/vim-startify
+              ; :mhinz/vim-startify
               ; Align with ease
               :junegunn/vim-easy-align
               ; Yanking highlighting feedback
