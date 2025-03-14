@@ -90,10 +90,12 @@
        {1 (.. prefix :F :j) 2 ":%!jq --sort-keys<CR>" :desc "json" :mode [:n :v]}])))
 
 (fn register-git-keybindings [prefix]
-  (let [which-key (require :which-key)]
+  (let [which-key (require :which-key)
+        snacks (require :snacks)]
     (which-key.add
       [{1 (.. prefix :g) :group "git"}
        {1 (.. prefix :g :n) 2 ":Neogit<CR>" :desc "neogit"}
+       {1 (.. prefix :g :B) 2 (fn [] (snacks.gitbrowse)) :desc "browse"}
        {1 (.. prefix :g :b) 2 ":Git blame<CR>" :desc "blame"}
        {1 (.. prefix :g :c) 2 ":Git commit<CR>" :desc "commit"}
        {1 (.. prefix :g :d) :group "conflict resolution"}

@@ -6,7 +6,14 @@
               {1 :folke/snacks.nvim
                :priority 1000
                :lazy false
-               :opts {:dashboard {:enabled true :example "advanced"}}}
+               :opts {:dashboard {:enabled true :example "advanced"}
+                      :notifier {:enable true}
+                      :bigfile {:enable true}
+                      :toggle {:enable true}
+                      :input {:enable true}
+                      :rename {:enable true}
+                      :gitbrowse {:enable true}
+                      :statuscolumn {:enable true}}}
               ; nvim config and plugins in Fennel
               :Olical/aniseed
               ; Run Fennel inside Neovim on startup with Aniseed
