@@ -24,11 +24,11 @@
                                           :fennel
                                           :go
                                           :html
+                                          :helm
                                           :javascript
                                           :jsdoc
                                           :json
                                           :jsonc
-                                          :lua
                                           :lua
                                           :luadoc
                                           :luap
