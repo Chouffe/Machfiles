@@ -223,7 +223,7 @@
               {1 :kosayoda/nvim-lightbulb
                :config (. (require :config.plugin.lightbulb) :config)}
               :marko-cerovac/material.nvim
-              :rcarriga/nvim-notify
+              ; :rcarriga/nvim-notify
               ; Minimalist status/tabline for vim
               {1 :nvim-lualine/lualine.nvim
                :dependencies [:nvim-tree/nvim-web-devicons]}

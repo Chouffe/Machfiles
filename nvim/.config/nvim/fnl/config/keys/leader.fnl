@@ -229,8 +229,7 @@
        {1 (.. prefix :r :i) 2 ":RemoteInfo<CR>" :desc "info"}])))
 
 (fn register-misc-keybindings [prefix]
-  (let [nvim-notify (require :notify)
-        which-key (require :which-key)]
+  (let [which-key (require :which-key)]
     (which-key.add
       [{1 (.. prefix :h) :group "highlight"}
        {1 (.. prefix :h :c) 2 ":togglehiglightatcolorcolumn<CR>" :desc "column toggle"}
@@ -242,7 +241,6 @@
        {1 (.. prefix :e :e) 2 ":<C-u>NvimTreeToggle<CR>" :desc "toggle"}
        {1 (.. prefix :e :r) 2 ":<C-u>NvimTreeFindFileToggle<CR>" :desc "find file toggle"}
        {1 (.. prefix :y) 2 "\"+yy" :desc "copy into clipboard" :mode [:n :v]}
-       {1 (.. prefix :n :x) 2 #(nvim-notify.dismiss) :desc "dismiss notification"}
        {1 (.. :g :c :c) :desc "comment toggle"}])))
     ; (which-key.register
     ;   {:h {:name "highlight"
