@@ -41,6 +41,49 @@
     ;        :r [":Trouble lsp toggle focus=false win.position=right<cr>" "LSP Definitions / references / ... (Trouble)"]}}
     ;   {:prefix prefix})))
 
+(fn register-snacks-keybindings [prefix]
+  (let [which-key (require :which-key)
+        snacks (require :snacks)]
+    (which-key.add
+      [
+       {1 :<Leader>f :group "find"}
+       {1 (.. prefix :f :<space>) 2 (fn [] (snacks.picker.smart)) :desc "smart find files"}
+       {1 (.. prefix :f :/) 2 (fn [] (snacks.picker.search_history)) :desc "search history"}
+       {1 (.. prefix :f ",") 2 (fn [] (snacks.picker.buffers)) :desc "buffers"}
+       {1 (.. prefix :f ":") 2 (fn [] (snacks.picker.command_history)) :desc "command history"}
+       {1 (.. prefix :f :R) 2 (fn [] (snacks.picker.resume)) :desc "resume"}
+       {1 (.. prefix :f :b) 2 (fn [] (snacks.picker.buffers)) :desc "buffers"}
+       {1 (.. prefix :f :f) 2 (fn [] (snacks.picker.files)) :desc "files"}
+       {1 (.. prefix :f :c) 2 (fn [] (snacks.picker.files {:cwd (vim.fn.stdpath "config")})) :desc "config"}
+       {1 (.. prefix :f :n) 2 (fn [] (snacks.picker.files {:cwd "~/notes"})) :desc "notes"}
+       {1 (.. prefix :f :j) 2 (fn [] (snacks.picker.files {:cwd "~/journal"})) :desc "journal"}
+       {1 (.. prefix :f :N) 2 (fn [] (snacks.picker.notifications)) :desc "config"}
+       {1 (.. prefix :f :r) 2 (fn [] (snacks.picker.recent)) :desc "recent"}
+       {1 (.. prefix :f :m) 2 (fn [] (snacks.picker.marks)) :desc "marks"}
+       {1 (.. prefix :f :i) 2 (fn [] (snacks.picker.icons)) :desc "icons"}
+       {1 (.. prefix :f :d) 2 (fn [] (snacks.picker.diagnostics)) :desc "diagnostics"}
+       {1 (.. prefix :f :D) 2 (fn [] (snacks.picker.diagnostics_buffer)) :desc "diagnostics buffer"}
+       {1 (.. prefix :f :g) 2 (fn [] (snacks.picker.grep)) :desc "grep"}
+       {1 (.. prefix :f :l) 2 (fn [] (snacks.picker.lines)) :desc "buffer lines"}
+       {1 (.. prefix :f :B) 2 (fn [] (snacks.picker.grep_buffers)) :desc "grep open buffers"}
+       {1 (.. prefix :f :w) 2 (fn [] (snacks.picker.grep_word)) :desc "grep word"}
+       {1 (.. prefix :f :s) 2 (fn [] (snacks.picker.lsp_symbols)) :desc "LSP symbols"}
+       {1 (.. prefix :f :q) 2 (fn [] (snacks.picker.quickfix)) :desc "quickfix"}
+       {1 (.. prefix :f :C) 2 (fn [] (snacks.picker.colorschemes)) :desc "colorschemes"}
+
+       ;; git
+       {1 (.. prefix :g :l) 2 (fn [] (snacks.picker.git_log)) :desc "log"}
+
+       ;; Scratch Buffer
+       {1 (.. prefix :. ) 2 (fn [] (snacks.scratch)) :desc "toggle scratch buffer"}
+       {1 (.. prefix :S ) 2 (fn [] (snacks.scratch.select)) :desc "select scratch buffer"}
+
+       ;; Other
+       {1 (.. prefix :e :f) 2 (fn [] (snacks.explorer)) :desc "explorer"}
+       {1 (.. prefix :z) 2 (fn [] (snacks.zen)) :desc "toggle zen mode"}
+       {1 (.. prefix :u :n) 2 (fn [] (snacks.notifier.hide)) :desc "dismiss all notifications"}])))
+
+
 (fn register-buffer-keybindings [prefix]
   (let [which-key (require :which-key)
         functions (require :config.general.functions)
@@ -249,6 +292,7 @@
   (register-trouble-keybindings :<Leader>)
   (register-quickfix-keybindings :<Leader>)
   (register-parinfer-keybindings :<Localleader>)
-  (register-neotest-keybindings :<Leader>))
+  (register-neotest-keybindings :<Leader>)
+  (register-snacks-keybindings :<Leader>))
 
 {: register-keybindings}

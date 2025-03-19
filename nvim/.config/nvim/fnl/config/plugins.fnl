@@ -6,14 +6,21 @@
               {1 :folke/snacks.nvim
                :priority 1000
                :lazy false
-               :opts {:dashboard {:enabled true :example "advanced"}
-                      :notifier {:enable true}
-                      :bigfile {:enable true}
-                      :toggle {:enable true}
-                      :input {:enable true}
-                      :rename {:enable true}
+               :opts {:bigfile {:enable true}
+                      :dashboard {:enabled true :example "compact_files"}
+                      :explorer {:enable true}
                       :gitbrowse {:enable true}
-                      :statuscolumn {:enable true}}}
+                      :indent {:enable true}
+                      :input {:enable true}
+                      :picker {:enable true}
+                      :notifier {:enable true}
+                      :quickfile {:enable true}
+                      :rename {:enable true}
+                      :scope {:enable true}
+                      :scroll {:enable true}
+                      :statuscolumn {:enable true}
+                      :toggle {:enable true}
+                      :words {:enable true}}}
               ; nvim config and plugins in Fennel
               :Olical/aniseed
               ; Run Fennel inside Neovim on startup with Aniseed
@@ -76,10 +83,10 @@
               {1 :tyru/open-browser.vim
                :config (. (require :config.plugin.open-browser) :config)}
               ; plugin that completely replaces the UI for messages, cmdline and the popupmenu.
-              {1 :folke/noice.nvim
-               :event :VeryLazy
-               :dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
-               :config (. (require :config.plugin.noice) :config)}
+              ; {1 :folke/noice.nvim
+              ;  :event :VeryLazy
+              ;  :dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
+              ;  :config (. (require :config.plugin.noice) :config)}
               {1 :folke/todo-comments.nvim
                :dependencies [:nvim-lua/plenary.nvim]
                :config #(let [todo-comments (require :todo-comments)]

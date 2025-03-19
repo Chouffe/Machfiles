@@ -20,29 +20,31 @@
 (fn register-keybindings []
   (let [t (require :telescope.builtin)
         which-key (require :which-key)]
-    (which-key.add
-      [{1 :<Leader>f :group "find"}
-       {1 :<Leader>f/ 2 t.search_history :desc "search history"}
-       {1 :<Leader>f: 2 t.command_history :desc "command history"}
-       {1 :<Leader>f<CR> 2 ":Telescope " :desc "enter find command..." :silent false}
-       {1 :<Leader>fR 2 t.resume :desc "resume last telescope"}
-       {1 :<Leader>fb 2 t.buffers :desc "buffers"}
-       {1 :<Leader>ff 2 t.find_files :desc "files"}
-       {1 :<Leader>fg 2 t.live_grep :desc "live grep"}
-       {1 :<Leader>fh 2 t.help_tags :desc "help tags"}
-       {1 :<Leader>fk 2 t.keymaps :desc "keymaps"}
-       {1 :<Leader>fm 2 t.marks :desc "marks"}
-       {1 :<Leader>fn 2 #(t.find_files {:cwd "~/notes"}) :desc "notes"}
-       {1 :<Leader>fN 2 ":Telescope notify<CR>" :desc "notifications"}
-       {1 :<Leader>fo 2 t.oldfiles :desc "old files"}
-       {1 :<Leader>fr 2 t.lsp_references :desc "lsp references"}
-       {1 :<Leader>fs 2 t.symbols :desc "symbols"}
-       {1 :<Leader>fT 2 t.builtin :desc "telescope pickers"}
-       {1 :<Leader>ft 2 ":TodoTelescope<CR>" :desc "find todos, fixmes, bugs"}
-       {1 :<Leader>fv :group "vim"}
-       {1 :<Leader>fvg 2 #(t.live_grep {:cwd "~/.config/nvim"}) :desc "live grep config"}
-       {1 :<Leader>fvf 2 #(t.find_files {:cwd "~/.config/nvim"}) :desc "files"}
-       {1 :<Leader>fw 2 t.grep_string :desc "grep word"}])))
+    ;; FIXME
+    (comment
+      (which-key.add
+        [{1 :<Leader>f :group "find"}
+         {1 :<Leader>f/ 2 t.search_history :desc "search history"}
+         {1 :<Leader>f: 2 t.command_history :desc "command history"}
+         {1 :<Leader>f<CR> 2 ":Telescope " :desc "enter find command..." :silent false}
+         {1 :<Leader>fR 2 t.resume :desc "resume last telescope"}
+         {1 :<Leader>fb 2 t.buffers :desc "buffers"}
+         {1 :<Leader>ff 2 t.find_files :desc "files"}
+         {1 :<Leader>fg 2 t.live_grep :desc "live grep"}
+         {1 :<Leader>fh 2 t.help_tags :desc "help tags"}
+         {1 :<Leader>fk 2 t.keymaps :desc "keymaps"}
+         {1 :<Leader>fm 2 t.marks :desc "marks"}
+         {1 :<Leader>fn 2 #(t.find_files {:cwd "~/notes"}) :desc "notes"}
+         {1 :<Leader>fN 2 ":Telescope notify<CR>" :desc "notifications"}
+         {1 :<Leader>fo 2 t.oldfiles :desc "old files"}
+         {1 :<Leader>fr 2 t.lsp_references :desc "lsp references"}
+         {1 :<Leader>fs 2 t.symbols :desc "symbols"}
+         {1 :<Leader>fT 2 t.builtin :desc "telescope pickers"}
+         {1 :<Leader>ft 2 ":TodoTelescope<CR>" :desc "find todos, fixmes, bugs"}
+         {1 :<Leader>fv :group "vim"}
+         {1 :<Leader>fvg 2 #(t.live_grep {:cwd "~/.config/nvim"}) :desc "live grep config"}
+         {1 :<Leader>fvf 2 #(t.find_files {:cwd "~/.config/nvim"}) :desc "files"}
+         {1 :<Leader>fw 2 t.grep_string :desc "grep word"}]))))
 
     ; (which-key.register
     ;   {:name "find"
