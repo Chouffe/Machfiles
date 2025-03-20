@@ -6,6 +6,7 @@
               {1 :folke/snacks.nvim
                :priority 1000
                :lazy false
+               :dependencies [:echasnovski/mini.icons :kyazdani42/nvim-web-devicons]
                :opts {:bigfile {:enable true}
                       :dashboard {:enabled true :example "compact_files"}
                       :explorer {:enable true}
@@ -27,7 +28,8 @@
               :Olical/nvim-local-fennel
               ; Display a popup with possible key bindings of the command you started ty
               {1 :folke/which-key.nvim
-               :dependencies [:echasnovski/mini.icons :kyazdani42/nvim-web-devicons]}
+               :dependencies [:echasnovski/mini.icons :kyazdani42/nvim-web-devicons]
+               :opts {:preset :helix}}
               ; Readline style insertion
               :tpope/vim-rsi
               ; Heuristically set buffer options
