@@ -58,7 +58,8 @@
        {1 (.. prefix :f :n) 2 (fn [] (snacks.picker.files {:cwd "~/notes"})) :desc "notes"}
        {1 (.. prefix :f :j) 2 (fn [] (snacks.picker.files {:cwd "~/journal"})) :desc "journal"}
        {1 (.. prefix :f :N) 2 (fn [] (snacks.picker.notifications)) :desc "config"}
-       {1 (.. prefix :f :r) 2 (fn [] (snacks.picker.recent)) :desc "recent"}
+       {1 (.. prefix :f :r) 2 (fn [] (snacks.picker.lsp_references)) :desc "references"}
+       ; {1 (.. prefix :f :r) 2 (fn [] (snacks.picker.recent)) :desc "recent"}
        {1 (.. prefix :f :m) 2 (fn [] (snacks.picker.marks)) :desc "marks"}
        {1 (.. prefix :f :i) 2 (fn [] (snacks.picker.icons)) :desc "icons"}
        {1 (.. prefix :f :d) 2 (fn [] (snacks.picker.diagnostics)) :desc "diagnostics"}
@@ -68,8 +69,13 @@
        {1 (.. prefix :f :B) 2 (fn [] (snacks.picker.grep_buffers)) :desc "grep open buffers"}
        {1 (.. prefix :f :w) 2 (fn [] (snacks.picker.grep_word)) :desc "grep word"}
        {1 (.. prefix :f :s) 2 (fn [] (snacks.picker.lsp_symbols)) :desc "LSP symbols"}
+       {1 (.. prefix :f :S) 2 (fn [] (snacks.picker.lsp_workspace_symbols)) :desc "LSP workspace symbols"}
        {1 (.. prefix :f :q) 2 (fn [] (snacks.picker.quickfix)) :desc "quickfix"}
        {1 (.. prefix :f :C) 2 (fn [] (snacks.picker.colorschemes)) :desc "colorschemes"}
+
+       ;; LSP
+       {1 (.. :g :r) 2 (fn [] (snacks.picker.lsp_references)) :desc "references"}
+
 
        ;; git
        {1 (.. prefix :g :l) 2 (fn [] (snacks.picker.git_log)) :desc "log"}
