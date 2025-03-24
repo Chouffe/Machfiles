@@ -22,6 +22,10 @@
                       :statuscolumn {:enable true}
                       :toggle {:enable true}
                       :words {:enable true}}}
+              ; Library of 40+ independent Lua modules
+              {1 :echasnovski/mini.nvim
+               :version false
+               :config (. (require :config.plugin.mini) :config)}
               ; nvim config and plugins in Fennel
               :Olical/aniseed
               ; Run Fennel inside Neovim on startup with Aniseed
@@ -41,7 +45,8 @@
               ; Expand region
               :terryma/vim-expand-region
               ; Pairs of handy bracket mapping
-              :tpope/vim-unimpaired
+              ; replaced by mini.nvim
+              ; :tpope/vim-unimpaired
               ; Asynchronous build and test dispatcher
               :tpope/vim-dispatch
               ; Harpoon
@@ -65,8 +70,9 @@
               :tpope/vim-projectionist
               ; Enable repeating supported plugin maps with '.'
               :tpope/vim-repeat
-              ; Quoting/parenthesizing made simple
-              :tpope/vim-surround
+              ; Quoting/parenthesizing made simple 
+              ; Replaced by mini.surround
+              ; :tpope/vim-surround
               ; Continuously updated session files (to be used with tmux resurect)
               :tpope/vim-obsession
               ; The fancy start screen for Vim

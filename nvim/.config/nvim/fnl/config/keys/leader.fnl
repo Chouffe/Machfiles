@@ -235,7 +235,8 @@
        {1 (.. prefix :r :i) 2 ":RemoteInfo<CR>" :desc "info"}])))
 
 (fn register-misc-keybindings [prefix]
-  (let [which-key (require :which-key)]
+  (let [which-key (require :which-key)
+        mini-files (require :mini.files)]
     (which-key.add
       [{1 (.. prefix :h) :group "highlight"}
        {1 (.. prefix :h :c) 2 ":togglehiglightatcolorcolumn<CR>" :desc "column toggle"}
@@ -244,6 +245,7 @@
        {1 (.. prefix :p) 2 ":set paste!<CR>\"+p :set paste!<CR>" :desc "paste from clipboard"}
        {1 (.. prefix :s) 2 ":set spell!<CR>" :desc "spell toggle"}
        {1 (.. prefix :e) :group "NvimTree"}
+       {1 (.. prefix :e :m) 2 (fn [] (mini-files.open)) :desc "mini"}
        {1 (.. prefix :e :e) 2 ":<C-u>NvimTreeToggle<CR>" :desc "toggle"}
        {1 (.. prefix :e :r) 2 ":<C-u>NvimTreeFindFileToggle<CR>" :desc "find file toggle"}
        {1 (.. prefix :y) 2 "\"+yy" :desc "copy into clipboard" :mode [:n :v]}
