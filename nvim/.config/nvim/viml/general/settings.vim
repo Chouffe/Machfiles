@@ -17,7 +17,7 @@ set number                       " Enable hybrid mode
 set encoding=utf-8               " UTF-8 encoding
 set scrolloff=3                  " Number of screen lines to show around the cursor
 set showmatch                    " Show matches ({[
-set pastetoggle=<F2>
+"set pastetoggle=<F2>
 set listchars=tab:▸\ ,eol:¬
 " set textwidth=79               " Max text-width
 " Wildmenu {{{

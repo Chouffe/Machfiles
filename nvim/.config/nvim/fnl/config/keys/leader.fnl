@@ -74,7 +74,8 @@
        {1 (.. prefix :f :C) 2 (fn [] (snacks.picker.colorschemes)) :desc "colorschemes"}
 
        ;; LSP
-       {1 (.. :g :r) 2 (fn [] (snacks.picker.lsp_references)) :desc "references"}
+       ;; Not needed in nvim 0.11
+       ; {1 (.. :g :r :r) 2 (fn [] (snacks.picker.lsp_references)) :desc "references"}
 
 
        ;; git
