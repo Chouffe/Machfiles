@@ -5,7 +5,7 @@
                                              :djlint
                                              :prettier
                                              :hadolint
-                                             ; :ruff
+                                             :ruff
                                              :clj_kondo
                                              :cljstyle
                                              :zprint

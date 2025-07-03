@@ -91,10 +91,10 @@
               {1 :tyru/open-browser.vim
                :config (. (require :config.plugin.open-browser) :config)}
               ; plugin that completely replaces the UI for messages, cmdline and the popupmenu.
-              ; {1 :folke/noice.nvim
-              ;  :event :VeryLazy
-              ;  :dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
-              ;  :config (. (require :config.plugin.noice) :config)}
+              {1 :folke/noice.nvim
+               :event :VeryLazy
+               :dependencies [:MunifTanjim/nui.nvim :rcarriga/nvim-notify]
+               :config (. (require :config.plugin.noice) :config)}
               {1 :folke/todo-comments.nvim
                :dependencies [:nvim-lua/plenary.nvim]
                :config #(let [todo-comments (require :todo-comments)]
@@ -112,6 +112,33 @@
               :neovim/nvim-lspconfig
               {1 :j-hui/fidget.nvim
                :config (. (require :config.plugin.fidget-nvim) :config)}
+              ; AI
+              {1 :yetone/avante.nvim
+               :event :VeryLazy
+               :version false
+               :opts {:provider :openai
+                      :providers {:claude {:disable_tools true}
+                                  :openai {:model "gpt-4o-mini"
+                                           :disable_tools true}}}
+               :build :make
+               :dependencies [:nvim-treesitter/nvim-treesitter
+                              :stevearc/dressing.nvim
+                              :nvim-lua/plenary.nvim
+                              :MunifTanjim/nui.nvim
+                              :nvim-telescope/telescope.nvim
+                              :hrsh7th/nvim-cmp
+                              :ibhagwan/fzf-lua
+                              :nvim-tree/nvim-web-devicons
+                              :zbirenbaum/copilot.lua ; for providers='copilot'
+                              {1 :HakonHarnes/img-clip.nvim
+                               :event :VeryLazy
+                               :opts {:embed_image_as_base64 false
+                                      :prompt_for_file_name false
+                                      :drag_and_drop {:insert_mode true}
+                                      :use_absolute_path true}}
+                              {1 :MeanderingProgrammer/render-markdown.nvim
+                               :opts {:file_types [:markdown :Avante]}
+                               :ft [:markdown :Avante]}]}
               ; LSP
               {1 :ray-x/lsp_signature.nvim
                :event :VeryLazy
