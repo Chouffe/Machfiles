@@ -250,7 +250,11 @@
        {1 (.. prefix :e :e) 2 ":<C-u>NvimTreeToggle<CR>" :desc "toggle"}
        {1 (.. prefix :e :r) 2 ":<C-u>NvimTreeFindFileToggle<CR>" :desc "find file toggle"}
        {1 (.. prefix :y) 2 "\"+yy" :desc "copy into clipboard" :mode [:n :v]}
-       {1 (.. :g :c :c) :desc "comment toggle"}])))
+       {1 (.. :g :c :c) :desc "comment toggle"}
+       {1 (.. prefix :<left>) 2 ":vertical resize +20<cr>" :desc "resize vertical increse"}
+       {1 (.. prefix :<right>) 2 ":vertical resize -20<cr>" :desc "resize vertical decrease"}
+       {1 (.. prefix :<up>) 2 ":horizontal resize +10<cr>" :desc "resize horizontal increase"}
+       {1 (.. prefix :<down>) 2 ":horizontal resize -10<cr>" :desc "resize horizontal decrease"}])))
     ; (which-key.register
     ;   {:h {:name "highlight"
     ;        :c [":togglehiglightatcolorcolumn<cr>" "toggle highlight at column"]
