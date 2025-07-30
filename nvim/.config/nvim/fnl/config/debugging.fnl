@@ -18,22 +18,6 @@
        {1 (.. prefix :dh) 2 dap-widgets.hover :desc "hover"}
        {1 (.. prefix :ds) 2 (fn [] (dap-widgets.centered_float dap-widgets.scopes)) :desc "scopes"}])))
 
-    ; (which-key.register
-    ;   {:d {:name "debug"
-    ;        :b [dap.toggle_breakpoint "breakpoint toggle"]
-    ;        :c [dap.continue "continue"]
-    ;        :e [dapui.eval "eval"]
-    ;        :s [(fn [] (dap-widgets.centered_float dap-widgets.scopes)) "scopes"]
-    ;        :f [(fn [] (dap-widgets.centered_float dap-widgets.frames)) "frames"]
-    ;        :h [dap-widgets.hover "hover"]
-    ;        :p [dap-widgets.preview "preview"]
-    ;        :i [dap.step_into "step into"]
-    ;        :u [dapui.toggle "ui toggle"]
-    ;        :o [dap.step_over "step over"]
-    ;        :O [dap.step_out "step out"]
-    ;        :r [dap.repl.open "repl"]}}
-    ;   {:prefix prefix})))
-
 (fn setup-dap-ui []
   (let [dap (require :dap)
         dapui (require :dapui)]
