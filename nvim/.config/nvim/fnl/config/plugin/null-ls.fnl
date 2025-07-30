@@ -8,9 +8,10 @@
                               null-ls.builtins.formatting.djlint
                               ;; Python
                               ; null-ls.builtins.diagnostics.ruff
-                              null-ls.builtins.formatting.isort
+                              null-ls.builtins.formatting.ruff
+                              ; null-ls.builtins.formatting.isort
                               ; null-ls.builtins.formatting.docformatter
-                              null-ls.builtins.formatting.black
+                              ; null-ls.builtins.formatting.black
                               ;; Clojure
                               ; null-ls.builtins.formatting.zprint
                               ; null-ls.builtins.formatting.cljstyle

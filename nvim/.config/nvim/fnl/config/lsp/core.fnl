@@ -105,6 +105,8 @@
     (mason-lspconfig.setup {:ensure_installed [:pyright
                                                :bashls
                                                :ts_ls
+                                               ; Python
+                                               :ruff
                                                ; :jinja_lsp
                                                :clojure_lsp
                                                :dockerls
@@ -114,9 +116,15 @@
                                                :lua_ls
                                                :fennel_language_server]})
     ;; Setting up the LSPs
-    (lspconfig.pyright.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                  :document-formatting-on-save? true})
+    ;; Using Ruff for import's organizer
+    ;; Ignore all files for analysis to exclusively use Ruff for linting
+    (lspconfig.pyright.setup {:settings {:pyright {:disableOrganizeImports true} :python {:analysis {:ignore ["*"]}}}
+                              :on_attach (make-on-attach-handler {:force? false
+                                                                  :document-formatting-on-save? false})
                               : capabilities})
+    ; (lspconfig.ruff.setup {:on_attach (make-on-attach-handler {:force? false
+    ;                                                            :document-formatting-on-save? false})
+    ;                        : capabilities})
     (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
                                                                 :document-formatting-on-save? true})
                             : capabilities})

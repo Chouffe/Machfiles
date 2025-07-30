@@ -1,19 +1,30 @@
 (local nvim (require :aniseed.nvim))
 
-(fn python-setup []
-  (let [python-group-id (vim.api.nvim_create_augroup :python_config {})]
+; (fn python-setup []
+;   (let [python-group-id (vim.api.nvim_create_augroup :python_config {})]
+;     (vim.api.nvim_create_autocmd
+;       :BufWritePost
+;       {:group python-group-id
+;        :pattern "*.py"
+;        :callback (fn [_]
+;                    (comment
+;                      (let [filename (vim.api.nvim_buf_get_name 0)]
+;                        ;; Make sure to install black, isort and blackformatter with Mason
+;                        (vim.api.nvim_command (.. ":silent !black --preview -q " filename))
+;                        (vim.api.nvim_command (.. ":silent !isort --profile black --float-to-top -q " filename))
+;                        (vim.api.nvim_command (.. ":silent !docformatter --in-place --black " filename)))))
+;        :desc "Format python code with Black and isort"})))
+
+(fn nvim-lint-setup []
+  (let [group-id (vim.api.nvim_create_augroup :nvim-lint {})
+        nvim-lint (require :lint)]
     (vim.api.nvim_create_autocmd
       :BufWritePost
-      {:group python-group-id
-       :pattern "*.py"
+      {:group group-id
        :callback (fn [_]
-                   (comment
-                     (let [filename (vim.api.nvim_buf_get_name 0)]
-                       ;; Make sure to install black, isort and blackformatter with Mason
-                       (vim.api.nvim_command (.. ":silent !black --preview -q " filename))
-                       (vim.api.nvim_command (.. ":silent !isort --profile black --float-to-top -q " filename))
-                       (vim.api.nvim_command (.. ":silent !docformatter --in-place --black " filename)))))
+                   (nvim-lint.try_lint))
        :desc "Format python code with Black and isort"})))
+
 
 (fn general-clean-setup []
   (let [group-id (vim.api.nvim_create_augroup :config_group {})]
@@ -50,7 +61,8 @@
        :desc "Registers quickfix list keybindings"})))
 
 (fn setup []
-  (python-setup)
+  ; (python-setup)
+  (nvim-lint-setup)
   (general-clean-setup)
   (quickfix-list-setup))
 
