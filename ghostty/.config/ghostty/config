@@ -50,5 +50,4 @@
 gtk-titlebar = false
 background-opacity = 0.90
 theme = Rose Pine Moon
-
 window-decoration = false
