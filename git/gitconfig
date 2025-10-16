@@ -1,11 +1,12 @@
 [user]
-	name = Chouffe
+	name = Arthur Caillau
 	signingkey = FEF6AA450D2F807B
+	email = arthur@caillau.me
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
 	precomposeunicode = true
-	pager = delta --dark --theme="zenburn"
+	pager = delta --dark -- --theme="zenburn"
 [interactive]
         diffFilter = delta --color-only
 [alias]
@@ -49,3 +50,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[pull]
+	rebase = true
+[safe]
+	directory = /home/chouffe/runpod/pyronear-mlops
