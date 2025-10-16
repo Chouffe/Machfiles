@@ -1,4 +1,3 @@
-[general]
 import = ["~/.config/alacritty/rose-pine-moon.toml"]
 
 
@@ -70,7 +69,7 @@ mods = "Control"
 
 [window]
 dynamic_title = true
-opacity = 0.85
+opacity = 0.70
 # Mac OS config to turn option to alt key
 option_as_alt = "Both"
 # Hiding the title bar
@@ -82,4 +81,3 @@ x = 2
 y = 2
 
 [terminal]
-
