@@ -55,12 +55,8 @@
 
 (fn config []
   (let [mason-lspconfig (require :mason-lspconfig)
-        lspconfig (require :lspconfig)
-        cmp-nvim-lsp (require :cmp_nvim_lsp)
-        capabilities (cmp-nvim-lsp.default_capabilities)
-        nvim (require :aniseed.nvim)]
-    (disable-lsp-watcher)
-    ;; Make sure some lsp servers are always installed
+        nvim (require :aniseed.nvim)
+        lspconfig (require :lspconfig)]
     (mason-lspconfig.setup {:ensure_installed [:pyright
                                                :bashls
                                                :ts_ls
@@ -74,61 +70,7 @@
                                                :html
                                                :lua_ls
                                                :fennel_language_server]})
-    ;; Setting up the LSPs
-    ;; Using Ruff for import's organizer
-    ;; Ignore all files for analysis to exclusively use Ruff for linting
-    (lspconfig.pyright.setup {:settings {:pyright {:disableOrganizeImports true} :python {:analysis {:ignore ["*"]}}}
-                              :on_attach (make-on-attach-handler {:force? false
-                                                                  :document-formatting-on-save? false})
-                              : capabilities})
-    ; (lspconfig.ruff.setup {:on_attach (make-on-attach-handler {:force? false
-    ;                                                            :document-formatting-on-save? false})
-    ;                        : capabilities})
-    ;; Terraform
-    (lspconfig.terraformls.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                      :document-formatting-on-save? true})
-                                  : capabilities})
-    (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                :document-formatting-on-save? true})
-                            : capabilities})
-    ;; Docker
-    (lspconfig.dockerls.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                   :document-formatting-on-save? true})
-                               : capabilities})
-    (lspconfig.docker_compose_language_service.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                                          :document-formatting-on-save? true})
-                                                      : capabilities})
-    ; (lspconfig.jinja_lsp.setup {:on_attach (make-on-attach-handler {:force? true
-    ;                                                                 :document-formatting-on-save? true})
-    ;                             : capabilities})
-    ; (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
-    ;                                                             :document-formatting-on-save? true})
-    ;                         : capabilities})
-    (lspconfig.lua_ls.setup {: capabilities
-                             :settings {:Lua {:diagnostics {:globals [:vim]}}}})
-    (lspconfig.fennel_language_server.setup {: capabilities
-                                             :on_attach (make-on-attach-handler {:force? true
-                                                                                 :document-formatting-on-save? true})
-                                             :filetypes [:fennel]
-                                             :root_dir (lspconfig.util.root_pattern :fnl
-                                                                                    :lua)
-                                             :single_file_support true
-                                             :settings {:fennel {:diagnostics {:globals [:vim
-                                                                                         :jit
-                                                                                         :comment]}
-                                                                 :workspace {:library (vim.api.nvim_list_runtime_paths)}}}})
-    (lspconfig.clojure_lsp.setup {:on_attach (make-on-attach-handler {:document-formatting-on-save? true})
-                                  : capabilities
-                                  :root_dir (lspconfig.util.root_pattern :.git)})
-    (lspconfig.html.setup {: capabilities})
-    (lspconfig.yamlls.setup {:on_attach (make-on-attach-handler {:force? true
-                                                                 :document-formatting-on-save? true})
-                             : capabilities})
-    ; (lspconfig.bashls.setup {:on_attach (make-on-attach-handler {:force? true
-    ;                                                              :document-formatting-on-save? true})
-    ;                          : capabilities})
-    ;; TODO: setup default config from here: https://github.com/neovim/nvim-lspconfig
-    ;; TODO setup global mappings too
+    ;; Register the keybindings
     (vim.api.nvim_create_autocmd :LspAttach
                                  {:group (vim.api.nvim_create_augroup :UserLspConfig
                                                                       {})
@@ -139,6 +81,115 @@
                                                                      :omnifunc
                                                                      "v:lua.vim.lsp.omnifunc")
                                                 ;; Register keybindings
-                                                (register-keybindings bufnr)))})))
+                                                (register-keybindings bufnr)))})
+    ;; Enable all the following LSP servers with their associated configs
+    (let [lsps [{:lsp :pyright :config {}}
+                {:lsp :ruff :config {}}
+                {:lsp :terraformls :config {}}
+                {:lsp :dockerls :config {}}
+                {:lsp :ts_ls :config {}}
+                {:lsp :lua_ls :config {}}
+                {:lsp :fennel_language_server :config {}}
+                {:lsp :clojure_lsp :config {}}
+                {:lsp :htmls :config {}}
+                {:lsp :yamlls :config {}}
+                {:lsp :bashls :config {}}]]
+      (each [_ {: lsp : config} (ipairs lsps)]
+        ;; Enable the LSP
+        (vim.lsp.enable lsp)
+        ;; Customize a LSP config
+        (vim.lsp.config lsp config)))))
+
+
+    ;; customize a config
+    ; (vim.lsp.config :pyright {})))
+
+; (fn config []
+;   (let [mason-lspconfig (require :mason-lspconfig)
+;         lspconfig (require :lspconfig)
+;         cmp-nvim-lsp (require :cmp_nvim_lsp)
+;         capabilities (cmp-nvim-lsp.default_capabilities)
+;         nvim (require :aniseed.nvim)]
+;     (disable-lsp-watcher)
+;     ;; Make sure some lsp servers are always installed
+;     (mason-lspconfig.setup {:ensure_installed [:pyright
+;                                                :bashls
+;                                                :ts_ls
+;                                                ; Python
+;                                                :ruff
+;                                                ; :jinja_lsp
+;                                                :clojure_lsp
+;                                                :dockerls
+;                                                :docker_compose_language_service
+;                                                :yamlls
+;                                                :html
+;                                                :lua_ls
+;                                                :fennel_language_server]})
+;     ;; Setting up the LSPs
+;     ;; Using Ruff for import's organizer
+;     ;; Ignore all files for analysis to exclusively use Ruff for linting
+;     (lspconfig.pyright.setup {:settings {:pyright {:disableOrganizeImports true} :python {:analysis {:ignore ["*"]}}}
+;                               :on_attach (make-on-attach-handler {:force? false
+;                                                                   :document-formatting-on-save? false})
+;                               : capabilities})
+;     ; (lspconfig.ruff.setup {:on_attach (make-on-attach-handler {:force? false
+;     ;                                                            :document-formatting-on-save? false})
+;     ;                        : capabilities})
+;     ;; Terraform
+;     (lspconfig.terraformls.setup {:on_attach (make-on-attach-handler {:force? true
+;                                                                       :document-formatting-on-save? true})
+;                                   : capabilities})
+;     (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
+;                                                                 :document-formatting-on-save? true})
+;                             : capabilities})
+;     ;; Docker
+;     (lspconfig.dockerls.setup {:on_attach (make-on-attach-handler {:force? true
+;                                                                    :document-formatting-on-save? true})
+;                                : capabilities})
+;     (lspconfig.docker_compose_language_service.setup {:on_attach (make-on-attach-handler {:force? true
+;                                                                                           :document-formatting-on-save? true})
+;                                                       : capabilities})
+;     ; (lspconfig.jinja_lsp.setup {:on_attach (make-on-attach-handler {:force? true
+;     ;                                                                 :document-formatting-on-save? true})
+;     ;                             : capabilities})
+;     ; (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
+;     ;                                                             :document-formatting-on-save? true})
+;     ;                         : capabilities})
+;     (lspconfig.lua_ls.setup {: capabilities
+;                              :settings {:Lua {:diagnostics {:globals [:vim]}}}})
+;     (lspconfig.fennel_language_server.setup {: capabilities
+;                                              :on_attach (make-on-attach-handler {:force? true
+;                                                                                  :document-formatting-on-save? true})
+;                                              :filetypes [:fennel]
+;                                              :root_dir (lspconfig.util.root_pattern :fnl
+;                                                                                     :lua)
+;                                              :single_file_support true
+;                                              :settings {:fennel {:diagnostics {:globals [:vim
+;                                                                                          :jit
+;                                                                                          :comment]}
+;                                                                  :workspace {:library (vim.api.nvim_list_runtime_paths)}}}})
+;     (lspconfig.clojure_lsp.setup {:on_attach (make-on-attach-handler {:document-formatting-on-save? true})
+;                                   : capabilities
+;                                   :root_dir (lspconfig.util.root_pattern :.git)})
+;     (lspconfig.html.setup {: capabilities})
+;     (lspconfig.yamlls.setup {:on_attach (make-on-attach-handler {:force? true
+;                                                                  :document-formatting-on-save? true})
+;                              : capabilities})
+;     ; (lspconfig.bashls.setup {:on_attach (make-on-attach-handler {:force? true
+;     ;                                                              :document-formatting-on-save? true})
+;     ;                          : capabilities})
+;     ;; TODO: setup default config from here: https://github.com/neovim/nvim-lspconfig
+;     ;; TODO setup global mappings too
+;     (vim.api.nvim_create_autocmd :LspAttach
+;                                  {:group (vim.api.nvim_create_augroup :UserLspConfig
+;                                                                       {})
+;                                   :callback (fn [ev]
+;                                               (let [bufnr ev.buf]
+;                                                 ;; Set omnicompletion with LSP
+;                                                 (nvim.buf_set_option bufnr
+;                                                                      :omnifunc
+;                                                                      "v:lua.vim.lsp.omnifunc")
+;                                                 ;; Register keybindings
+;                                                 (register-keybindings bufnr)))})))
 
 {: config : register-keybindings}
