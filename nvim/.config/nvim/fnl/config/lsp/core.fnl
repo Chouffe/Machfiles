@@ -84,6 +84,10 @@
     ; (lspconfig.ruff.setup {:on_attach (make-on-attach-handler {:force? false
     ;                                                            :document-formatting-on-save? false})
     ;                        : capabilities})
+    ;; Terraform
+    (lspconfig.terraformls.setup {:on_attach (make-on-attach-handler {:force? true
+                                                                      :document-formatting-on-save? true})
+                                  : capabilities})
     (lspconfig.ts_ls.setup {:on_attach (make-on-attach-handler {:force? true
                                                                 :document-formatting-on-save? true})
                             : capabilities})

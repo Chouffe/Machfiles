@@ -113,6 +113,20 @@
               {1 :j-hui/fidget.nvim
                :config (. (require :config.plugin.fidget-nvim) :config)}
               ; AI
+              ; {1 :olimorris/codecompanion.nvim
+              ;  :opts {:strategies
+              ;         {:chat {:adapter :openai
+              ;                 :opts {:completion_provider :cmp}}
+              ;          :inline {:adapter :openai
+              ;                   :keymaps {:accept_change {:modes {:n "ga"} :description "Accept the suggested change"}
+              ;                             :reject_change {:modes {:n "gr"} :description "Reject the suggested change"}}}
+              ;          :cmd {:adapter :openai}}}
+              ;  :dependencies [:nvim-lua/plenary.nvim
+              ;                 :nvim-treesitter/nvim-treesitter
+              ;                 {1 :MeanderingProgrammer/render-markdown.nvim :ft [:markdown :codecompanion]}
+              ;                 ; {1 :OXY2DEV/markview.nvim :lazy false :opts {:preview {:filetypes [:markdown :codecompanion] :ignore_buftypes []}}}
+              ;                 {1 :echasnovski/mini.diff :config (fn [] (let [diff (require :mini.diff)]
+              ;                                                            (diff.setup {:source (diff.gen_source.none)})))}]}
               {1 :yetone/avante.nvim
                :event :VeryLazy
                :version false
@@ -293,6 +307,29 @@
                ; :config (fn [] (. (require :config.theme) :config))}
               :joshdick/onedark.vim
               :projekt0n/github-nvim-theme
+              ; CSV
+              {1 :hat0uma/csvview.nvim
+               :opts {:parser {:comments ["#" "//"]}
+                      :keymaps {:textobject_field_inner {1 :if :mode [:o :x]}
+                                :textobject_field_outer {1 :af :mode [:o :x]}
+                                :jump_next_field_end {1 :<Tab> :mode [:n :v]}
+                                :jump_prev_field_end {1 :<S-Tab> :mode [:n :v]}
+                                :jump_next_row {1 :<Enter> :mode [:n :v]}
+                                :jump_prev_row {1 :<S-Enter> :mode [:n :v]}}}
+; -- Text objects for selecting fields
+;       textobject_field_inner = { "if", mode = { "o", "x" } },
+;       textobject_field_outer = { "af", mode = { "o", "x" } },
+;       -- Excel-like navigation:
+;       -- Use <Tab> and <S-Tab> to move horizontally between fields.
+;       -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+;       -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+;       jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+;       jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+;       jump_next_row = { "<Enter>", mode = { "n", "v" } },
+;       jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
+                                
+               :cmd [:CsvViewEnable :CsvViewDisable :CsvViewToggle]}
+
               ; Trouble
               {1 :folke/trouble.nvim
                :opts {}

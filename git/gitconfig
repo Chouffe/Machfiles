@@ -52,5 +52,3 @@
 	required = true
 [pull]
 	rebase = true
-[safe]
-	directory = /home/chouffe/runpod/pyronear-mlops
