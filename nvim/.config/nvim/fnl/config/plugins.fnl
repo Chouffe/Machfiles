@@ -200,9 +200,12 @@
               {1 :saghen/blink.cmp
                :version "v1.*"
                :dependencies [:rafamadriz/friendly-snippets]
-               :opts {:keymap {:preset :default}
+               :opts {:keymap {:preset :enter
+                               :<C-space> false
+                               :<Tab> [:show :fallback]}
                       :appearance {:nerd_font_variant :mono}
-                      :completion {:documentation {:auto_show false}}
+                      :completion {:documentation {:auto_show false}
+                                   :list {:selection {:preselect false}}}
                       :sources {:default [:lsp :path :snippets :buffer]}}
                :opts_extend [:sources.default]}
               ;; Dap
