@@ -15,7 +15,7 @@
                                              :cfn_lint
                                              :markdownlint
                                              ; :docformatter
-                                             ; :shellcheck
+                                             :shellcheck
                                              ; :terraform_validate
                                              :shellharden
                                              :shfmt]})))

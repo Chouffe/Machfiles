@@ -228,10 +228,10 @@
               ; {1 :nvimtools/none-ls.nvim
               ;  :dependencies [:nvim-lua/plenary.nvim]
               ;  :config (. (require :config.plugin.null-ls) :config)}
-              ; {1 :jay-babu/mason-null-ls.nvim
-              ;  :event [:bufreadpre :bufnewfile]
-              ;  :dependencies [:williamboman/mason.nvim :nvimtools/none-ls.nvim]
-              ;  :config (. (require :config.plugin.mason-null-ls) :config)}
+              {1 :jay-babu/mason-null-ls.nvim
+               :event [:bufreadpre :bufnewfile]
+               :dependencies [:williamboman/mason.nvim :nvimtools/none-ls.nvim]
+               :config (. (require :config.plugin.mason-null-ls) :config)}
               {1 :stevearc/conform.nvim :opts 
                {:format_on_save {:timeout_ms 500
                                  :lsp_format
