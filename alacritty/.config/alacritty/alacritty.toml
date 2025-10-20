@@ -14,7 +14,7 @@ blinking = "Never"
 # family = "MesloLGS NF"
 
 [font]
-size = 16.0
+size = 13.0
 # size = 22.0
 
 [font.glyph_offset]
@@ -69,7 +69,7 @@ mods = "Control"
 
 [window]
 dynamic_title = true
-opacity = 0.70
+opacity = 0.92
 # Mac OS config to turn option to alt key
 option_as_alt = "Both"
 # Hiding the title bar
