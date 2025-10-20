@@ -196,17 +196,44 @@
                :dependencies [:HiPhish/rainbow-delimiters.nvim
                               :windwp/nvim-ts-autotag]
                :config (. (require :config.plugin.treesitter) :config)}
+              ; Autocomplete compatibility layer for nvim-cmp sources
+              {1 :saghen/blink.compat
+               :version "*" 
+               :lazy true
+               :opts {}}
               ; Autocomplete
               {1 :saghen/blink.cmp
                :version "v1.*"
-               :dependencies [:rafamadriz/friendly-snippets]
+               :dependencies [:rafamadriz/friendly-snippets
+                              :saghen/blink.compat
+                              {1 :mikavilpas/blink-ripgrep.nvim
+                               :version "*"}
+                              {1 :mgalliou/blink-cmp-tmux}]
                :opts {:keymap {:preset :enter
                                :<C-space> false
                                :<Tab> [:show :fallback]}
                       :appearance {:nerd_font_variant :mono}
                       :completion {:documentation {:auto_show false}
                                    :list {:selection {:preselect false}}}
-                      :sources {:default [:lsp :path :snippets :buffer]}}
+                      :sources {:default [:lsp :path :snippets :buffer :omni :ripgrep :tmux]
+                                :per_filetype {:clojure [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]
+                                               :fennel [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]
+                                               :scheme [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]
+                                               :lisp [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]}
+                                :providers {:conjure {:name "Conjure"
+                                                     :module "blink.compat.source"
+                                                     :opts {}}
+                                           :ripgrep {:name "Ripgrep"
+                                                    :module "blink-ripgrep"
+                                                    :opts {:prefix_min_len 3
+                                                           :context_size 5
+                                                           :max_filesize "1M"}}
+                                           :tmux {:name "Tmux"
+                                                 :module "blink-cmp-tmux"
+                                                 :opts {:all_panes false
+                                                        :capture_history false
+                                                        :triggered_only false
+                                                        :trigger_chars ["."]}}}}}
                :opts_extend [:sources.default]}
               ;; Dap
               {1 :mfussenegger/nvim-dap
