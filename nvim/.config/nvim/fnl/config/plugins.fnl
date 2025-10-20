@@ -208,14 +208,15 @@
                               :saghen/blink.compat
                               {1 :mikavilpas/blink-ripgrep.nvim
                                :version "*"}
-                              {1 :moyiz/blink-emoji.nvim}]
+                              {1 :moyiz/blink-emoji.nvim}
+                              {1 :mgalliou/blink-cmp-tmux}]
                :opts {:keymap {:preset :enter
                                :<C-space> false
                                :<Tab> [:show :fallback]}
                       :appearance {:nerd_font_variant :mono}
                       :completion {:documentation {:auto_show false}
                                    :list {:selection {:preselect false}}}
-                      :sources {:default [:lsp :path :snippets :buffer :omni :ripgrep :emoji]
+                      :sources {:default [:lsp :path :snippets :buffer :omni :ripgrep :emoji :tmux]
                                 :per_filetype {:clojure [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
                                                :fennel [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
                                                :scheme [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
@@ -234,7 +235,10 @@
                                                   :module "blink-emoji"
                                                   :score_offset 15
                                                   :opts {:insert true
-                                                         :trigger (fn [] [":"])}}}}}
+                                                         :trigger (fn [] [":"])}}
+                                           :tmux {:name "Tmux"
+                                                 :module "blink-cmp-tmux"
+                                                 :opts {}}}}}
                :opts_extend [:sources.default]}
               ;; Dap
               {1 :mfussenegger/nvim-dap
