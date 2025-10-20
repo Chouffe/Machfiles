@@ -208,18 +208,20 @@
                               :saghen/blink.compat
                               {1 :mikavilpas/blink-ripgrep.nvim
                                :version "*"}
-                              {1 :mgalliou/blink-cmp-tmux}]
+                              {1 :moyiz/blink-emoji.nvim}]
                :opts {:keymap {:preset :enter
                                :<C-space> false
                                :<Tab> [:show :fallback]}
                       :appearance {:nerd_font_variant :mono}
                       :completion {:documentation {:auto_show false}
                                    :list {:selection {:preselect false}}}
-                      :sources {:default [:lsp :path :snippets :buffer :omni :ripgrep :tmux]
-                                :per_filetype {:clojure [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]
-                                               :fennel [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]
-                                               :scheme [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]
-                                               :lisp [:lsp :path :snippets :buffer :omni :conjure :ripgrep :tmux]}
+                      :sources {:default [:lsp :path :snippets :buffer :omni :ripgrep :emoji]
+                                :per_filetype {:clojure [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
+                                               :fennel [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
+                                               :scheme [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
+                                               :lisp [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
+                                               :markdown [:lsp :path :snippets :buffer :omni :ripgrep :emoji]
+                                               :gitcommit [:lsp :path :snippets :buffer :omni :ripgrep :emoji]}
                                 :providers {:conjure {:name "Conjure"
                                                      :module "blink.compat.source"
                                                      :opts {}}
@@ -228,12 +230,11 @@
                                                     :opts {:prefix_min_len 3
                                                            :context_size 5
                                                            :max_filesize "1M"}}
-                                           :tmux {:name "Tmux"
-                                                 :module "blink-cmp-tmux"
-                                                 :opts {:all_panes false
-                                                        :capture_history false
-                                                        :triggered_only false
-                                                        :trigger_chars ["."]}}}}}
+                                           :emoji {:name "Emoji"
+                                                  :module "blink-emoji"
+                                                  :score_offset 15
+                                                  :opts {:insert true
+                                                         :trigger (fn [] [":"])}}}}}
                :opts_extend [:sources.default]}
               ;; Dap
               {1 :mfussenegger/nvim-dap
