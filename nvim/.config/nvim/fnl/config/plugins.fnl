@@ -140,7 +140,7 @@
                               :nvim-lua/plenary.nvim
                               :MunifTanjim/nui.nvim
                               :nvim-telescope/telescope.nvim
-                              :hrsh7th/nvim-cmp
+                              :saghen/blink.cmp
                               :ibhagwan/fzf-lua
                               :nvim-tree/nvim-web-devicons
                               :zbirenbaum/copilot.lua ; for providers='copilot'
@@ -197,18 +197,14 @@
                               :windwp/nvim-ts-autotag]
                :config (. (require :config.plugin.treesitter) :config)}
               ; Autocomplete
-              {1 :hrsh7th/nvim-cmp
-               :dependencies [:hrsh7th/cmp-buffer
-                              :hrsh7th/cmp-nvim-lsp
-                              :PaterJason/cmp-conjure
-                              :andersevenrud/cmp-tmux
-                              :lukas-reineke/cmp-rg
-                              :hrsh7th/cmp-path
-                              :hrsh7th/cmp-cmdline
-                              :hrsh7th/cmp-nvim-lua
-                              :hrsh7th/cmp-nvim-lsp-signature-help
-                              :rcarriga/cmp-dap
-                              :onsails/lspkind-nvim]}
+              {1 :saghen/blink.cmp
+               :version "v1.*"
+               :dependencies [:rafamadriz/friendly-snippets]
+               :opts {:keymap {:preset :default}
+                      :appearance {:nerd_font_variant :mono}
+                      :completion {:documentation {:auto_show false}}
+                      :sources {:default [:lsp :path :snippets :buffer]}}
+               :opts_extend [:sources.default]}
               ;; Dap
               {1 :mfussenegger/nvim-dap
                :dependencies [:rcarriga/nvim-dap-ui :nvim-neotest/nvim-nio]}
@@ -340,13 +336,10 @@
   (let [lazy (require :lazy)]
     (lazy.setup specs))
   (let [config-theme (require :config.theme)
-        config-cmp (require :config.plugin.cmp)
         mason (require :mason)
         mason-nvim-dap (require :config.plugin.mason-nvim-dap)]
     ;; Configure the UI theme
     (config-theme.config)
-    ;; Configure the autocompletion
-    (config-cmp.config)
     ;; Packages
     (mason.setup)
     ;; DAP
