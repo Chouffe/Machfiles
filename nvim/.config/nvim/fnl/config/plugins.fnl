@@ -221,7 +221,7 @@
                                                :scheme [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
                                                :lisp [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
                                                :markdown [:lsp :path :snippets :buffer :omni :ripgrep :emoji]
-                                               :gitcommit [:lsp :path :snippets :buffer :omni :ripgrep :emoji]}
+                                               :gitcommit [:lsp :path :snippets :buffer :ripgrep :emoji]}
                                 :providers {:conjure {:name "Conjure"
                                                      :module "blink.compat.source"
                                                      :opts {}}
