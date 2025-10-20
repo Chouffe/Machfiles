@@ -23,7 +23,7 @@
       {:group group-id
        :callback (fn [_]
                    (nvim-lint.try_lint))
-       :desc "Format python code with Black and isort"})))
+       :desc "Format code with nvim-lint"})))
 
 
 (fn general-clean-setup []
