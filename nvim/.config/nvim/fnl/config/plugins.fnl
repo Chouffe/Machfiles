@@ -107,7 +107,7 @@
               {1 :RRethy/vim-illuminate
                :config (. (require :config.plugin.illuminate) :config)}
               ;; Packages
-              :williamboman/mason.nvim
+              {1 :williamboman/mason.nvim :opts {:ensured_installed ["prettierd"]}}
               :williamboman/mason-lspconfig.nvim
               :neovim/nvim-lspconfig
               {1 :j-hui/fidget.nvim
@@ -267,7 +267,9 @@
                {:format_on_save {:timeout_ms 500
                                  :lsp_format
                                  "fallback"}
-                :formatters_by_ft {:python
+
+                :formatters_by_ft {:javascript ["prettierd"]
+                                   :python
                                    ["ruff_fix" 
                                     "ruff_format"
                                     "ruff_organize_imports"]}}}
