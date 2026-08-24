@@ -141,7 +141,7 @@ bindkey '^I' $fzf_default_completion
 
 
 # Configure pinentry to use the correct TTY
-gpg-connect-agent updatestartuptty /bye >/dev/null
+[ -z "$SSH_CONNECTION" ] && gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 
 # Fix Ctrl-U
 bindkey \^U backward-kill-line
@@ -192,3 +192,27 @@ unset file;
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Scaleway CLI autocomplete initialization.
+eval "$(scw autocomplete script shell=zsh)"
+
+# Enable pass extensions
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+
+eval "$(/home/chouffe/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
+
+# claude-sandbox launcher
+alias csbox="$HOME/playground/claude/bin/claude-sandbox"
+
+# Use forwarded laptop YubiKey for GPG ONLY in an SSH session whose forwarded
+# agent socket is live. Physical-console logins have no SSH_CONNECTION, so they
+# keep the normal ~/.gnupg and the desktop own YubiKey, exactly as before.
+if [ -n "$SSH_CONNECTION" ] && \
+   [ -S "/run/user/$(id -u)/gnupg/d.h353o1a63jtd4e33ni4xky1p/S.gpg-agent" ]; then
+    export GNUPGHOME="$HOME/.gnupg-forwarded"
+    # Register this session tty with the FORWARDED (laptop) gpg-agent, so signing
+    # (git commit -S / gpg --clearsign) can prompt for the YubiKey PIN. Without
+    # this the forwarded 2.2.x agent has no tty for the session and gpg reports
+    # "no gpg-agent running in this session".
+    gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
+fi

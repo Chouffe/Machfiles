@@ -59,8 +59,16 @@ export KEYID=0x397F35B12DB2DDA7
 # GPG_TTY=$(tty)
 export GPG_TTY=$(tty)
 
-# Use gpg-agent as my ssh-agent
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# Use gpg-agent as my ssh-agent -- EXCEPT in an SSH session that already has a
+# forwarded ssh-agent. SSH sets SSH_AUTH_SOCK to a /tmp/ssh-*/agent.* socket when
+# ForwardAgent is on; that socket carries the forwarded (laptop) YubiKey, which is
+# what we want for git/ssh on the remote. Overriding it with gpgconf would point
+# at the local gpg-agent ssh socket (no usable key) -> Permission denied.
+# On the laptop and on physical/non-forwarded logins, fall back to gpg-agent.
+case "$SSH_AUTH_SOCK" in
+    /tmp/ssh-*) : ;;  # forwarded ssh-agent present -- keep it
+    *) export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket) ;;
+esac
 
 # pyenv
 # export PYENV_ROOT="$HOME/.pyenv"
