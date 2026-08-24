@@ -31,7 +31,18 @@ __pycache__
 
 # Scratch folders
 .scratch
+.scratch/
 
 # Direnv
 .direnv
 .envrc
+
+# AI agents
+CLAUDE.md
+.claude/
+.claude/settings.local.json
+TODO.md
+.superpowers/
+.superpowers/brainstorm/
+
+.worktrees
