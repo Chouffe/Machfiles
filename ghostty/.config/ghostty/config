@@ -51,3 +51,4 @@ gtk-titlebar = false
 background-opacity = 0.90
 theme = Rose Pine Moon
 window-decoration = false
+keybind = shift+enter=text:\x1b\r
