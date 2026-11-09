@@ -8,7 +8,7 @@
                :lazy false
                :dependencies [:echasnovski/mini.icons :kyazdani42/nvim-web-devicons]
                :opts {:bigfile {:enable true}
-                      :dashboard {:enabled true :example "compact_files"}
+                      :dashboard {:enabled false}
                       :explorer {:enable true}
                       :gitbrowse {:enable true}
                       :indent {:enable true}
@@ -127,32 +127,31 @@
               ;                 ; {1 :OXY2DEV/markview.nvim :lazy false :opts {:preview {:filetypes [:markdown :codecompanion] :ignore_buftypes []}}}
               ;                 {1 :echasnovski/mini.diff :config (fn [] (let [diff (require :mini.diff)]
               ;                                                            (diff.setup {:source (diff.gen_source.none)})))}]}
-              {1 :yetone/avante.nvim
-               :event :VeryLazy
-               :version false
-               :opts {:provider :openai
-                      :providers {:claude {:disable_tools true}
-                                  :openai {:model "gpt-4o-mini"
-                                           :disable_tools true}}}
-               :build :make
-               :dependencies [:nvim-treesitter/nvim-treesitter
-                              :stevearc/dressing.nvim
-                              :nvim-lua/plenary.nvim
-                              :MunifTanjim/nui.nvim
-                              :nvim-telescope/telescope.nvim
-                              :saghen/blink.cmp
-                              :ibhagwan/fzf-lua
-                              :nvim-tree/nvim-web-devicons
-                              :zbirenbaum/copilot.lua ; for providers='copilot'
-                              {1 :HakonHarnes/img-clip.nvim
-                               :event :VeryLazy
-                               :opts {:embed_image_as_base64 false
-                                      :prompt_for_file_name false
-                                      :drag_and_drop {:insert_mode true}
-                                      :use_absolute_path true}}
-                              {1 :MeanderingProgrammer/render-markdown.nvim
-                               :opts {:file_types [:markdown :Avante]}
-                               :ft [:markdown :Avante]}]}
+              ; {1 :yetone/avante.nvim
+              ;  :event :VeryLazy
+              ;  :version false
+              ;  :opts {:provider :openai
+              ;         :providers {:claude {:disable_tools true}
+              ;                     :openai {:model "gpt-4o-mini"
+              ;                              :disable_tools true}}}
+              ;  :build :make
+              ;  :dependencies [:nvim-treesitter/nvim-treesitter
+              ;                 :stevearc/dressing.nvim
+              ;                 :nvim-lua/plenary.nvim
+              ;                 :MunifTanjim/nui.nvim
+              ;                 :nvim-telescope/telescope.nvim
+              ;                 :ibhagwan/fzf-lua
+              ;                 :nvim-tree/nvim-web-devicons
+              ;                 :zbirenbaum/copilot.lua
+              ;                 {1 :HakonHarnes/img-clip.nvim
+              ;                  :event :VeryLazy
+              ;                  :opts {:embed_image_as_base64 false
+              ;                         :prompt_for_file_name false
+              ;                         :drag_and_drop {:insert_mode true}
+              ;                         :use_absolute_path true}}
+              ;                 {1 :MeanderingProgrammer/render-markdown.nvim
+              ;                  :opts {:file_types [:markdown :Avante]}
+              ;                  :ft [:markdown :Avante]}]}
               ; LSP
               {1 :ray-x/lsp_signature.nvim
                :event :VeryLazy
@@ -197,49 +196,17 @@
                               :windwp/nvim-ts-autotag]
                :config (. (require :config.plugin.treesitter) :config)}
               ; Autocomplete compatibility layer for nvim-cmp sources
-              {1 :saghen/blink.compat
-               :version "*" 
-               :lazy true
-               :opts {}}
               ; Autocomplete
               {1 :saghen/blink.cmp
                :version "v1.*"
-               :dependencies [:rafamadriz/friendly-snippets
-                              :saghen/blink.compat
-                              {1 :mikavilpas/blink-ripgrep.nvim
-                               :version "*"}
-                              {1 :moyiz/blink-emoji.nvim}
-                              {1 :mgalliou/blink-cmp-tmux}]
+               :dependencies [:rafamadriz/friendly-snippets]
                :opts {:keymap {:preset :enter
                                :<C-space> false
                                :<Tab> [:show :fallback]}
                       :appearance {:nerd_font_variant :mono}
                       :completion {:documentation {:auto_show false}
                                    :list {:selection {:preselect false}}}
-                      :sources {:default [:lsp :path :snippets :buffer :omni :ripgrep :emoji :tmux]
-                                :per_filetype {:clojure [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
-                                               :fennel [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
-                                               :scheme [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
-                                               :lisp [:lsp :path :snippets :buffer :omni :conjure :ripgrep :emoji]
-                                               :markdown [:lsp :path :snippets :buffer :omni :ripgrep :emoji]
-                                               :gitcommit [:lsp :path :snippets :buffer :ripgrep :emoji]}
-                                :providers {:conjure {:name "Conjure"
-                                                     :module "blink.compat.source"
-                                                     :opts {}}
-                                           :ripgrep {:name "Ripgrep"
-                                                    :module "blink-ripgrep"
-                                                    :opts {:prefix_min_len 3
-                                                           :context_size 5
-                                                           :max_filesize "1M"}}
-                                           :emoji {:name "Emoji"
-                                                  :module "blink-emoji"
-                                                  :score_offset 15
-                                                  :opts {:insert true
-                                                         :trigger (fn [] [":"])}}
-                                           :tmux {:name "Tmux"
-                                                 :module "blink-cmp-tmux"
-                                                 :opts {}}}}}
-               :opts_extend [:sources.default]}
+                      :sources {:default [:lsp :path :snippets :buffer]}}}
               ;; Dap
               {1 :mfussenegger/nvim-dap
                :dependencies [:rcarriga/nvim-dap-ui :nvim-neotest/nvim-nio]}
