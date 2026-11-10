@@ -41,6 +41,8 @@
 	autocorrect = 1
 [commit]
 	gpgsign = true
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
 [merge]
 	tool = vimdiff
 [init]
