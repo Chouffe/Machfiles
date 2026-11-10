@@ -1,0 +1,21 @@
+#!/bin/sh
+# Blocks a push if any commit being pushed contains a secret, including commits made
+# with --no-verify or before the hooks were enabled. See "Secret scanning" in README.md.
+. "$(dirname "$0")/lib.sh"
+remote=$1
+while read -r _ local_sha _ remote_sha; do
+  case $local_sha in *[!0]*) ;; *) continue ;; esac   # branch deletion: nothing to scan
+  if git cat-file -e "$remote_sha^{commit}" 2>/dev/null; then
+    range="$remote_sha..$local_sha"                   # the new commits on top of the remote branch
+  else
+    # New branch, or a remote commit this clone hasn't fetched (e.g. before a force-push):
+    # every commit not already on a known remote branch.
+    range="$local_sha --not --remotes=$remote"
+  fi
+  # gitleaks reports "no leaks" when git log fails, so check the range first.
+  if ! git rev-list $range >/dev/null 2>&1; then
+    echo "secret scan: can't list the commits to scan ($range), push blocked." >&2
+    exit 1
+  fi
+  scan push git --log-opts="$range" "$ROOT"
+done

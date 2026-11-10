@@ -1,0 +1,15 @@
+# Secret scanning config, used by the git hooks in .githooks/ and by CI.
+# Keeps all of gitleaks' default rules and only adds to them.
+title = "Machfiles"
+
+[extend]
+useDefault = true
+
+# The default rules only catch AWS secret keys and session tokens through the generic
+# entropy-based rule. Match them by name too.
+[[rules]]
+id = "aws-secret-in-env"
+description = "AWS secret access key or session token, as an env var, in ~/.aws/credentials or in JSON"
+regex = '''(?i)aws_(?:secret_access_key|session_token)["']?\s*[:=]\s*["']?([A-Za-z0-9/+=]{20,})'''
+secretGroup = 1
+keywords = ["aws_secret_access_key", "aws_session_token"]
