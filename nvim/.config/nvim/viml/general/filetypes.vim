@@ -25,6 +25,7 @@ augroup filetypes
   autocmd BufNewFile,BufRead *.rss       setfiletype xml
   autocmd BufNewFile,BufRead *.skim      setfiletype slim
   autocmd BufNewFile,BufRead *.styl      setfiletype css
+  autocmd BufNewFile,BufRead .env.*      setfiletype sh
 
   " automatic gofmt
   autocmd FileType go nmap <buffer> = <Esc>:Fmt<CR>
