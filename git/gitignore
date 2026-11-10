@@ -39,6 +39,7 @@ __pycache__
 
 # AI agents
 CLAUDE.md
+CLAUDE.local.md
 .claude/
 .claude/settings.local.json
 TODO.md
