@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks a commit whose staged changes contain a secret. See "Secret scanning" in README.md.
+. "$(dirname "$0")/lib.sh"
+scan commit git --pre-commit --staged "$ROOT"
