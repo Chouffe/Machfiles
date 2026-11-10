@@ -47,3 +47,4 @@ TODO.md
 
 .worktrees
 sbxenv.yaml
+.env.shared
