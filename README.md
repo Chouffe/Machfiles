@@ -1,31 +1,68 @@
 # Machfiles
 
-## Installing
+My dotfiles, one [GNU stow](https://www.gnu.org/software/stow/) package per program.
 
-You will need `git` and GNU `stow`
+## Setting up a new machine
 
-Clone into your `$HOME` directory or `~`
+1. Install `git` and `stow`.
+2. Clone the repo into a folder in `$HOME`. Stow links into the parent of the folder it runs from, so this is what puts the links in `~`:
 
-```bash
-git clone https://github.com/Chouffe/Machfiles.git ~
-```
+   ```bash
+   git clone https://github.com/Chouffe/Machfiles.git ~/Machfiles
+   cd ~/Machfiles
+   ```
 
-Run `stow` to symlink everything or just select what you want
+3. Stow the packages this machine needs (see [Packages](#packages)):
 
-```bash
-stow */ # Everything (the '/' ignores the README)
-```
+   ```bash
+   # Linux desktop (niri + DMS)
+   stow zsh git nvim tmux ghostty alacritty niri dms direnv tig ranger
+   ```
 
-```bash
-stow zsh # Just my zsh config
-```
+   Don't run `stow */`. It also links `programs/` (notes, not config) into `~`, along with the legacy packages.
 
-Turn on the secret-scanning git hooks, once per clone (needs [mise](https://mise.jdx.dev)):
+   Stow refuses to overwrite a file that already exists, such as the default `~/.zshrc`. Move that file out of the way and run the command again.
 
-```bash
-mise trust
-mise run setup    # installs gitleaks and sets core.hooksPath to .githooks
-```
+4. Read the notes for the packages that have them (what they need installed, first-run steps):
+   - `git`: see [`git/README.md`](git/README.md)
+   - `nvim`: see [`nvim/README.md`](nvim/README.md)
+5. Turn on the secret-scanning git hooks (needs [mise](https://mise.jdx.dev)):
+
+   ```bash
+   mise trust
+   mise run setup    # installs gitleaks and sets core.hooksPath to .githooks
+   ```
+
+6. Install the programs and do the system setup in [`programs/`](programs): `deps.list` lists the programs to install, and `setup.md` covers the YubiKey, pass, fonts and keyboard.
+
+Remove a package's links with `stow -D <package>`. Run stow from the repo root so it picks up [`.stowrc`](.stowrc), which links files named `dot-foo` as `.foo`.
+
+## Packages
+
+| Package | What it configures | Platform | Status |
+|---|---|---|---|
+| `zsh` | zsh with oh-my-zsh, plus aliases, functions and `PATH` | any | current |
+| `git` | git config, global gitignore, signing keys | any | current |
+| `nvim` | Neovim in Fennel (lazy.nvim + aniseed) | any | current |
+| `tmux` | tmux and its status bar | any | current |
+| `ghostty` | Ghostty terminal | any | current |
+| `alacritty` | Alacritty terminal and themes | any | current |
+| `direnv` | direnv helpers | any | current |
+| `tig` | tig, the git TUI | any | current |
+| `ranger` | ranger file manager | any | current |
+| `niri` | niri, a scrolling Wayland compositor | Linux | current |
+| `dms` | DankMaterialShell, the bar and shell for niri | Linux | current |
+| `regolith` | Regolith 2 (i3) desktop and wallpapers | Linux, X11 | legacy |
+| `x` | X11 resources and `.xprofile` | Linux, X11 | legacy |
+| `rofi` | rofi-pass | Linux, X11 | legacy |
+| `yabai` | yabai tiling window manager | macOS | legacy |
+| `skhd` | skhd hotkeys for yabai | macOS | legacy |
+| `conda` | `.condarc` | any | legacy |
+| `lein` | Leiningen profiles | any | legacy |
+
+"Legacy" means I haven't used it on a recent machine. It's kept for reference.
+
+`programs/` is not a stow package. It holds the install list and the setup notes.
 
 ## Secret scanning
 
@@ -47,7 +84,3 @@ All three use the gitleaks version pinned in [`mise.toml`](mise.toml) and the ru
 4. If it's a false positive, add a narrow allowlist entry to `.gitleaks.toml` that matches the whole value. Don't disable a rule, and don't use a `gitleaks:allow` comment: it hides every secret on that line.
 
 To scan the whole history by hand: `gitleaks git --config .gitleaks.toml .`
-
-## Programs
-
-An updated list of all the programs I use can be found in the `programs` directory

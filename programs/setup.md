@@ -26,6 +26,8 @@ How to setup a work environment.
 
 ## Config
 
+The `xset` and gnome-tweak-tool steps below are for X11 desktops.
+
 * Remap Caps lock to Control
   * edit /etc/default/keyboard
   * set XKBOPTIONS=“ctrl:nocaps”
@@ -44,11 +46,12 @@ How to setup a work environment.
 
 ## Editor: nvim
 
-* Install vim-plug
 * Install the latest nvim
-* Install all plugins with `:PlugInstall`
+* See [`nvim/README.md`](../nvim/README.md): plugins install themselves on first start
 
-## Desktop: Regolith
+## Desktop: Regolith (legacy)
+
+Older X11 machines only. Current machines use niri + DMS (the `niri` and `dms` stow packages).
 
 * Install from PPA as a package
 * Install i3xrocks-battery status
