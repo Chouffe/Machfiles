@@ -189,7 +189,7 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.gnome\."#
     draw-border-with-background false
-    geometry-corner-radius 12
+    geometry-corner-radius 4
     clip-to-geometry true
 }
 window-rule {
@@ -250,4 +250,11 @@ include optional=true "dms/input.kdl"
 
 binds {
     Mod+B hotkey-overlay-title="Toggle Bar" { spawn "dms" "ipc" "call" "bar" "toggle" "index" "0"; }
+}
+
+// Square-ish windows, independent of the DMS shell radius (which also drives the bar).
+// Must stay after the dms/ includes: later window rules override earlier ones.
+window-rule {
+    geometry-corner-radius 4
+    clip-to-geometry true
 }
