@@ -1,0 +1,3 @@
+# Plugins cloned into ~/.config/ranger/plugins land here, since stow links
+# ~/.config/ranger into this repo. See programs/setup.md.
+/ranger/.config/ranger/plugins/
