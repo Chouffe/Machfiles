@@ -42,7 +42,7 @@ The `xset` and gnome-tweak-tool steps below are for X11 desktops.
 
 * Install ranger
 * Install w3m: `sudo apt install w3m-img`
-* Install devicons: `git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicon`
+* Install devicons: `git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons` (the clone lands in this repo, under `ranger/.config/ranger/plugins/`, which is git-ignored)
 
 ## Editor: nvim
 
