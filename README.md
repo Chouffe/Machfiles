@@ -4,7 +4,7 @@ My dotfiles, one [GNU stow](https://www.gnu.org/software/stow/) package per prog
 
 ## Setting up a new machine
 
-1. Install `git` and `stow`.
+1. Install `git` and `stow` 2.4 or newer. This repo uses stow's `--dotfiles` option, and older versions don't handle it fully. Only 2.4.1 has been tested. Debian bookworm and Ubuntu 24.04 ship 2.3.1.
 2. Clone the repo into a folder in `$HOME`. Stow links into the parent of the folder it runs from, so this is what puts the links in `~`:
 
    ```bash
@@ -15,9 +15,12 @@ My dotfiles, one [GNU stow](https://www.gnu.org/software/stow/) package per prog
 3. Stow the packages this machine needs (see [Packages](#packages)):
 
    ```bash
+   mkdir -p ~/.config
    # Linux desktop (niri + DMS)
    stow zsh git nvim tmux ghostty alacritty niri dms direnv tig ranger
    ```
+
+   Create `~/.config` first. If it doesn't exist, stow can link the whole folder into a single package, such as `~/.config` → `Machfiles/git/.config`. Every program would then write its config into the repo.
 
    Don't run `stow */`. It also links `programs/` (notes, not config) into `~`, along with the legacy packages.
 

@@ -5,6 +5,7 @@ Neovim config written in [Fennel](https://fennel-lang.org), compiled at startup 
 ## Install
 
 ```bash
+mkdir -p ~/.config   # see step 3 of the main README
 cd ~/Machfiles
 stow nvim
 nvim
