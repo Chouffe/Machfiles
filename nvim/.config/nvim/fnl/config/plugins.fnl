@@ -192,8 +192,8 @@
               ; Grammar parsing
               {1 :nvim-treesitter/nvim-treesitter
                :build ":TSUpdate"
-               :dependencies [:HiPhish/rainbow-delimiters.nvim
-                              :windwp/nvim-ts-autotag]
+               ; :HiPhish/rainbow-delimiters.nvim disabled for now: crashed on scratch buffers (fidget) with nvim 0.12
+               :dependencies [:windwp/nvim-ts-autotag]
                :config (. (require :config.plugin.treesitter) :config)}
               ; Autocomplete compatibility layer for nvim-cmp sources
               ; Autocomplete
